@@ -4,7 +4,8 @@ namespace NutriSoftwareV2.Negocio.Domain
 {
     public class Paciente : Pessoa
     {
-        public string? Profissao { get; set; }
+        public int? ProfissaoId { get; set; }
+        public Profissao? Profissao { get; set; }
         public ICollection<AnotacoesPaciente>?Anotacoes { get; set; }
         public ICollection<Consulta>? Consultas{ get; set; }
         public ICollection<Dieta>? Dietas{ get; set; }

@@ -19,7 +19,8 @@ namespace NutriSoftwareV2.Negocio.Data.NutriDbContext
         public DbSet<Consulta> Consulta{get ; set;}
         public DbSet<Pagamento> Pagamento{get ; set;}
         public DbSet<LocaisAtendimento> LocalAtendimento{get ; set;}
-     
+        public DbSet<Profissao> Profissao { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
         {
             //var connetionString = Configuration.GetConnectionString("DefaultConnection");

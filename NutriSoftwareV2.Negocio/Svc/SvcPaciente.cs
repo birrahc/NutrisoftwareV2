@@ -62,7 +62,9 @@ namespace NutriSoftwareV2.Negocio.Svc
         {
             using (NutriDbContext db = new NutriDbContext())
             {
-                Paciente paciente = db.pacientes.Include(c=>c.Consultas)
+                Paciente paciente = db.pacientes
+                                                .Include(pr => pr.Profissao)
+                                                .Include(c=>c.Consultas)
                                                 .ThenInclude(p=>p.Dieta)
                                                 .ThenInclude(p=>p.PlanosAlimentares)
                                                 .ThenInclude(q=>q.QuantidadeAlimentos)

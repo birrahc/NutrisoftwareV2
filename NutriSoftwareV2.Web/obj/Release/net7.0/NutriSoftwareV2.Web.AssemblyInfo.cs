@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NutriSoftwareV2.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+337794131f116347948b1403cfd5a56bc22eeaab")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+43ee6abad36be686ecf29c5dc4859bcaaae9c5dd")]
 [assembly: System.Reflection.AssemblyProductAttribute("NutriSoftwareV2.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NutriSoftwareV2.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

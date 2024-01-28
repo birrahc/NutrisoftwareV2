@@ -9,9 +9,6 @@
 <div class="modal-content">
     <div class="modal-header">
         <h5 class="modal-title">Registro de Anotações</h5>
-        <button type="submit" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">x</span>
-        </button>
     </div>
     <form method="post" id="formObservacaoPaciente" class="p-0">
         <div class="modal-body">
@@ -40,7 +37,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            <button type="button" onclick="FecharModal('modalObservacaoPaciente')" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
             <button type="button" onclick="CadastrarEditarAnotacoesPaciente()" class="btn btn-primary">Salvar</button>
         </div>
     </form>

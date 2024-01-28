@@ -1,12 +1,16 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using NutriSoftwareV2.Negocio.Data.NutriDbContext;
 using NutriSoftwareV2.Negocio.Domain;
 using NutriSoftwareV2.Negocio.Svc;
 using NutriSoftwareV2.Web.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.Xml;
 using System.Threading.Tasks;
 
 namespace NutriSoftwareV2.Web.Controllers
@@ -48,6 +52,11 @@ namespace NutriSoftwareV2.Web.Controllers
         [HttpGet]
         public ActionResult Create()
         {
+            using (NutriDbContext db = new NutriDbContext())
+            {
+                ViewBag.Profissoes = ListarProfissoes(db);
+            }
+
             return PartialView("PartiaisPaciente/_FormularioPaciente");
         }
 
@@ -73,7 +82,12 @@ namespace NutriSoftwareV2.Web.Controllers
 
         public ActionResult Edit(int Id)
         {
+
             var paciente = SvcPaciente.BuscarPacienteCompleto(Id);
+            using (NutriDbContext db = new NutriDbContext())
+            {
+                ViewBag.Profissoes = ListarProfissoes(db, paciente.ProfissaoId);
+            }
             return PartialView("PartiaisPaciente/_FormularioPaciente", paciente);
         }
 
@@ -86,8 +100,9 @@ namespace NutriSoftwareV2.Web.Controllers
                 if (paciente != null)
                 {
                     SvcPaciente.AtualizarPaciente(paciente);
-                    ViewBag.Paciente = paciente;
+
                     var pacientes = SvcPaciente.ListarPacientes();
+                    ViewBag.Paciente = SvcPaciente.BuscarPacienteCompleto(paciente.Id);
                     return PartialView("PartiaisPaciente/_Conteudo", pacientes);
                 }
                 return RedirectToAction(nameof(Index));
@@ -98,7 +113,7 @@ namespace NutriSoftwareV2.Web.Controllers
             }
         }
 
-      
+
 
         [HttpPost]
         public ActionResult Delete(int Id)
@@ -155,6 +170,12 @@ namespace NutriSoftwareV2.Web.Controllers
             SvcAnotacoes.DeletarAnotacao(anotacao);
             var anotacoes = SvcAnotacoes.ListarAnotacoesPaciente(pacienteId);
             return PartialView("PartiaisPaciente/_ObservacaoPaciente", anotacoes.OrderByDescending(p => p.Id));
+        }
+
+        public static SelectList ListarProfissoes(NutriDbContext db, int? Id = null)
+        {
+            var profissoes = db.Profissao.ToList();
+            return new SelectList(profissoes, "Id", "Descricao", Id);
         }
     }
 }
