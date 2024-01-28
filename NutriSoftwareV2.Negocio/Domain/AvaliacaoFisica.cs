@@ -62,7 +62,7 @@ namespace NutriSoftwareV2.Negocio.Domain
         [NotMapped]
         private double ? Densidade {
             get { 
-                if(this.SomatoriaDc.HasValue && this.Paciente.Sexo.HasValue && this.Paciente.Idade > 0)
+                if(this.SomatoriaDc.HasValue && this.Paciente !=null && this.Paciente.Sexo.HasValue && this.Paciente?.Idade > 0)
                     return SvcAvaliacao.CalculularDensidade(this.SomatoriaDc.Value, this.Paciente.Sexo.Value, this.Paciente.Idade).Value;
                 return null;
             }

@@ -20,3 +20,10 @@
 
 })
 
+function AbrirModal(modalId) {
+    $("#" + modalId).modal('show');
+}
+
+function FecharModal(modalId) {
+    $("#" + modalId).modal('hide');
+}

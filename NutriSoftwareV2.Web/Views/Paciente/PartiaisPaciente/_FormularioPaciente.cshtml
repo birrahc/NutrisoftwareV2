@@ -1,16 +1,14 @@
 ﻿@model NutriSoftwareV2.Negocio.Domain.Paciente
 @{
-    string tituloModal = Model != null && Model.Nome !=null ? "Editar Paciente" : "Cadastrar novo paciente";
- }
-<div class="modal-content">
-    <div class="modal-header">
-        <h5 class="modal-title">@tituloModal</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
+    string tituloModal = Model != null && Model.Nome != null ? "Editar Paciente" : "Cadastrar novo paciente";
+}
+
     <form method="post" id="formularioCadastrarPaciente" class="p-0">
-        <input type="hidden" asp-for="Id" ident-paciente ="pacienteId"/>
+        <div class="modal-header">
+            <h5 class="modal-title">@tituloModal</h5>
+        </div>
+
+        <input type="hidden" asp-for="Id" ident-paciente="pacienteId" />
         <div class="modal-body">
             <div class="row">
                 <div class="col-12">
@@ -41,7 +39,7 @@
                     <input type="text" asp-for="Profissao" class="form-control" />
                 </div>
             </div>
-            
+
             <div class="row mt-2">
                 <div class="col-6">
                     <label>Telefone:</label>
@@ -62,8 +60,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" onclick="FecharModal('modalPaciente')" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="button" onclick="cadastrarPaciente();" class="btn btn-primary">Save changes</button>
         </div>
     </form>
-</div>

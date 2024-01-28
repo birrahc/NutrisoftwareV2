@@ -1,1 +1,76 @@
 ﻿<script src="~/js/paciente.js"></script>
+
+<script>
+
+    function AbrirModalParaCadastro() {
+
+        AbrirModal('@Url.Action("Create", "Paciente")', 'formularioPaciente', 'modalPaciente')
+    }
+
+    function AbrirFormulariEdicao(id) {
+
+        AbrirModal('@Url.Action("Edit", "Paciente")', 'formularioPaciente', 'modalPaciente', id)
+    }
+
+    function cadastrarPaciente() {
+
+        let dados = $("#formularioCadastrarPaciente").serialize();
+        let pacienteId = $('input[ident-paciente ="pacienteId"]').val();
+        let url = pacienteId > 0 ? '@Url.Action("Edit", "Paciente")' : '@Url.Action("Create", "Paciente")';
+       
+        CadastrarEdiarPaciente(url, 'Conteudo', 'modalPaciente',pacienteId)
+
+        // $.ajax({
+        //     url: '/Paciente/' + action,
+        //     type: 'POST',
+        //     data: dados,
+        //     async: true,
+        //     success: function (response) {
+        //         $("#Conteudo").empty();
+        //         $("#Conteudo").append(response);
+        //         $('#modalPaciente').modal('hide')
+        //         toastr.success(mensagem, "Sucesso");
+        //     },
+        //     error: function (response) {
+        //         toastr.error(mensagem, "Error");
+        //     }
+        // });
+    }
+
+
+    function filtrarPacientes() {
+        const filterElement = document.querySelector('#txtPesquisaPaciente')
+        const pacientes = document.querySelectorAll('#listaDepacientes tr')
+
+        if (filterElement.value != '') {
+            for (let paciente of pacientes) {
+
+                let title = paciente.querySelector('td')
+                title = title.textContent.toLocaleLowerCase()
+
+                let filerText = filterElement.value.toLocaleLowerCase()
+                console.log(filerText)
+                if (!title.includes(filerText)) {
+                    paciente.style.display = "none"
+                } else {
+                    paciente.style.display = "block"
+                }
+            }
+        } else {
+
+            for (let paciente of pacientes) {
+                paciente.style.display = "block"
+            }
+        }
+    }
+
+    function LimparFiltro_OnClick() {
+        $(txtPesquisarPaciente).val("");
+        filtrarPacientes();
+    }
+    function DetalhesPaciente_OnClick(url) {
+        Detalhes(url, 'pnlDetalhesPaciente');
+        $("#pnlBlocoObservacao").hide();
+        console.log("Teste")
+    }
+</script>

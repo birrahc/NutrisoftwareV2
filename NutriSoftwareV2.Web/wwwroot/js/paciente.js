@@ -1,16 +1,17 @@
 ﻿
 
-function AbrirModalParaCadastro() {
 
+function AbrirModal(url, pnlResultadoId,modalId, id=null) {
     $.ajax({
-        url: '/Paciente/Create',
+        url: url,
         type: 'GET',
+        data: { Id: id },
         async: true,
         success: function (response) {
-            $("#formularioPaciente").empty();
-            $("#formularioPaciente").append(response);
-            $('#modalPaciente').modal('show')
-            
+            $("#" + pnlResultadoId).empty();
+            $("#" + pnlResultadoId).append(response);
+            $("#" + modalId).modal('show')
+
         },
         error: function (response) {
             toastr.error("Houve um erro ao abrir formulário." + response, "Error");
@@ -18,41 +19,59 @@ function AbrirModalParaCadastro() {
     });
 }
 
-function AbrirFormulariEdicao(value)
-{
-    window.value = value;
-   
-    $.ajax({
-        url: '/Paciente/Edit',
-        type: 'GET',
-        data: {Id: window.value},
-        async: true,
-        success: function (response) {
-            $("#formularioPaciente").empty();
-            $("#formularioPaciente").append(response);
-            $('#modalPaciente').modal('show')
-        },
-        error: function (response) {
-            toastr.error("Houve um erro na abrir formulario de Edição." + response, "Error");
-        }
-    });
-}
+//function AbrirModalParaCadastro() {
 
-function cadastrarPaciente() {
+//    $.ajax({
+//        url: '/Paciente/Create',
+//        type: 'GET',
+//        async: true,
+//        success: function (response) {
+//            $("#formularioPaciente").empty();
+//            $("#formularioPaciente").append(response);
+//            $('#modalPaciente').modal('show')
 
+//        },
+//        error: function (response) {
+//            toastr.error("Houve um erro ao abrir formulário." + response, "Error");
+//        }
+//    });
+//}
+
+//function AbrirFormulariEdicao(value)
+//{
+//    window.value = value;
+
+//    $.ajax({
+//        url: '/Paciente/Edit',
+//        type: 'GET',
+//        data: {Id: window.value},
+//        async: true,
+//        success: function (response) {
+//            $("#formularioPaciente").empty();
+//            $("#formularioPaciente").append(response);
+//            $('#modalPaciente').modal('show')
+//        },
+//        error: function (response) {
+//            toastr.error("Houve um erro na abrir formulario de Edição." + response, "Error");
+//        }
+//    });
+//}
+
+
+function CadastrarEdiarPaciente(url,pnlResultadoId,modalId,id) {
     var dados = $("#formularioCadastrarPaciente").serialize();
-    var action = $('input[ident-paciente ="pacienteId"]').val() > 0 ? "Edit" : "Create";
-    var mensagem = action == "Edit" ? "Dados do paciente editados com sucesso" : "Paciente cadastrado com sucesso";
+   
+    var mensagem = id >0  ? "Dados do paciente editados com sucesso" : "Paciente cadastrado com sucesso";
 
     $.ajax({
-        url: '/Paciente/'+action,
+        url: url,
         type: 'POST',
         data: dados,
         async: true,
         success: function (response) {
-            $("#Conteudo").empty();
-            $("#Conteudo").append(response);
-            $('#modalPaciente').modal('hide')
+            $("#" + pnlResultadoId).empty();
+            $("#" + pnlResultadoId).append(response);
+            $("#" + modalId).modal('hide')
             toastr.success(mensagem, "Sucesso");
         },
         error: function (response) {
@@ -60,6 +79,28 @@ function cadastrarPaciente() {
         }
     });
 }
+//function cadastrarPaciente() {
+
+//    var dados = $("#formularioCadastrarPaciente").serialize();
+//    var action = $('input[ident-paciente ="pacienteId"]').val() > 0 ? "Edit" : "Create";
+//    var mensagem = action == "Edit" ? "Dados do paciente editados com sucesso" : "Paciente cadastrado com sucesso";
+
+//    $.ajax({
+//        url: '/Paciente/'+action,
+//        type: 'POST',
+//        data: dados,
+//        async: true,
+//        success: function (response) {
+//            $("#Conteudo").empty();
+//            $("#Conteudo").append(response);
+//            $('#modalPaciente').modal('hide')
+//            toastr.success(mensagem, "Sucesso");
+//        },
+//        error: function (response) {
+//            toastr.error(mensagem, "Error");
+//        }
+//    });
+//}
 
 function ExcluirPaciente(value)
 {
