@@ -1,0 +1,95 @@
+﻿@using NutriSoftwareV2.Negocio.Enums;
+@model NutriSoftwareV2.Negocio.Domain.Pagamento
+@{
+    string TituloModal = Model?.Id > 0 ? "Editar" : "Cadastrar";
+}
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">@TituloModal Pagamento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form method="post" id="formularioCadastrarPagamento" class="p-0 m-0 w-100">
+         <input type="hidden" asp-for="Id" ident-pagamento="pagamentoId"/>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-6">
+                    <label>Data do Pagamento</label>
+                    <input type="date" asp-for="DataPagamento" class="form-control" />
+                </div>
+                <div class="col-6">
+                    <label>Local de atendimento</label>
+                    <select asp-for="LocaisAtendimentoId" asp-items="@ViewBag.LocaisAtendimento" class="form-control"></select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <label>Tipo de consulta</label>
+                    <select asp-for="TipoAtendimento" asp-items="Html.GetEnumSelectList<EN_TipoAtendimento>()" class="form-control"></select>
+                </div>
+
+                <div class="col-6">
+                    <label>Tipo de plano</label>
+                    <select asp-for="TipoPlano" asp-items="Html.GetEnumSelectList<EN_TipoPlano>()" class="form-control"></select>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-4">
+                    <label>Valor da Consulta</label>
+                    <input type="text" asp-for="Valor" mask="valores" class="form-control" />
+                </div>
+
+                <div class="col-4">
+                    <label>Desconto</label>
+                    <input type="text" asp-for="Desconto" mask="valores" class="form-control" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label>Forma de pagamento</label>
+                    <select asp-for="FormaPagamento" asp-items="Html.GetEnumSelectList<EN_FormaPagamento>()" class="form-control"></select>
+                </div>
+
+                <div class="col-4">
+                    <label>Prazo de Pagamento</label>
+                    <select asp-for="PrazoPagamento" asp-items="Html.GetEnumSelectList<EN_PrazoPagamento>()" class="form-control"></select>
+                </div>
+
+                <div class="col-4">
+                    <label>Situação do pagamento</label>
+                    <select asp-for="Situacao" asp-items="Html.GetEnumSelectList<EN_StatusPagamento>()" class="form-control"></select>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label>N° parcelas</label>
+                    <input type="number" asp-for="NumeroParcelas" class="form-control" />
+                </div>
+
+                <div class="col-4">
+                    <label>Valor das parcelas</label>
+                    <input type="text" asp-for="ValorParcelas" mask="valores" class="form-control" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <label>Consulta(s)</label>
+                    <select multiple asp-for="ConsultasId" asp-items="@ViewBag.Consultas" class="form-control" id="selConsultas"></select>
+                </div>
+                <div class="col-12">
+                    <label>Observação</label>
+                    <textarea asp-for="Observacao" class="form-control"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" onclick="cadastrarEditarPagamento()" class="btn btn-primary">@TituloModal</button>
+        </div>
+    </form>
+</div>

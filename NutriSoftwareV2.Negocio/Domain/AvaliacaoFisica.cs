@@ -28,7 +28,7 @@ namespace NutriSoftwareV2.Negocio.Domain
         public double? DCAxilar { get; set; }
         public double? DCPeitoral { get; set; }
         public double? DCCoxa { get; set; }
-        public Paciente Paciente { get; set; }
+        public Paciente? Paciente { get; set; }
 
         [NotMapped]
         private double? SomatoriaDc

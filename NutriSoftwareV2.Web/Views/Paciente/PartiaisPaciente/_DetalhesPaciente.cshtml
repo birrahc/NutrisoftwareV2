@@ -1,0 +1,34 @@
+﻿@model NutriSoftwareV2.Negocio.Domain.Paciente
+
+<div class="row mt-2 p-2 bg-light">
+    <div class="col-3 text-secondary" style="font-size:18px;"><b>Nome:</b></div>
+    <div class="col-9" style="font-size:18px;">@Model.Nome</div>
+</div>
+<div class="row mt-2 p-2 bg-light">
+    <div class="col-3 text-secondary" style="font-size:18px;"><b>Sexo:</b></div>
+    <div class="col-9" style="font-size:18px;">@Model.Sexo</div>
+</div>
+<div class="row mt-2 p-2 bg-light">
+    <div class="col-3 text-secondary" style="font-size:18px;"><b>Nascimento:</b></div>
+    <div class="col-8 ml-1" style="font-size:18px;"> @Model.Nascimento.GetValueOrDefault().ToShortDateString()</div>
+</div>
+<div class="row mt-2 p-2 bg-light">
+    <div class="col-3 text-secondary" style="font-size:18px;"><b>Idade:</b></div>
+    <div class="col-9" style="font-size:18px;">@Model.Idade anos </div>
+</div>
+<div class="row mt-2 p-2 bg-light">
+    <div class="col-3 text-secondary" style="font-size:18px;"><b>Profissão:</b></div>
+    <div class="col-9" style="font-size:18px;">@Model.Profissao </div>
+</div>
+<div class="row mt-2 p-2 bg-light">
+    <div class="col-3 text-secondary" style="font-size:18px;"><b>CPF:</b></div>
+    <div class="col-8 ml-1" style="font-size:18px;"><span id="cpfMask">@Model.CPF</span></div>
+</div>
+<div class="row mt-2 p-2 bg-light">
+    <div class="col-3 text-secondary" style="font-size:18px;"><b>E-Mail:</b></div>
+    <div class="col-9" style="font-size:18px;">@Model.Email</div>
+</div>
+<div class="row mt-2 p-2 bg-light">
+    <div class="col-3 text-secondary" style="font-size:18px;"><b>Telefone</b>:</div>
+    <div class="col-9" style="font-size:18px;">@Model.Telefone <span style="font-size:13px !important;">(@Model.TipoTelefoneGetDescription)</span> </div>
+</div>

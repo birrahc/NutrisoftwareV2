@@ -1,0 +1,116 @@
+﻿@using NutriSoftwareV2.Negocio.Domain;
+@using NutriSoftwareV2.Web.Components.ComponentModel;
+@model Paciente
+
+@{
+    List<Consulta> Consultas = new List<Consulta>();
+    Model.Consultas.ToList().ForEach(p =>
+    {
+        if (!Consultas.Any(c => c.DataConsulta == p.DataConsulta))
+            Consultas.Add(new Consulta
+                    {
+                        Id = p.Id,
+                        DataConsulta = p.DataConsulta,
+                        Anotacoes = p.Anotacoes,
+                        AvaliacaoId = p.AvaliacaoId,
+                        DietaId = p.DietaId,
+                        Dieta = p.Dieta,
+                        Paciente = p.Paciente,
+                        PacienteId = p.PacienteId,
+                        Avaliacao = p.Avaliacao
+                    });
+
+    });
+
+    Consulta consulta = ViewBag.ConsultaDetalhada;
+}
+@if (Model?.Consultas.Count > 0)
+{
+  
+
+    <div class="container-fluid">
+        <div class="row bg-light p-2" style="margin-top:56px; position:fixed; z-index:1000; width:100%;">
+            <h3 class="text-center">Paciente: @Model.Nome</h3>
+        </div>
+        <div class="row w-100" style="position: relative; top: 125px;">
+            <div class="col-3 m-0 p-0">
+                <div class="row" style="padding-top:35px;">
+                    <div class="col-12 mt-2 ml-2 pb-5 pt-2" style="border-radius: 5px; border: solid 5px #d8f0d6; height:500px; position:fixed; width:25%;">
+                        <h3 class="text-center">Lista de consultas</h3>
+                        <div class="m-auto p-2 bg-white" style="width: 99%; border: solid 1px #d8d8d8; border-radius: 5px; height: 370px; overflow:auto;">
+
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="border:none;">Data</th>
+                                        <th style="border:none;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Consultas.Distinct())
+                                    {
+                                        <tr>
+                                            <td>
+                                                @if (item.DataConsulta.HasValue)
+                                                {
+                                                    @item.DataConsulta.Value.ToShortDateString()
+                                                }
+                                                else
+                                                {
+                                                    @item.DataConsulta
+                                                }
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("Index","Consulta",new{ Id= Model.Id, ConsultaId = item.Id })" class="btn btn-light">
+                                                    <i class="fa fa-eye" title="Ver detalhes"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div class="col-12 mt-1"> <a href="@Url.Action("CadastrarConsulta","Consulta", new{Id=Model.Id})" class="btn btn-success  float-right"><i class="fa fa-plus"></i> Nova Consulta </a></div>
+                        <div style="clear:both"></div>
+                    </div>
+                    
+                </div>
+            </div>
+            @if (consulta != null)
+            {
+                <div class="col-9 m-0 p-0" style="padding-bottom:70px !important;">
+                    <div class="row">
+                        <div class="container" style="border: solid 2px #c4c0c0; padding: 0 0 10px 0; ">
+                            <div class="row" style="padding: 0 35px;">
+                                <div class="col-12">
+                                    <h3 class="text-secondary">Anotações</h3>
+                                    <textarea readonly name="Anotacoes" class="form-control" rows="10">@consulta.Anotacoes</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @if(consulta.Avaliacao !=null)
+                        @await Component.InvokeAsync("Avaliacao",new ComponenteAvaliacaoModel{avaliacaoFisica = consulta.Avaliacao})
+                    
+                    @if (consulta.Dieta != null)
+                        @await Component.InvokeAsync("Dieta",new ComponenteDietaModel{Cabecalho=false,Dieta = consulta.Dieta== null? new Dieta() : consulta.Dieta})
+                </div>
+
+
+            }
+        </div>
+    </div>
+}
+else
+{
+    <div class="row" style="margin-top:70px; padding-top:35px;">
+        <span class="text-center" style="margin:auto"> Nenuma consulta cadastrada para o paciente <b>@Model.Nome</b> <br /><a href="@Url.Action("CadastrarConsulta","Consulta", new{Id=Model.Id})" class="stretched-link"> Abrir Consulta </a></span>
+        
+    </div>
+}
+
+
+

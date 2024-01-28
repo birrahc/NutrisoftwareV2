@@ -1,0 +1,57 @@
+﻿@model NutriSoftwareV2.Negocio.Domain.Consulta
+
+@{
+    List<NutriSoftwareV2.Negocio.Domain.AvaliacaoFisica> avaliacoes = ViewBag.Avaliacoes == null ? new List<NutriSoftwareV2.Negocio.Domain.AvaliacaoFisica>() : (List<NutriSoftwareV2.Negocio.Domain.AvaliacaoFisica>)ViewBag.Avaliacoes;
+}
+
+
+<div id="pnlTotal" class="mt-1">
+   <partial name="PartiaisConsulta/_ConteudoConsulta" for="@Model"/>
+</div>
+
+@section Scripts{
+
+   
+    @{
+
+        Html.RenderPartial("_ConsultasJs");
+        //Html.RenderPartial("_DietaJs");
+
+    }
+   @* <script>
+
+        $(document).ready(function () {
+        
+       
+                $("#btnFinalizarConsulta_OnClick").click(function (e) {
+
+                    
+                    e.preventDefault();
+                    alert("Teste")
+                    Swal.fire({
+                        title: textoPerguntaCofirmacao,
+                        //text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Sim'
+
+                    }).then((result) => {
+                        if (result.value) {
+                            $("#frmFinalizarConsulta").submit();
+                        }
+
+                    });
+                })
+
+            })
+
+
+                
+      
+    </script>*@
+
+}
+
+

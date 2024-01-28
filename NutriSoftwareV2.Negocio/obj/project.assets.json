@@ -473,7 +473,7 @@
           }
         }
       },
-      "MySql.EntityFrameworkCore/8.0.0": {
+      "MySql.EntityFrameworkCore/7.0.14": {
         "type": "package",
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "7.0.14",
@@ -1528,10 +1528,10 @@
         "runtimes/win-x64/native/krbcc64.dll"
       ]
     },
-    "MySql.EntityFrameworkCore/8.0.0": {
-      "sha512": "u2Djzvj2YJdJ4T8+BXbPwFTXDK3XzW36Z9sM+c2BHMNYBPq1mQHc8ycr77jLR+1qyBB/G6rpChquT1qot3m0hw==",
+    "MySql.EntityFrameworkCore/7.0.14": {
+      "sha512": "Jk/OFQ0ckftthuBu846IYsfbiNiOcnU+yVD6Pe9j3rJ42BQ+vMZODTCWfFaaJA4zR7LUSdMdvjtbjDv31rmakA==",
       "type": "package",
-      "path": "mysql.entityframeworkcore/8.0.0",
+      "path": "mysql.entityframeworkcore/7.0.14",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1540,10 +1540,8 @@
         "lib/net6.0/MySql.EntityFrameworkCore.xml",
         "lib/net7.0/MySql.EntityFrameworkCore.dll",
         "lib/net7.0/MySql.EntityFrameworkCore.xml",
-        "lib/net8.0/MySql.EntityFrameworkCore.dll",
-        "lib/net8.0/MySql.EntityFrameworkCore.xml",
         "logo-mysql-170x115.png",
-        "mysql.entityframeworkcore.8.0.0.nupkg.sha512",
+        "mysql.entityframeworkcore.7.0.14.nupkg.sha512",
         "mysql.entityframeworkcore.nuspec"
       ]
     },
@@ -2615,7 +2613,7 @@
       "Microsoft.EntityFrameworkCore >= 7.0.15",
       "Microsoft.EntityFrameworkCore.Design >= 7.0.15",
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.15",
-      "MySql.EntityFrameworkCore >= 8.0.0"
+      "MySql.EntityFrameworkCore >= 7.0.14"
     ]
   },
   "packageFolders": {
@@ -2681,7 +2679,7 @@
           },
           "MySql.EntityFrameworkCore": {
             "target": "Package",
-            "version": "[8.0.0, )"
+            "version": "[7.0.14, )"
           }
         },
         "imports": [

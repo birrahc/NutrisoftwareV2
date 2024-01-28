@@ -1,0 +1,105 @@
+﻿@model IEnumerable<NutriSoftwareV2.Negocio.Domain.Dieta>
+
+<div class="row pl-5 pr-5 pt-2">
+    <div class="col-12">
+        <h3 class=" m=0 pl-3">Dieta(s) do paciente <b>@Model.FirstOrDefault().Paciente.Nome</b></h3>
+    </div>
+
+    @foreach (var item in Model)
+    {
+        <div class="col-12">
+            <p class=" m-0 p-3 ml-auto" style="font-size:25px; width:28%;"><b> @item.Data.ToShortDateString()</b></p>
+        </div>
+
+        <div class="container" style="border: solid 2px #c4c0c0;">
+            <div class="row">
+
+                <div class="col-12 bg-secondary">
+                    <p class=" m-0 p-3 text-light text-center" style="font-size:25px;">Plano Alimentar:<b> @item.Paciente.Nome</b></p>
+                </div>
+            </div>
+            @foreach (var hora in item.PlanosAlimentares)
+            {
+
+                var alimentosHora = hora.QuantidadeAlimentos.Where(p => p.Hora == hora.HoraAlimentos && p.Tipo == NutriSoftwareV2.Negocio.Enums.EN_TipoDietaAlimentos.Alimento);
+                var SubAlimentosHora = hora.QuantidadeAlimentos.Where(p => p.Hora == hora.HoraAlimentos && p.Tipo == NutriSoftwareV2.Negocio.Enums.EN_TipoDietaAlimentos.Substituicao);
+                var intervalo = hora.QuantidadeAlimentos.Where(p => p.Hora == hora.HoraAlimentos && p.Tipo == NutriSoftwareV2.Negocio.Enums.EN_TipoDietaAlimentos.Intervalo);
+                int rowSpan = alimentosHora.ToList().Count < 1 ? 1 : alimentosHora.ToList().Count;
+
+                <div class="row">
+                    <div class="col-lg-2 col-md-2 col-sm-12">
+                        <h6>Horário</h6>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td rowspan="@rowSpan">
+                                        <p style="font-size:22px;"><b>@hora.HoraAlimentos</b></p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="col-lg-5 col-md-5 col-sm-12">
+                        <h6>Alimentos</h6>
+                        <table class="table">
+                            <tbody>
+                                @foreach (var alimentos in alimentosHora)
+                                {
+                                    <tr>
+                                        <td class="p-0">@alimentos.Alimento.Nome</td>
+                                        <td class="p-0">@alimentos.Quantidade</td>
+                                        <td class="p-0">@alimentos.TipoMedida.Descricao</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-sm-12">
+                        <h6>Substituições</h6>
+                        <table class="table">
+                            <tbody>
+                                @foreach (var subAlimentos in SubAlimentosHora)
+                                {
+                                    <tr>
+                                        <td class="p-0">@subAlimentos.Alimento.Nome</td>
+                                        <td class="p-0">@subAlimentos.Quantidade</td>
+                                        <td class="p-0">@subAlimentos.TipoMedida.Descricao</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                if (hora.ObservacaoPlano != null)
+                {
+                    int total = hora.ObservacaoPlano.Anotacoes.Length - hora.ObservacaoPlano.Anotacoes.Replace("\n", "").Length+1;
+                    total = total <= 0 ? 1 : total;
+                    <div class="row">
+                        <h6 class="ml-3">Observações</h6>
+                        <div class="col-12">
+                            <textarea readonly class="form-control bg-light" rows="@total" style="resize:none; padding-bottom:2px;">@hora?.ObservacaoPlano?.Anotacoes.Replace("<br/>", "\n")</textarea>
+                        </div>
+                    </div>
+                }
+                <div class="row">
+                    <h6 class="m-auto">Intervalos</h6>
+                    <div class="col-12 p-2" style="border-top: solid 1px #c4c0c0; border-bottom: solid 2px #c4c0c0; ">
+                        @foreach (var intevaloAlimento in intervalo)
+                        {
+                            var descricao = $"{intevaloAlimento.Quantidade} {intevaloAlimento.TipoMedida.Descricao} {intevaloAlimento.Alimento.Nome}";
+                            <p class="m-0 text-center">
+                                @descricao
+                            </p>
+                        }
+                    </div>
+                </div>
+            }
+
+        </div>
+    }
+</div>
+
+<div class="row">
+
+</div>

@@ -6,3 +6,53 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+<div class="row">
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+    {
+        <input type="text" id="txtCustomer" name="CustomerName" />
+        <input type="hidden" id="hfCustomer" name="CustomerId" />
+        <br /><br />
+        <input type="submit" id="btnSubmit" value="Submit" />
+        <br /><br />
+        @ViewBag.Message
+    }
+
+</div>
+@section Scripts{ 
+    <script>
+        $(document).ready(function () {
+
+            $(function () {
+                $("#txtCustomer").autocomplete({
+                    source: function (request, response) {
+                        $.ajax({
+                            url: "/Home/AutoComplete",
+                            type: "POST",
+                            data: { busca: request.term },
+                            dataType: "json",
+                            success: function (data) {
+                                response($.map(data, function (item) {
+                                    return item;
+                                }))
+                            },
+                            error: function (response) {
+                                alert(response.responseText);
+                            },
+                            failure: function (response) {
+                                alert(response.responseText);
+                            }
+                        });
+                    },
+                    select: function (e, i) {
+                        $("#hfCustomer").val(i.item.val);
+                    },
+                    minLength: 1
+                });
+            });
+        });
+
+
+      
+    </script>
+
+}

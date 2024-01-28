@@ -1,0 +1,47 @@
+﻿@model NutriSoftwareV2.Negocio.Domain.AnotacoesPaciente
+
+@{
+
+    var x = Model;
+ }
+
+
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title">Registro de Anotações</h5>
+        <button type="submit" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">x</span>
+        </button>
+    </div>
+    <form method="post" id="formObservacaoPaciente" class="p-0">
+        <div class="modal-body">
+            <div class="container">
+                <input type="hidden" asp-for="Id" ident-anotacao="anotacaoId" />
+                <input type="hidden" asp-for="PacienteId" />
+                <div class="row">
+                    <div class="col-4">
+                        <label>Data</label>
+                        <input type="date" asp-for="Data" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <label>Titulo da anotação</label>
+                        <input type="text" asp-for="Titulo" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <label>Descrição da anotação</label>
+                        <textarea asp-for="Anotacoes" id="obs_paciente" rows="7" class="md-textarea form-control"></textarea>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            <button type="button" onclick="CadastrarEditarAnotacoesPaciente()" class="btn btn-primary">Salvar</button>
+        </div>
+    </form>
+</div>

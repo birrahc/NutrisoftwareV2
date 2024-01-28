@@ -18,15 +18,15 @@ namespace NutriSoftwareV2.Negocio.Domain
         public decimal? ValorParcelas { get; set; }
         public decimal? Desconto { get; set; }
         public EN_StatusPagamento? Situacao { get; set; }
-        public string Observacao { get; set; }
+        public string? Observacao { get; set; }
         public EN_PrazoPagamento? PrazoPagamento { get; set; }
 
         [NotMapped]
-        public List<int> ConsultasId { get; set; }
-        public virtual ICollection<Consulta> Consulta { get; set; }
+        public List<int>? ConsultasId { get; set; }
+        public virtual ICollection<Consulta>? Consulta { get; set; }
 
         public int? LocaisAtendimentoId { get; set; }
-        public virtual LocaisAtendimento LocaisAtendimento { get; set; }
+        public virtual LocaisAtendimento? LocaisAtendimento { get; set; }
 
     }
 }

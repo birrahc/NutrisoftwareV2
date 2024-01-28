@@ -1,0 +1,114 @@
+﻿@model IEnumerable<NutriSoftwareV2.Negocio.Domain.Pagamento>
+
+@{
+    string dspDetalhesPgtConsulta = "dspDetalheConsulta_";
+    string dspDetalhesPgtObs = "dspDetalheObs_";
+    string iconDetalhes = "iconDetalhes_";
+    int idDisplay = 0;
+    decimal? totalDesconto = Model.Sum(d => d.Desconto);
+    decimal? totalLiquido = (Model.Sum(d => d.Valor) - totalDesconto);
+
+
+}
+@if (Model?.ToList()?.Count >= 1)
+{
+    <div class="col-2"> <label>Total desconto</label><input type="text" readonly placeholder="@totalDesconto" class="form-control" /></div>
+    <div class="col-2"> <label>Total Liquido</label><input type="text" readonly placeholder="@totalLiquido" class="form-control" /></div>
+}
+<div class="col-12 mt-2 pt-3 pb-3" style="box-shadow: 5px 10px 8px #888888;">
+
+    @if (Model?.ToList()?.Count >= 1)
+    {
+        <h3 class="text-center m-auto">Lista de pagamentos</h3>
+        <table class="table table-hover mt-4">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Data</th>
+                    <th>Tipo de atendimento</th>
+                    <th>Tipo de plano</th>
+                    <th>R$ Consulta</th>
+                    <th>R$ Desconto</th>
+                    <th>Forma de pagamento</th>
+                    <th>Prazo Pagamento</th>
+                    <th>N° parcelas</th>
+                    <th>R$ parcelas</th>
+                    <th>Situação</th>
+                    <th>Local de Atendimento</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    idDisplay += 1;
+                    dspDetalhesPgtConsulta = $"{dspDetalhesPgtConsulta}{idDisplay}";
+                    dspDetalhesPgtObs = $"{dspDetalhesPgtObs}{idDisplay}";
+                    iconDetalhes = $"{iconDetalhes}{idDisplay}";
+                    <tr>
+                        <td onclick="VerDetalhesPagamento('@dspDetalhesPgtConsulta','@dspDetalhesPgtObs','@iconDetalhes')" style="cursor:pointer"><i class="fa fa-angle-right" id="@iconDetalhes"></i></td>
+                        <td>@item.DataPagamento?.ToShortDateString()</td>
+                        <td>@item.TipoAtendimento</td>
+                        <td>@item.TipoPlano</td>
+                        <td>@item.Valor</td>
+                        <td>@item.Desconto</td>
+                        <td>@item.FormaPagamento</td>
+                        <td>@item.PrazoPagamento</td>
+                        <td>@item.NumeroParcelas</td>
+                        <td>@item.ValorParcelas</td>
+                        <td>@item.Situacao</td>
+                        <td>@item?.LocaisAtendimento?.Nome</td>
+                        <td>
+                            <button onclick="AbrirFormulariEdicaoPagamento(@item.Id)" class="btn btn-light" style="border-radius:25px">
+                                <i class="fa fa-pencil" title="Editar pagamento"></i>
+                            </button>
+                            <button class="btn btn-light" style="border-radius:25px">
+                                <i class="fa fa-remove" title="Excluir pagamento"></i>
+                            </button>
+                        </td>
+                    </tr>
+
+                    @if (!string.IsNullOrEmpty(item.Observacao))
+                    {
+                        <tr style="display:none" id="@dspDetalhesPgtObs">
+                            <td colspan="12" style="padding-left:30px;">
+                                <h6>Observação</h6>
+                                <p>@item.Observacao</p>
+                            </td>
+                        </tr>
+                    }
+                    <tr style="display:none;" id="@dspDetalhesPgtConsulta">
+
+                        <td colspan="12" style=" padding-left:20px;">
+                            <h5 class="text-center w-50 pt-2 pb-2 bg-light">Referente a(s) Consulta(s)</h5>
+                            <table class="table w-50" style="box-shadow: 0px 0px 2px 0px #888888;">
+                                <thead>
+                                    <tr>
+                                        <th>Data Consulta</th>
+                                        <th>Paciente</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var c in item.Consulta)
+                                    {
+                                        <tr>
+                                            <td>@c.DataConsulta</td>
+                                            <td>@c?.Paciente?.Nome</td>
+                                        </tr>
+                                    }
+                                </tbody>
+
+                            </table>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    }
+    else
+    {
+        <p class="text-center">@ViewBag.Mensagem</p>
+    }
+
+</div>

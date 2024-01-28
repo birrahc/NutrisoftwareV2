@@ -1,7 +1,31 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using NutriSoftwareV2.Web.Identity;
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllersWithViews();
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.HttpOnly = true;
+    options.ExpireTimeSpan = TimeSpan.FromHours(6);
+    options.LoginPath = "/Account/Login";
+    options.SlidingExpiration = true;
+});
+
+builder.Services.AddDbContext<NutriSoftwareV2.Web.Identity.ApplicationDbContext>(opt =>
+{
+    opt.UseMySQL(builder.Configuration.GetConnectionString("IdentityConnection"));
+});
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+{
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromHours(6);
+    options.Lockout.MaxFailedAccessAttempts = 5;
+
+})
+.AddEntityFrameworkStores<ApplicationDbContext>();
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
@@ -21,7 +45,7 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+     name: "default",
+     pattern: "{controller=Account}/{action=Login}");
 
 app.Run();

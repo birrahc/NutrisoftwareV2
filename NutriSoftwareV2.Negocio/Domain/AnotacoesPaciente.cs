@@ -9,7 +9,7 @@ namespace NutriSoftwareV2.Negocio.Domain
         public DateTime ? Data { get; set; }
         public string Titulo{get;set;}
         public string Anotacoes { get; set; }
-        public Paciente Paciente { get; set; }
+        public Paciente? Paciente { get; set; }
 
         public AnotacoesPaciente()
         {

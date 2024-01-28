@@ -18,6 +18,82 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\programacao\Projetos\NET7\NutriSoftwareV2\NutriSoftwareV2.Web
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Avaliacao/AvaliacoesPaciente.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXZhbGlhY2FvXEF2YWxpYWNvZXNQYWNpZW50ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Avaliacao/PartiaisAvaliacao/_ConteudoAvaliacao.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXZhbGlhY2FvXFBhcnRpYWlzQXZhbGlhY2FvXF9Db250ZXVkb0F2YWxpYWNhby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Avaliacao/PartiaisAvaliacao/_FomularioAvaliacao.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXZhbGlhY2FvXFBhcnRpYWlzQXZhbGlhY2FvXF9Gb211bGFyaW9BdmFsaWFjYW8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Consulta/CadastarConsulta.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uc3VsdGFcQ2FkYXN0YXJDb25zdWx0YS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Consulta/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uc3VsdGFcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Consulta/PartiaisConsulta/PartiaisAvaliacao/_AvaliacoesPaciente.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uc3VsdGFcUGFydGlhaXNDb25zdWx0YVxQYXJ0aWFpc0F2YWxpYWNhb1xfQXZhbGlhY29lc1BhY2llbnRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Consulta/PartiaisConsulta/PartiaisAvaliacao/_ConteudoAvaliacao.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uc3VsdGFcUGFydGlhaXNDb25zdWx0YVxQYXJ0aWFpc0F2YWxpYWNhb1xfQ29udGV1ZG9BdmFsaWFjYW8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Consulta/PartiaisConsulta/PartiaisAvaliacao/_FomularioAvaliacao.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uc3VsdGFcUGFydGlhaXNDb25zdWx0YVxQYXJ0aWFpc0F2YWxpYWNhb1xfRm9tdWxhcmlvQXZhbGlhY2FvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Consulta/PartiaisConsulta/PartiaisDieta/_CadastrarDieta.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uc3VsdGFcUGFydGlhaXNDb25zdWx0YVxQYXJ0aWFpc0RpZXRhXF9DYWRhc3RyYXJEaWV0YS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Consulta/PartiaisConsulta/PartiaisDieta/_DietasPaciente.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uc3VsdGFcUGFydGlhaXNDb25zdWx0YVxQYXJ0aWFpc0RpZXRhXF9EaWV0YXNQYWNpZW50ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Consulta/PartiaisConsulta/PartiaisDieta/_ListaAlimentos.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uc3VsdGFcUGFydGlhaXNDb25zdWx0YVxQYXJ0aWFpc0RpZXRhXF9MaXN0YUFsaW1lbnRvcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Consulta/PartiaisConsulta/_ConteudoConsulta.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uc3VsdGFcUGFydGlhaXNDb25zdWx0YVxfQ29udGV1ZG9Db25zdWx0YS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Dieta/CadastrarDieta.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlldGFcQ2FkYXN0cmFyRGlldGEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Dieta/DietasPaciente.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlldGFcRGlldGFzUGFjaWVudGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Dieta/DietasPaciente2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlldGFcRGlldGFzUGFjaWVudGUyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Dieta/PartiaisDieta/_ListaAlimentos.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlldGFcUGFydGlhaXNEaWV0YVxfTGlzdGFBbGltZW50b3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Dieta/TesteFormulario.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlldGFcVGVzdGVGb3JtdWxhcmlvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -26,8 +102,112 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Paciente2/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFjaWVudGUyXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Paciente2/PartiaisPaciente/_Conteudo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFjaWVudGUyXFBhcnRpYWlzUGFjaWVudGVcX0NvbnRldWRvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Paciente2/PartiaisPaciente/_DetalhesPaciente.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFjaWVudGUyXFBhcnRpYWlzUGFjaWVudGVcX0RldGFsaGVzUGFjaWVudGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Paciente2/PartiaisPaciente/_FormularioObservacaoPaciente.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFjaWVudGUyXFBhcnRpYWlzUGFjaWVudGVcX0Zvcm11bGFyaW9PYnNlcnZhY2FvUGFjaWVudGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Paciente2/PartiaisPaciente/_FormularioPaciente.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFjaWVudGUyXFBhcnRpYWlzUGFjaWVudGVcX0Zvcm11bGFyaW9QYWNpZW50ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Paciente2/PartiaisPaciente/_ListaDePacientes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFjaWVudGUyXFBhcnRpYWlzUGFjaWVudGVcX0xpc3RhRGVQYWNpZW50ZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Paciente2/PartiaisPaciente/_ObservacaoPaciente.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFjaWVudGUyXFBhcnRpYWlzUGFjaWVudGVcX09ic2VydmFjYW9QYWNpZW50ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Paciente/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFjaWVudGVcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Paciente/PartiaisPaciente/_Conteudo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFjaWVudGVcUGFydGlhaXNQYWNpZW50ZVxfQ29udGV1ZG8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Paciente/PartiaisPaciente/_DetalhesPaciente.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFjaWVudGVcUGFydGlhaXNQYWNpZW50ZVxfRGV0YWxoZXNQYWNpZW50ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Paciente/PartiaisPaciente/_FormularioObservacaoPaciente.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFjaWVudGVcUGFydGlhaXNQYWNpZW50ZVxfRm9ybXVsYXJpb09ic2VydmFjYW9QYWNpZW50ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Paciente/PartiaisPaciente/_FormularioPaciente.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFjaWVudGVcUGFydGlhaXNQYWNpZW50ZVxfRm9ybXVsYXJpb1BhY2llbnRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Paciente/PartiaisPaciente/_ListaDePacientes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFjaWVudGVcUGFydGlhaXNQYWNpZW50ZVxfTGlzdGFEZVBhY2llbnRlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Paciente/PartiaisPaciente/_ObservacaoPaciente.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFjaWVudGVcUGFydGlhaXNQYWNpZW50ZVxfT2JzZXJ2YWNhb1BhY2llbnRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Pagamento/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFnYW1lbnRvXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Pagamento/PartiaisPagamentos/_ConteudoPagamento.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFnYW1lbnRvXFBhcnRpYWlzUGFnYW1lbnRvc1xfQ29udGV1ZG9QYWdhbWVudG8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Pagamento/PartiaisPagamentos/_FormularioPagamento.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFnYW1lbnRvXFBhcnRpYWlzUGFnYW1lbnRvc1xfRm9ybXVsYXJpb1BhZ2FtZW50by5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Pagamento/PartiaisPagamentos/_ResultadoPagamento.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFnYW1lbnRvXFBhcnRpYWlzUGFnYW1lbnRvc1xfUmVzdWx0YWRvUGFnYW1lbnRvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Shared/Components/Avaliacao/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQXZhbGlhY2FvXERlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Shared/Components/Dieta/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcRGlldGFcRGVmYXVsdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Shared/_AlimentoJS.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9BbGltZW50b0pTLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Shared/_ConsultasJs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Db25zdWx0YXNKcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Shared/_DietaJs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9EaWV0YUpzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Shared/_LoginPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Shared/_PacienteJS.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QYWNpZW50ZUpTLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Shared/_PagamentoJS.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QYWdhbWVudG9KUy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Shared/_ValidationScriptsPartial.cshtml]

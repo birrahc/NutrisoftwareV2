@@ -1,0 +1,158 @@
+﻿@using NutriSoftwareV2.Negocio.Domain
+@model NutriSoftwareV2.Negocio.Domain.AvaliacaoFisica
+
+@{
+    AvaliacaoFisica avaliacaAnterior = ViewBag.AvaliacaoAnterior == null ? new AvaliacaoFisica() : ViewBag.AvaliacaoAnterior;
+}
+
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title">Cadastro de avaliação</h5>
+        <button type="submit" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">x</span>
+        </button>
+    </div>
+    <form method="post" id="formularioCadastrarEditarAvaliacao" class="p-0">
+        <div class="modal-body">
+            <div class="container">
+                <input type="hidden" asp-for="Id" id="avaliacaoId"/>
+                <input type="hidden" asp-for="PacienteId" />
+                <input type="hidden" name="IdPaciente" value="@ViewBag.IdPaciente" />
+                <div class="row mt-1">
+                    <div class="float-left ml-4" style="width:140px;"><input type="text" value="@avaliacaAnterior.NumAvaliacao" readonly class="form-control h32px w-140px avalAnterior" /></div>
+                    <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Avaliacao</div>
+                    <div class="float-left" style="width:100px;"><input type="text" asp-for="NumAvaliacao" class="form-control h32px w-140px" /></div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="row mt-1">
+                    <div class="float-left ml-4" style="width:140px;"><input type="date" asp-for="@avaliacaAnterior.DataAvaliacao" readonly class="form-control h32px w-140px avalAnterior" /></div>
+                    <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Data</div>
+                    <div class="float-left" style="width:100px;"><input type="date" asp-for="DataAvaliacao" class="form-control h32px w-140px" /></div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="row mt-1">
+                    <div class="float-left ml-4" style="width:140px;"><input type="text" placeholder="@avaliacaAnterior.Peso" readonly class="form-control h32px w-140px avalAnterior" /></div>
+                    <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Peso</div>
+                    <div class="float-left" style="width:100px;"><input type="text" asp-for="Peso" mask="formAval" class="form-control h32px w-140px" /></div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="row mt-1">
+                    <div class="bg-secondary" style="width:100%;">
+                        <p class="text-center m-1 text-light"><b>Circunferências</b></p>
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="float-left ml-4" style="width:140px;"><input type="text" placeholder="@avaliacaAnterior.CircCintura" readonly class="form-control h32px w-140px avalAnterior" /></div>
+                    <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Circ. Cintura</div>
+                    <div class="float-left" style="width:100px;"><input type="text" asp-for="CircCintura" mask="formAval" class="form-control h32px w-140px" /></div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="row mt-1">
+                    <div class="float-left ml-4" style="width:140px;"><input type="text" placeholder="@avaliacaAnterior.CircAbdominal" readonly class="form-control h32px w-140px avalAnterior" /></div>
+                    <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Circ. Abdominal</div>
+                    <div class="float-left" style="width:100px;"><input type="text" asp-for="CircAbdominal" mask="formAval"  class="form-control h32px w-140px" /></div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="row mt-1">
+                    <div class="float-left ml-4" style="width:140px;"><input type="text" placeholder="@avaliacaAnterior.CircQuadril" readonly class="form-control h32px w-140px avalAnterior" /></div>
+                    <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Circ. Quadril</div>
+                    <div class="float-left" style="width:100px;"><input type="text" asp-for="CircQuadril" mask="formAval"  class="form-control h32px w-140px" /></div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="row mt-1">
+                    <div class="float-left ml-4" style="width:140px;"><input type="text" placeholder="@avaliacaAnterior.CircPeito" readonly class="form-control h32px w-140px avalAnterior" /></div>
+                    <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Circ. Peito</div>
+                    <div class="float-left" style="width:100px;"><input type="text" asp-for="CircPeito" mask="formAval" class="form-control h32px w-140px" /></div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="row mt-1">
+                    <div class="float-left ml-4" style="width:140px;"><input type="text" placeholder="@avaliacaAnterior.CircBracoDireito" readonly class="form-control h32px w-140px avalAnterior" /></div>
+                    <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Circ. Braço D</div>
+                    <div class="float-left" style="width:100px;"><input type="text" asp-for="CircBracoDireito" mask="formAval" class="form-control h32px w-140px" /></div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="row mt-1">
+                    <div class="float-left ml-4" style="width:140px;"><input type="text" placeholder="@avaliacaAnterior.CircBracoEsquerdo" readonly class="form-control h32px w-140px avalAnterior" /></div>
+                    <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Circ. Braço E</div>
+                    <div class="float-left" style="width:100px;"><input type="text" asp-for="CircBracoEsquerdo" mask="formAval" class="form-control h32px w-140px" /></div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="row mt-1">
+                    <div class="float-left ml-4" style="width:140px;"><input type="text" placeholder="@avaliacaAnterior.CircCoxadireita" readonly class="form-control h32px w-140px avalAnterior" /></div>
+                    <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Circ. Coxa D</div>
+                    <div class="float-left" style="width:100px;"><input type="text" asp-for="CircCoxadireita" mask="formAval" class="form-control h32px w-140px" /></div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="row mt-1">
+                    <div class="float-left ml-4" style="width:140px;"><input type="text" placeholder="@avaliacaAnterior.CircCoxaEsquerda" readonly class="form-control h32px w-140px avalAnterior" /></div>
+                    <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Circ. Coxa E</div>
+                    <div class="float-left" style="width:100px;"><input type="text" asp-for="CircCoxaEsquerda" mask="formAval" class="form-control h32px w-140px" /></div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="row mt-1">
+                    <div class="float-left ml-4" style="width:140px;"><input type="text" placeholder="@avaliacaAnterior.CircPanturrilhaDireita" readonly class="form-control h32px w-140px avalAnterior" /></div>
+                    <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Circ. Pant. D</div>
+                    <div class="float-left" style="width:100px;"><input type="text" asp-for="CircPanturrilhaDireita" mask="formAval" class="form-control h32px w-140px" /></div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="row mt-1">
+                    <div class="float-left ml-4" style="width:140px;"><input type="text" placeholder="@avaliacaAnterior.CircPanturrilhaEsquerda" readonly class="form-control h32px w-140px avalAnterior" /></div>
+                    <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Circ. Pant. E</div>
+                    <div class="float-left" style="width:100px;"><input type="text" asp-for="CircPanturrilhaEsquerda" mask="formAval" class="form-control h32px w-140px" /></div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="row mt-1">
+                    <div class="bg-secondary" style="width:100%;">
+                        <p class="text-center m-1 text-light"><b>Dobra cutânia</b></p>
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="float-left ml-4" style="width:140px;"><input type="text" placeholder="@avaliacaAnterior.DCTriceps" readonly class="form-control h32px w-140px avalAnterior" /></div>
+                    <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">DC. Triceps</div>
+                    <div class="float-left" style="width:100px;"><input type="text" asp-for="DCTriceps" mask="formAval" class="form-control h32px w-140px" /></div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="row mt-1">
+                    <div class="float-left ml-4" style="width:140px;"><input type="text" placeholder="@avaliacaAnterior.DCEscapular" readonly class="form-control h32px w-140px avalAnterior" /></div>
+                    <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">DC. Escapular</div>
+                    <div class="float-left" style="width:100px;"><input type="text" asp-for="DCEscapular" mask="formAval" class="form-control h32px w-140px" /></div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="row mt-1">
+                    <div class="float-left ml-4" style="width:140px;"><input type="text" placeholder="@avaliacaAnterior.DCSupraIliaca" readonly class="form-control h32px w-140px avalAnterior" /></div>
+                    <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">DC. Supra Iliaca</div>
+                    <div class="float-left" style="width:100px;"><input type="text" asp-for="DCSupraIliaca" mask="formAval" class="form-control h32px w-140px" /></div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="row mt-1">
+                    <div class="float-left ml-4" style="width:140px;"><input type="text" placeholder="@avaliacaAnterior.DCAbdominal" readonly class="form-control h32px w-140px avalAnterior" /></div>
+                    <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">DC. Abdominal</div>
+                    <div class="float-left" style="width:100px;"><input type="text" asp-for="DCAbdominal" mask="formAval" class="form-control h32px w-140px" /></div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="row mt-1">
+                    <div class="float-left ml-4" style="width:140px;"><input type="text" placeholder="@avaliacaAnterior.DCAxilar" readonly class="form-control h32px w-140px avalAnterior" /></div>
+                    <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">DC. Axilar</div>
+                    <div class="float-left" style="width:100px;"><input type="text" asp-for="DCAxilar" mask="formAval" class="form-control h32px w-140px" /></div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="row mt-1">
+                    <div class="float-left ml-4" style="width:140px;"><input type="text" placeholder="@avaliacaAnterior.DCPeitoral" readonly class="form-control h32px w-140px avalAnterior" /></div>
+                    <div class="w-140px p-1 pl-1 float-left bg-secondary text-light h32px">DC. Peitoral</div>
+                    <div class="float-left" style="width:100px;"><input type="text" asp-for="DCPeitoral" mask="formAval" class="form-control h32px w-140px" /></div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="row mt-1">
+                    <div class="float-left ml-4" style="width:140px;"><input type="text" placeholder="@avaliacaAnterior.DCCoxa" readonly class="form-control h32px w-140px avalAnterior" /></div>
+                    <div class="w-140px p-1 pl-1 float-left bg-secondary text-light h32px">DC. Coxa</div>
+                    <div class="float-left" style="width:100px;"><input type="text" asp-for="DCCoxa" mask="formAval" class="form-control h32px w-140px" /></div>
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            <button type="button" onclick="CadastrarEditarAvaliacao()" class="btn btn-primary">Salvar</button>
+        </div>
+    </form>
+</div>

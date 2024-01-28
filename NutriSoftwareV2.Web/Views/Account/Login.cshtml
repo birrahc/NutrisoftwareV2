@@ -1,0 +1,27 @@
+﻿@model NutriSoftwareV2.Web.Identity.Login
+
+<div class="row mt-5 p-5">
+    <div class="col-md-3 col-lg-3 col-sm-12 m-auto p-3" style="border-radius:5px; border:solid 1px">
+        <h3 class="text-center">Login</h3>
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PassWord"></label>
+                <input asp-for="PassWord" type="password" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="custom-checkbox">
+                    <label asp-for="Relembrar"></label>
+                    <input asp-for="Relembrar" />
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Login</button>
+        </form>
+    </div>
+</div>
+

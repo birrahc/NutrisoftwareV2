@@ -1,0 +1,241 @@
+﻿@model IEnumerable<NutriSoftwareV2.Negocio.Domain.AvaliacaoFisica>
+
+@if (Model.ToList().Any() && Model.ToList().Count > 0)
+{
+    <div class="row mt-05">
+        <div class="w-140px pl-1 float-left bg-secondary text-light">Avaliacão</div>
+        @foreach (var aval in Model)
+        {
+            <div class="float-left ml-1" style="width:100px; border:solid 1px #808080" ;><p class="m-0 text-center">@aval.NumAvaliacao° Aval</p></div>
+        }
+        <div style="clear:both;"></div>
+    </div>
+
+    <div class="row mt-05">
+        <div class="w-140px pl-1 float-left bg-secondary text-light">Data Avaliacão</div>
+        @foreach (var aval in Model)
+        {
+            <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.DataAvaliacao.ToShortDateString()</p></div>
+        }
+        <div style="clear:both;"></div>
+    </div>
+
+    <div class="row mt-05">
+        <div class="w-140px pl-1 float-left bg-secondary text-light">Peso</div>
+        @foreach (var aval in Model)
+        {
+            <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.Peso.GetValueOrDefault().ToString("N2")</p></div>
+        }
+        <div style="clear:both;"></div>
+    </div>
+    <div class="row mt-05">
+        <div class="w-100 bg-secondary text-center text-light">
+            <b>Circunferências</b>
+        </div>
+    </div>
+    <div class="row mt-05">
+        <div class="w-140px pl-1 float-left bg-secondary text-light">Circ. Cintura</div>
+        @foreach (var aval in Model)
+        {
+            <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.CircCintura?.ToString("N2")</p></div>
+        }
+        <div style="clear:both;"></div>
+    </div>
+
+    <div class="row mt-05">
+        <div class="w-140px pl-1 float-left bg-secondary text-light">Circ. Abdominal</div>
+        @foreach (var aval in Model)
+        {
+            <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.CircAbdominal?.ToString("N2")</p></div>
+        }
+        <div style="clear:both;"></div>
+    </div>
+
+    <div class="row mt-05">
+        <div class="w-140px pl-1 float-left bg-secondary text-light">Circ. Quadril</div>
+        @foreach (var aval in Model)
+        {
+            <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.CircQuadril?.ToString("N2")</p></div>
+        }
+        <div style="clear:both;"></div>
+    </div>
+
+    <div class="row mt-05">
+        <div class="w-140px pl-1 float-left bg-secondary text-light">Circ. Peito</div>
+        @foreach (var aval in Model)
+        {
+            <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.CircPeito?.ToString("N2")</p></div>
+        }
+        <div style="clear:both;"></div>
+    </div>
+
+    <div class="row mt-05">
+        <div class="w-140px pl-1 float-left bg-secondary text-light">Circ. Braço D</div>
+        @foreach (var aval in Model)
+        {
+            <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.CircBracoDireito?.ToString("N2")</p></div>
+        }
+        <div style="clear:both;"></div>
+    </div>
+
+    <div class="row mt-05">
+        <div class="w-140px pl-1 float-left bg-secondary text-light">Circ. Braço E</div>
+        @foreach (var aval in Model)
+        {
+            <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.CircBracoEsquerdo?.ToString("N2")</p></div>
+        }
+        <div style="clear:both;"></div>
+    </div>
+
+    <div class="row mt-05">
+        <div class="w-140px pl-1 float-left bg-secondary text-light">Circ. Coxa D</div>
+        @foreach (var aval in Model)
+        {
+            <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.CircCoxadireita?.ToString("N2")</p></div>
+        }
+        <div style="clear:both;"></div>
+    </div>
+
+    <div class="row mt-05">
+        <div class="w-140px pl-1 float-left bg-secondary text-light">Circ. Coxa E</div>
+        @foreach (var aval in Model)
+        {
+            <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.CircCoxaEsquerda?.ToString("N2")</p></div>
+        }
+        <div style="clear:both;"></div>
+    </div>
+
+    <div class="row mt-05">
+        <div class="w-140px pl-1 float-left bg-secondary text-light">Circ. Pant. D</div>
+        @foreach (var aval in Model)
+        {
+            <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.CircPanturrilhaDireita?.ToString("N2")</p></div>
+        }
+        <div style="clear:both;"></div>
+    </div>
+
+    <div class="row mt-05">
+        <div class="w-140px pl-1 float-left bg-secondary text-light">Circ. Pant. E</div>
+        @foreach (var aval in Model)
+        {
+            <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.CircPanturrilhaEsquerda?.ToString("N2")</p></div>
+        }
+        <div style="clear:both;"></div>
+    </div>
+
+    <div class="row mt-05">
+        <div class="w-100 bg-secondary text-center text-light">
+            <b>Dobra Cutânea</b>
+        </div>
+    </div>
+
+    <div class="row mt-05">
+        <div class="w-140px pl-1 float-left bg-secondary text-light">DC. Triceps</div>
+        @foreach (var aval in Model)
+        {
+            <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.DCTriceps?.ToString("N2")</p></div>
+        }
+        <div style="clear:both;"></div>
+    </div>
+
+    <div class="row mt-05">
+        <div class="w-140px pl-1 float-left bg-secondary text-light">DC. Escapula</div>
+        @foreach (var aval in Model)
+        {
+            <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.DCEscapular?.ToString("N2")</p></div>
+        }
+        <div style="clear:both;"></div>
+    </div>
+
+    <div class="row mt-05">
+        <div class="w-140px pl-1 float-left bg-secondary text-light">DC. Supra Iliaca</div>
+        @foreach (var aval in Model)
+        {
+            <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.DCSupraIliaca?.ToString("N2")</p></div>
+        }
+        <div style="clear:both;"></div>
+    </div>
+
+    <div class="row mt-05">
+        <div class="w-140px pl-1 float-left bg-secondary text-light">DC. Abdominal</div>
+        @foreach (var aval in Model)
+        {
+            <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.DCAbdominal?.ToString("N2")</p></div>
+        }
+        <div style="clear:both;"></div>
+    </div>
+
+    <div class="row mt-05">
+        <div class="w-140px pl-1 float-left bg-secondary text-light">DC. Axilar</div>
+        @foreach (var aval in Model)
+        {
+            <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.DCAxilar?.ToString("N2")</p></div>
+        }
+        <div style="clear:both;"></div>
+    </div>
+
+    <div class="row mt-05">
+        <div class="w-140px pl-1 float-left bg-secondary text-light">DC. Peitoral</div>
+        @foreach (var aval in Model)
+        {
+            <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.DCPeitoral?.ToString("N2")</p></div>
+        }
+        <div style="clear:both;"></div>
+    </div>
+
+    <div class="row mt-05">
+        <div class="w-140px pl-1 float-left bg-secondary text-light">DC. Coxa</div>
+        @foreach (var aval in Model)
+        {
+            <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.DCCoxa?.ToString("N2")</p></div>
+        }
+        <div style="clear:both;"></div>
+    </div>
+
+    <div class="row mt-05">
+        <div class="w-140px pl-1 float-left bg-secondary text-light">%Gordura</div>
+        @foreach (var aval in Model)
+        {
+            <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.PercentualGordura.GetValueOrDefault().ToString("N2") %</p></div>
+        }
+        <div style="clear:both;"></div>
+    </div>
+
+    <div class="row mt-05">
+        <div class="w-140px pl-1 float-left bg-secondary text-light">M. Muscular</div>
+        @foreach (var aval in Model)
+        {
+            <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.MassaMuscular.GetValueOrDefault().ToString("N2") Kg</p></div>
+        }
+        <div style="clear:both;"></div>
+    </div>
+
+    <div class="row mt-05">
+        <div class="w-140px pl-1 float-left bg-secondary text-light">Gordura</div>
+        @foreach (var aval in Model)
+        {
+            <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.Gordura.GetValueOrDefault().ToString("N2") Kg</p></div>
+        }
+        <div style="clear:both;"></div>
+    </div>
+
+    <div class="row mt-05">
+        <div class="w-140px pl-1 float-left"></div>
+        @foreach (var aval in Model)
+        {
+            <div class="float-left ml-1" style="width: 100px;">
+                <button id="@aval.Id" onclick="AbrirModalParaEdicaoAvaliacao(this.id)" class=" btn p-0 ml-3">
+                    <i class="fa fa-pencil-square text-primary" title="Editar avaliação" style="font-size:22px;"></i>
+                </button>
+                <button value="@aval.Id" onclick="excluirAvaliacaoPaciente(this.value,@aval.PacienteId)" class=" btn p-0 ml-4" >
+                    <i class="fa fa-trash text-danger"  title="Remover avaliação" style="font-size:22px;"></i>
+                </button>
+            </div>
+        }
+        <div style="clear:both;"></div>
+    </div>
+
+}
+else { 
+    <p class="text-center p-2 mt-2">Nenhuma avaliação cadastrada para esse paciente</p>
+}

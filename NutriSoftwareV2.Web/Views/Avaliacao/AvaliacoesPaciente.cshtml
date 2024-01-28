@@ -1,0 +1,92 @@
+﻿@using NutriSoftwareV2.Negocio.Domain
+@model IEnumerable<NutriSoftwareV2.Negocio.Domain.AvaliacaoFisica>
+
+@{
+    AvaliacaoFisica AvaliacaoDetalhado = ViewBag.Avaliacao;
+}
+<div class="container-fluid" id="Conteudo">
+
+    <div class="row">
+        <div class="col-6" padding:4px 20px;">
+            <form method="post" class="p-0 m-0" id="frmPesquisaEntreAvaliacoes">
+                <div class="row">
+                    <input type="hidden" name="PacienteId" value="@Model.FirstOrDefault().PacienteId" />
+                    <div class="col-4 p-1">
+
+                        <div class="input-group mb-2 mr-sm-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text" style="background-color: #d8f0d6;">De</div>
+                            </div>
+                            <input type="number" name="PrimeiroParamPesquisa" textbox-pesquisa ="pesquisavaAvaliacao" class="form-control" />
+                            <div class="input-group-prepend">
+                                <div class="input-group-text" style="background-color: #d8f0d6;">° Avaliação</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 p-1">
+                        <div class="input-group mb-2 mr-sm-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text" style="background-color: #d8f0d6;">Até</div>
+                            </div>
+                            <input type="number" name="SegundoParamPesquisa" textbox-pesquisa ="pesquisavaAvaliacao" class="form-control" />
+                            <div class="input-group-prepend">
+                                <div class="input-group-text" style="background-color: #d8f0d6;">° Avaliação</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-1 p-1">
+                        <button type="button" onclick="pesquisarAvaliacaoPaciente()" class="btn btn-secondary w-100">
+                            <i class="fa fa-search" title="Pesquisar"></i>
+                        </button>
+                    </div>
+                    <div class="col-1 p-1">
+                        <button type="button" onclick="limparPesquisaAvaliacaoPaciente()" class="btn btn-secondary w-100">
+                            <i class="fa fa-history" title="Limpar"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 mt-1">
+            <div class="row p-1">
+                <div class="col-12 pb-2" style="border-radius: 5px; border: solid 5px #d8f0d6;">
+                    <h3 class="text-center" style="color: #918f8f;">Avaliacoes</h3>
+                    <div class="m-auto p-2 bg-white" style="width: 99%; border: solid 1px #d8d8d8; border-radius: 5px; overflow:auto;">
+                        <div class="container-fluid">
+                            <div class="row mt-1">
+                                <div class="col-12 p-2 bg-secondary">
+                                    <p class="m-0 text-light text-center" style="font-size:20px;"> Paciente: <b>@Model.FirstOrDefault().Paciente.Nome</b> Idade: <b>@Model.FirstOrDefault().Paciente.Idade anos</b></p>
+                                </div>
+                            </div>
+                            <div id="conteudoAvaliacao">
+                                <partial name="PartiaisAvaliacao/_ConteudoAvaliacao" for="@Model" />
+                            </div> 
+                        </div>
+                    </div>
+
+                    <button value="@Model.FirstOrDefault().PacienteId" onclick="AbrirModalParaAvaliacao(this.value)" class="float-right mr-5 btn btn-secondary mt-3">
+                        <i class="fa fa-plus" title="Cadastrar nova avaliação"></i>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalAvaliacao" tabindex="-1" aria-labelledby="modalAvaliacao" aria-modal="true" role="dialog">
+    <div class="modal-dialog" id="formularioAvaliacao">
+    </div>
+</div>
+
+
+@section Scripts{
+
+    @{
+        Html.RenderPartial("_PacienteJS");
+    }
+   
+}

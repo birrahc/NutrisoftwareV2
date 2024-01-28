@@ -1,0 +1,200 @@
+﻿@model NutriSoftwareV2.Negocio.Domain.AvaliacaoFisica
+
+@{
+    NutriSoftwareV2.Negocio.Domain.AvaliacaoFisica avaliacaAnterior = ViewBag.AvaliacaoAnterior == null ? new NutriSoftwareV2.Negocio.Domain.AvaliacaoFisica() : ViewBag.AvaliacaoAnterior;
+    var data = Model?.DataAvaliacao == null ? DateTime.Now : Model?.DataAvaliacao;
+    string codigoDieta = ViewBag.CodigoConsulta;
+    bool? editar = ViewBag.Editar;
+    string display = Model != null && Model.IsValid() ? "block" : "none";
+}
+
+<div class="container" style="border: solid 2px #c4c0c0; padding: 0px 0 10px 0px; margin-top: 50px; ">
+    <h3 class="text-center" style="background-color: #acacac; border-radius: 0 0 50px 50px; padding: 5px 0; color: #6c6b6b;">Avaliação</h3>
+    <form method="post" id="frmCadastrarAvaliacaoConsulta" class="p-0">
+        <div style="width:35%; margin:auto;">
+            <input type="hidden" name="Inserir" id="blnInserir" />
+            <input type="hidden" asp-for="Id" id="avaliacaoId" />
+            <input type="hidden" name="PacienteId" value="@Model?.PacienteId" />
+            <input type="hidden" name="Codigo" value="@codigoDieta" />
+            <input type="hidden" name="Editar" value="@editar" class="txtEditar" />
+            <div class="row mt-1 p-0">
+                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.NumAvaliacao</div>
+                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Avaliacao</div>
+                <div class="float-left" style="width:100px;"><input type="text" name="NumAvaliacao" class="form-control h32px w-140px text-center" value="@Model?.NumAvaliacao" id="txtNumAvaliacao" /></div>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="row mt-1 p-0">
+                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior?.DataAvaliacao.ToShortDateString()</div>
+                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Data</div>
+                <div class="float-left" style="width:100px;"><input type="date" asp-for="DataAvaliacao" class="form-control h32px w-140px text-center" id="txtDataAvaliacao" /></div>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="row mt-1">
+                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior?.Peso?.ToString("N2")</div>
+                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Peso</div>
+                <div class="float-left" style="width:100px;"><input type="text" name="Peso" onblur="CalcularAvaliacao()" value="@Model?.Peso" mask="formAval" class="form-control h32px w-140px text-center" id="txtPeso" /></div>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="row mt-1">
+                <div class="bg-secondary" style="width:100%;">
+                    <p class="text-center m-1 text-light"><b>Circunferências</b></p>
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.CircCintura</div>
+                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Circ. Cintura</div>
+                <div class="float-left" style="width:100px;"><input type="text" name="CircCintura" onblur="CalcularAvaliacao()" value="@Model?.CircCintura" mask="formAval" class="form-control h32px w-140px text-center" id="txtCircCintura" /></div>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="row mt-1">
+                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.CircAbdominal</div>
+                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Circ. Abdominal</div>
+                <div class="float-left" style="width:100px;"><input type="text" name="CircAbdominal" onblur="CalcularAvaliacao()" value="@Model?.CircAbdominal" mask="formAval" class="form-control h32px w-140px text-center" id="txtCircAbdominal" /></div>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="row mt-1">
+                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.CircQuadril</div>
+                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Circ. Quadril</div>
+                <div class="float-left" style="width:100px;"><input type="text" name="CircQuadril" onblur="CalcularAvaliacao()" value="@Model?.CircQuadril" mask="formAval" class="form-control h32px w-140px text-center" id="txtCircQuadril" /></div>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="row mt-1">
+                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.CircPeito</div>
+                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Circ. Peito</div>
+                <div class="float-left" style="width:100px;"><input type="text" name="CircPeito" onblur="CalcularAvaliacao()" value="@Model?.CircPeito" mask="formAval" class="form-control h32px w-140px text-center" id="txtCircPeito" /></div>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="row mt-1">
+                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.CircBracoDireito</div>
+                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Circ. Braço D</div>
+                <div class="float-left" style="width:100px;"><input type="text" name="CircBracoDireito" onblur="CalcularAvaliacao()" value="@Model?.CircBracoDireito" mask="formAval" class="form-control h32px w-140px text-center" id="txtCircBracoDireito" /></div>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="row mt-1">
+                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.CircBracoEsquerdo</div>
+                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Circ. Braço E</div>
+                <div class="float-left" style="width:100px;"><input type="text" name="CircBracoEsquerdo" onblur="CalcularAvaliacao()" value="@Model?.CircBracoEsquerdo" mask="formAval" class="form-control h32px w-140px text-center" id="txtCircBracoEsquerdo" /></div>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="row mt-1">
+                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.CircCoxadireita</div>
+                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Circ. Coxa D</div>
+                <div class="float-left" style="width:100px;"><input type="text" name="CircCoxadireita" onblur="CalcularAvaliacao()" value="@Model?.CircCoxadireita" mask="formAval" class="form-control h32px w-140px text-center" id="txtCircCoxadireita" /></div>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="row mt-1">
+                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.CircCoxaEsquerda</div>
+                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Circ. Coxa E</div>
+                <div class="float-left" style="width:100px;"><input type="text" name="CircCoxaEsquerda" onblur="CalcularAvaliacao()" value="@Model?.CircCoxaEsquerda" mask="formAval" class="form-control h32px w-140px text-center" id="txtCircCoxaEsquerda" /></div>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="row mt-1">
+                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.CircPanturrilhaDireita</div>
+                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Circ. Pant. D</div>
+                <div class="float-left" style="width:100px;"><input type="text" name="CircPanturrilhaDireita" onblur="CalcularAvaliacao()" value="@Model?.CircPanturrilhaDireita" mask="formAval" class="form-control h32px w-140px text-center" id="txtPanturrilhaD" /></div>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="row mt-1">
+                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.CircPanturrilhaEsquerda</div>
+                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Circ. Pant. E</div>
+                <div class="float-left" style="width:100px;"><input type="text" name="CircPanturrilhaEsquerda" onblur="CalcularAvaliacao()" value="@Model?.CircPanturrilhaEsquerda" mask="formAval" class="form-control h32px w-140px text-center" id="txtPanturrilhaE" /></div>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="row mt-1">
+                <div class="bg-secondary" style="width:100%;">
+                    <p class="text-center m-1 text-light"><b>Dobra cutânia</b></p>
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.DCTriceps</div>
+                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">DC. Triceps</div>
+                <div class="float-left" style="width:100px;"><input type="text" name="DCTriceps" value="@Model?.DCTriceps" onblur="CalcularAvaliacao()" mask="formAval" class="form-control h32px w-140px text-center" id="txtDCTriceps" /></div>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="row mt-1">
+                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.DCEscapular</div>
+                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">DC. Escapular</div>
+                <div class="float-left" style="width:100px;"><input type="text" name="DCEscapular" value="@Model?.DCEscapular" onblur="CalcularAvaliacao()" mask="formAval" class="form-control h32px w-140px text-center" id="txtDCEscapular" /></div>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="row mt-1">
+                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.DCSupraIliaca</div>
+                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">DC. Supra Iliaca</div>
+                <div class="float-left" style="width:100px;"><input type="text" name="DCSupraIliaca" value="@Model?.DCSupraIliaca" onblur="CalcularAvaliacao()" mask="formAval" class="form-control h32px w-140px text-center" id="txtDCSupraIliaca" /></div>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="row mt-1">
+                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.DCAbdominal</div>
+                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">DC. Abdominal</div>
+                <div class="float-left" style="width:100px;"><input type="text" name="DCAbdominal" value="@Model?.DCAbdominal" onblur="CalcularAvaliacao()" mask="formAval" class="form-control h32px w-140px text-center" id="txtDCAbdominal" /></div>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="row mt-1">
+                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.DCAxilar</div>
+                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">DC. Axilar</div>
+                <div class="float-left" style="width:100px;"><input type="text" name="DCAxilar" value="@Model?.DCAxilar" onblur="CalcularAvaliacao()" mask="formAval" class="form-control h32px w-140px text-center" id="txtDCAxilar" /></div>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="row mt-1">
+                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.DCPeitoral</div>
+                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light h32px">DC. Peitoral</div>
+                <div class="float-left" style="width:100px;"><input type="text" name="DCPeitoral" value="@Model?.DCPeitoral" onblur="CalcularAvaliacao()" mask="formAval" class="form-control h32px w-140px text-center" id="txtDCPeitoral" /></div>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="row mt-1">
+                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.DCCoxa</div>
+                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light h32px">DC. Coxa</div>
+                <div class="float-left" style="width:100px;"><input type="text" name="DCCoxa" value="@Model?.DCCoxa" onblur="CalcularAvaliacao()" mask="formAval" class="form-control h32px w-140px text-center" id="txtDCCoxa" /></div>
+                <div style="clear:both;"></div>
+            </div>
+
+            <div class="row mt-1">
+                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior?.PercentualGordura?.ToString("N2")</div>
+                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light h32px">% Gordura</div>
+                <div class="float-left text-center bg-light p-1" style="width:140px;"><b>% @Model?.PercentualGordura?.ToString("N2")</b></div>
+                <div style="clear:both;"></div>
+            </div>
+
+            <div class="row mt-1">
+                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior?.MassaMuscular?.ToString("N2")</div>
+                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light h32px">M. Muscular</div>
+                <div class="float-left text-center bg-light p-1" style="width:140px;"><b>@Model?.MassaMuscular?.ToString("N2")</b></div>
+                <div style="clear:both;"></div>
+            </div>
+
+            <div class="row mt-1">
+                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior?.Gordura?.ToString("N2")</div>
+                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light h32px">Gordura</div>
+                <div class="float-left text-center bg-light p-1" style="width:140px;"><b>@Model?.Gordura?.ToString("N2")</b></div>
+                <div style="clear:both;"></div>
+            </div>
+
+            <div class="row mt-1" id="pnlBotoesAvaliacao">
+                <div class="col-6 pl-0">
+                    <button type="button" onclick="VoltarEtapasConsulta(2,'@codigoDieta')" class="btn btn-primary w-100" id="btnAnteriorAvaliacao"> <i class="fa fa-chevron-left" aria-hidden="true"></i> Anterior</button>
+                </div>
+                <div class="col-6 pr-0">
+                    <button type="button" onclick="CalcularAvaliacao()" class="btn btn-secondary w-100" id="btnCalcular" style="display:none">Calcular <i class="fa fa-calculator" aria-hidden="true"></i></button>
+                    <button type="button" onclick="inserirAvaliacao()" class="btn btn-primary w-100" id="btnInserirAvaliacao" style="display:@display;">Proximo <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                </div>
+            </div>
+
+            <div class="row mt-1" id="pnlBotaoEditarAvaliacao" style="display:none;">
+                <div class="col-6 pl-0 pr-0">
+                    <button type="button" class="btn btn-secondary" onclick="EditarPassoConsulta(2,'@codigoDieta','@editar')"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</button>
+                </div>
+            </div>
+            <div class="row mt-1" id="pnlBotaoSalvarAlteracoesAvaliacao" style="display:none;">
+                <div class="col-6 pl-0 float-left">
+                    <button type="button" class="btn btn-secondary w-100" onclick="SalvarAlteracoes('#frmCadastrarAvaliacaoConsulta', 'SegundoPassoAvaliacao')"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Salvar alterações</button>
+                </div>
+                <div class="col-6 pr-0 float-left">
+                    <button type="button" class="btn btn-secondary w-100" onclick="cancelarAlteracaoConsulta()"> <i class="fa fa-refresh" aria-hidden="true"></i> Cancelar</button>
+                </div>
+                <div style="clear:both"></div>
+            </div>
+
+        </div>
+
+    </form>
+</div>

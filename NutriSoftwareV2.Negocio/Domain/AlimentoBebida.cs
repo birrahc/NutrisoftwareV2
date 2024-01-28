@@ -8,7 +8,7 @@ namespace NutriSoftwareV2.Negocio.Domain
         public int Id { get; set; }
         public string Nome { get; set; }
         public EN_TipoAlimentoBebida Tipo { get; set; }
-        public string DescricaoTipoCaloria { get => Svc.SvcEnum.GetDescription(this.Tipo); }
+        public string? DescricaoTipoCaloria { get => Svc.SvcEnum.GetDescription(this.Tipo); }
         public float? Calorias { get; set; }
 
 

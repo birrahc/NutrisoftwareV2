@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\NutriSoftwareV2.Web.props" />
+</Project>

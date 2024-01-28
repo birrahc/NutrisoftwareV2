@@ -1,0 +1,63 @@
+﻿@using NutriSoftwareV2.Negocio.Domain;
+@using NutriSoftwareV2.Negocio.Enums;
+@model IEnumerable<NutriSoftwareV2.Negocio.Domain.Pagamento>
+
+@{
+    Pagamento pgt = ViewBag.Pagamento == null ? new Pagamento() : ViewBag.Pagamento;
+}
+
+<div style=" box-shadow: 5px 10px 8px #888888; padding:10px;">
+    <fieldset style="border:solid 1px; border-radius:5px; padding: 0px 20px 30px 20px;">
+        <legend class="ml-4" style="width:auto">Filtros</legend>
+        <form method="post" class="p-0 m-0 w-100" id="frmFiltroPgt">
+            <div class="row">
+                <div class="col-3">
+                    <label>Data Incial</label>
+                    <input name="DataIncial" type="date" class="form-control" id="txtDataIncial" asp-for="@pgt.DataPagamento" />
+                </div>
+                <div class="col-3">
+                    <label>Data Final</label>
+                    <input name="DataFinal" type="date" class="form-control" id="txtDataFinal" asp-for="@pgt.DataPagamento" />
+                </div>
+                <div class="col-3">
+                    <label>Local de atendimento</label>
+                    <select asp-for="@pgt.LocaisAtendimentoId" asp-items="@ViewBag.LocaisAtendimento" class="form-control" id="selLocalAtendimento">
+                        <option value="0">Todos</option>
+                    </select>
+                </div>
+                <div class="col-3">
+                    <label>Situação</label>
+                    <select asp-for="@pgt.Situacao" asp-items="Html.GetEnumSelectList<EN_StatusPagamento>()" class="form-control" id="selSituacao">
+                        <option value="0">Todos</option>
+                    </select>
+                </div>
+
+                <div class="col-6">
+                    <label>Paciente</label>
+                    <select name="pacienteId" asp-items="@ViewBag.Pacientes" class="form-control" id="selPaciente">
+                        <option value="0">Todos</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1 ml-0">
+                    <br />
+                    <button type="button" onclick="listarPagamentos()" class="btn btn-success w-100">Buscar</button>
+                </div>
+                <div class="col-1 ml-0">
+                    <br />
+                    <button type="button" onclick="limparPesquisaPagamento()" class="btn btn-info w-100">Limpar</button>
+                </div>
+            </div>
+        </form>
+    </fieldset>
+
+    <button type="button" class="btn btn-outline-secondary float-right mt-1" onclick="AbrirModalParaCadastroPagamento()">
+        <i class="fa fa-plus"></i> Registrar pagamento
+    </button>
+    <div style="clear:both;"></div>
+
+</div>
+<div class="row mt-4" style="padding:10px;" id="resultaPagamento">
+    <partial name="PartiaisPagamentos/_ResultadoPagamento" for="@Model" />
+</div>

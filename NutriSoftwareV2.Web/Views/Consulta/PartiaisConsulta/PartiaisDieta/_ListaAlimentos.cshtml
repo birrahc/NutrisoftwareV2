@@ -1,0 +1,218 @@
+﻿@model IEnumerable<NutriSoftwareV2.Negocio.Domain.PlanoAlimentar>
+@{
+    int contador = 0;
+    int ContaAlimentos = 0;
+    int contaSub = 0;
+    int cantadorIntervalo = 0;
+    int? pacienteId = ViewBag.PacienteId;
+    string codigoDieta = @ViewBag.CodigoDieta;
+    bool editar = (bool)(ViewBag.Editar == null ? false : ViewBag.Editar);
+    string display = Model?.ToList().Count > 0 ? "block":"none";
+
+}
+
+<h3 class="text-center" style="background-color: #acacac; border-radius: 0 0 50px 50px; padding: 5px 0; color: #6c6b6b;">Dieta</h3>
+@if (Model != null)
+{
+    @foreach (var hora in Model)
+    {
+        contador += 1;
+
+        var alimentosHora = hora.QuantidadeAlimentos.Where(p => p.Hora == hora.HoraAlimentos && p.Tipo == NutriSoftwareV2.Negocio.Enums.EN_TipoDietaAlimentos.Alimento).ToList();
+        var SubAlimentosHora = hora.QuantidadeAlimentos.Where(p => p.Hora == hora.HoraAlimentos && p.Tipo == NutriSoftwareV2.Negocio.Enums.EN_TipoDietaAlimentos.Substituicao).ToList();
+        var intervalo = hora.QuantidadeAlimentos.Where(p => p.Hora == hora.HoraAlimentos && p.Tipo == NutriSoftwareV2.Negocio.Enums.EN_TipoDietaAlimentos.Intervalo).ToList();
+        int rowSpan = alimentosHora.ToList().Count < 1 ? 1 : alimentosHora.ToList().Count;
+        <div style="padding:10px 20px">
+            <div class="row" id="linha_@hora.HoraAlimentos.Replace(":","")">
+                <div class="col-lg-2 col-md-2 col-sm-12">
+                    <h6>Horário</h6>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td rowspan="@rowSpan">
+                                    <p style="font-size:22px;"><b>@hora.HoraAlimentos</b></p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="col-lg-5 col-md-5 col-sm-12">
+                    <h6>Alimentos</h6>
+                    <table class="table">
+                        <tbody>
+                            @foreach (var alimentos in alimentosHora)
+                            {
+                                ContaAlimentos += 1;
+                                
+                                <tr>
+                                    <td class="p-0">@alimentos.Alimento.Nome</td>
+                                    <td class="p-0">@alimentos.Quantidade</td>
+                                    <td class="p-0">@alimentos.TipoMedida.Descricao</td>
+                                    <td class="p-0">
+                                        <form method="post" class="p-0 m-0 w-100" id="frmRemoveAlimento_@ContaAlimentos">
+                                            <input type="hidden" name="CodigoDieta" value="@hora.CodigoDieta" />
+                                            <input type="hidden" name="Hora" value="@alimentos.Hora" />
+                                            <input type="hidden" name="AlimentoId" value="@alimentos.Alimento.Id" />
+                                            <input type="hidden" name="Tipo" value="1" />
+                                            <button type="button" value="frmRemoveAlimento_@ContaAlimentos" onclick="removerItem(this.value)" class="btn btn-light" style="border-radius:25px">
+                                                <i title="remover" class="fa fa-remove"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-12">
+                    <h6>Substituições</h6>
+                    <table class="table">
+                        <tbody>
+                            @if (SubAlimentosHora.Any() && SubAlimentosHora.Count > 0)
+                                
+                                @foreach (var subAlimentos in SubAlimentosHora)
+                                {
+                                    contaSub += 1;
+                                    
+                                    <tr>
+                                        <td class="p-0">@subAlimentos.Alimento.Nome</td>
+                                        <td class="p-0">@subAlimentos.Quantidade</td>
+                                        <td class="p-0">@subAlimentos.TipoMedida.Descricao</td>
+                                        <td class="p-0">
+                                            <form method="post" class="p-0 m-0 w-100" id="frmRemoveSubAlimento_@contaSub">
+                                                <input type="hidden" name="CodigoDieta" value="@subAlimentos.CodigoDieta" />
+                                                <input type="hidden" name="Hora" value="@subAlimentos.Hora" />
+                                                <input type="hidden" name="AlimentoId" value="@subAlimentos.Alimento.Id" />
+                                                <input type="hidden" name="Tipo" value="2" />
+                                                <button type="button" value="frmRemoveSubAlimento_@contaSub" onclick="removerItem(this.value)" class="btn btn-light" style="border-radius:25px">
+                                                    <i title="remover" class="fa fa-remove"></i>
+                                                </button>
+                                            </form>
+                                            
+                                        </td>
+                                    </tr>
+                                }
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row">
+                <h6 class="ml-3">Observações</h6>
+                <div class="col-12">
+                    <form method="post" id="frmObservacao_@contador">
+                        <input type="hidden" name="HorarioReferencia" value="@hora.HoraAlimentos" />
+                        <input type="hidden" name="CodigoDieta" value="@hora.CodigoDieta" />
+                        <textarea name="Anotacoes" class="form-control bg-light" onblur="inserirObservacaoDieta(@contador)" rows="4" style="resize:none; padding-bottom:2px;">@hora?.ObservacaoPlano?.Anotacoes?.Replace("<br/>", "\n")</textarea>
+                    </form>
+                </div>
+            </div>
+
+            <div class="row pl-3 linhasform">
+                <form method="post" id="frmInserirIntervalos_@contador" class="p-0 m-0" style="width:100%">
+
+                    <h6 class="m-auto">Intervalos</h6>
+                    <div class="row p-0 m-0 linhasIntervalos">
+                        <div class="col-9">
+                            <div class="row p-0">
+                                <div class="col-5 p-1">
+                                    <input type="text" onblur="habilitarbotoes(3,@contador)" id="txtIntervalo_@contador" onfocus="buscarIntervalos(@contador)" class="form-control w-100 txtIntervalo" />
+                                    <input type="hidden" name="AlimentoId" id="txtIntervaloId_@contador" class="form-control w-100" />
+                                    <input type="hidden" name="Tipo" value="3" class="form-control w-100" />
+                                    <input type="hidden" name="CodigoDieta" value="@hora.CodigoDieta" class="form-control w-100" />
+                                    <input type="hidden" name="Hora" value="@hora.HoraAlimentos" id="horaIntervalo_@contador" class="form-control w-100 hora" />
+                                </div>
+                                <div class="col-2 p-1">
+                                    <input type="text" onblur="habilitarbotoes(3,@contador)" name="QuantidadeAlimento" id="quantidadeIntervaloAlimento_@contador" class="form-control w-100" />
+                                </div>
+                                <div class="col-4 p-1">
+                                    <input type="text" onblur="habilitarbotoes(3,@contador)" id="txtTpIntervalo_@contador" onfocus="buscarTipoMedidaIntevalos(@contador)" class="form-control w-100" />
+                                    <input type="hidden" name="TipoMedidaAlimentoId" id="txtTpIntervaloId_@contador" class="form-control w-100" />
+                                </div>
+                                <div class="col-1 p-0 pt-1 pb-1">
+                                    <button type="button" class="btn btn-outline-secondary"><i class="fa fa-history"></i> Limpar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2 p-0 pl-2 pt-1 pb-1 dvbtnAdicionar">
+                            <button type="button" class="btn btn-primary" id="btnInserirIntervalos_@contador" onclick="adicionarIntervalos(@contador)">Adicionar</button>
+                        </div>
+                    </div>
+                    
+                </form>
+                <div class="col-12 p-2" style="border-top: solid 1px #c4c0c0; border-bottom: solid 2px #c4c0c0; ">
+                    @if (intervalo != null)
+                    {
+                        <table class="table">
+
+                            <tbody>
+                                @foreach (var intevaloAlimento in intervalo)
+                                {
+                                    cantadorIntervalo += 1;
+                                    var descricao = $"{intevaloAlimento.Alimento.Nome} - {intevaloAlimento.Quantidade}  {intevaloAlimento.TipoMedida.Descricao}";
+                                <tr>
+                                    <td class="p-0 text-center w-75">
+                                        @descricao
+                                    </td>
+                                    <td class="p-0">
+                                        <form method="post" class="p-0 m-0 w-100" id="frmRemoveIntervalo_@cantadorIntervalo">
+                                            <input type="hidden" name="CodigoDieta" value="@hora.CodigoDieta" />
+                                            <input type="hidden" name="Hora" value="@intevaloAlimento.Hora" />
+                                            <input type="hidden" name="AlimentoId" value="@intevaloAlimento.Alimento.Id" />
+                                            <input type="hidden" name="Tipo" value="3" />
+                                            <button type="button" value="frmRemoveIntervalo_@cantadorIntervalo" onclick="removerItem(this.value)" class="btn btn-light" style="border-radius:25px">
+                                                <i title="remover" class="fa fa-remove"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                }
+
+                            </tbody>
+                        </table>
+
+                    }
+                </div>
+            </div>
+        </div>
+    }
+}
+
+<div class="row mt-1" id="pnlBotaoEditarDieta" style="display: none; margin: auto; margin-bottom: 62px;">
+    <div class="col-6 pl-2 pr-0">
+        <button type="button" class="btn btn-secondary" onclick="EditarPassoConsulta(3,'@codigoDieta','@editar')"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</button>
+    </div>
+</div>
+<div class="row mt-1" id="pnlBotaoSalvarAlteracaoDieta" style="display: none; margin: auto; margin-bottom: 62px;">
+    <form method="post" class="p-0 m-0" id="frmSalvarAlteracoesDieta">
+        <div class="col-6 pl-2 pr-0">
+            <input type="hidden" name="Editar" value="@editar" class="txtEditar" />
+            <input type="hidden" name="Codigo" value="@codigoDieta" />
+            <input type="hidden" name="PacienteId" value="@pacienteId" />
+            <button type="button" class="btn btn-secondary" onclick="SalvarAlteracoes('#frmSalvarAlteracoesDieta', 'TerceiroPassoDieta')"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Salvar alterações</button>
+            <button type="button" class="btn btn-secondary" onclick="cancelarAlteracaoConsulta()"> <i class="fa fa-pencil-refresh" aria-hidden="true"></i> Cancelar</button>
+        </div>
+    </form>
+</div>
+
+<div id="pnlBotoesAvancar" class="mt-1">
+    <form method="post" class="p-0 m-0" id="frmCadastrarDietaConsulta">
+        <div class="row" style="width:30%; margin:auto; margin-bottom:62px;">
+
+            <input type="hidden" name="Codigo" value="@Model?.FirstOrDefault().CodigoDieta" />
+            <input type="hidden" name="PacienteId" value="@pacienteId" />
+
+            <div class="col-6">
+                <button type="button" onclick="VoltarEtapasConsulta(3,'@codigoDieta')" class="btn btn-primary w-100" id="btnDietaAnterior"><i class="fa fa-chevron-left" aria-hidden="true"></i> Anterior </button>
+            </div>
+            <div class="col-6" style="display:@display">
+                <button type="button" onclick="inserirDieta()" class="btn btn-primary w-100"> Proximo <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+

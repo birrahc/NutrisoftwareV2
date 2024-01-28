@@ -1,0 +1,321 @@
+﻿@model NutriSoftwareV2.Negocio.Domain.AvaliacaoFisica
+
+@{
+    List<NutriSoftwareV2.Negocio.Domain.AvaliacaoFisica> avaliacoes = ViewBag.Avaliacoes == null ? new List<NutriSoftwareV2.Negocio.Domain.AvaliacaoFisica>() : (List<NutriSoftwareV2.Negocio.Domain.AvaliacaoFisica>)ViewBag.Avaliacoes;
+}
+<div class="container-fluid" id="Conteudo">
+
+    <div class="row">
+        <div class="col-12 mt-1">
+            <div class="row p-1">
+                <div class="col-12 pb-2" style="border-radius: 25px; border: solid 2px #e4e2e2; background-color: #d8f0d6;">
+                    <h3 class="text-center" style="color: #918f8f;">Avaliacoes</h3>
+                    <div class="m-auto p-2 bg-white" style="width: 95%; border: solid 1px #d8d8d8; border-radius: 5px; overflow:auto;">
+                        <div class="container-fluid">
+                            <div class="row mt-1">
+                                <div class="col-12 p-2 bg-secondary">
+                                    <p class="m-0 text-light text-center" style="font-size:20px;"> Paciente: <b>@Model?.Paciente?.Nome</b> Idade: <b>@Model?.Paciente?.Idade anos</b></p>
+                                </div>
+                            </div>
+                            <div id="conteudoAvaliacao">
+                                <div class="float-right">
+
+                                    @if (avaliacoes != null && avaliacoes.Any() && avaliacoes.Count > 0)
+                                    {
+                                        @*<form method="post" id="frmConsultaInserirAvaliacao" class="p-0 m-0">*@
+                                            <div class="row mt-05">
+
+                                                @foreach (var aval in avaliacoes)
+                                                {
+                                                    <div class="float-left ml-1" style="width:100px; border:solid 1px #808080" ;><p class="m-0 text-center">@aval.NumAvaliacao° Aval</p></div>
+                                                }
+                                                <div class="w-140px pl-1 ml-1 float-left bg-secondary text-light">Avaliacão</div>
+                                                <input type="text" asp-for="NumAvaliacao" mask="formAval" class="float-left ml-1 w-140px text-center" id="txtNumeroAvalicao" />
+                                                <div style="clear:both;"></div>
+                                            </div>
+
+                                            <div class="row mt-05">
+
+                                                @foreach (var aval in avaliacoes)
+                                                {
+                                                    <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.DataAvaliacao.ToShortDateString()</p></div>
+                                                }
+                                                <div class="w-140px pl-1 ml-1 float-left bg-secondary text-light">Data Avaliacão</div>
+                                                <input type="date" asp-for="DataAvaliacao" class="float-left ml-1 w-140px text-center" id="txtDataAvaliacao" />
+                                                <div style="clear:both;"></div>
+                                            </div>
+
+                                            <div class="row mt-05">
+                                                @foreach (var aval in avaliacoes)
+                                                {
+                                                    <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.Peso.GetValueOrDefault().ToString("N1")</p></div>
+                                                }
+                                                <div class="w-140px pl-1 ml-1 float-left bg-secondary text-light">Peso</div>
+                                                <div class="float-left ml-1 w-140px">
+                                                    <input type="text" asp-for="Peso" mask="formAval" class=" w-100 text-center" id="txtPesoPaciente" />
+                                                </div>
+                                                <div style="clear:both;"></div>
+                                            </div>
+                                            <div class="row mt-05">
+                                                <div class="w-100 bg-secondary text-center text-light">
+                                                    <b>Circunferências</b>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-05">
+                                                @foreach (var aval in avaliacoes)
+                                                {
+                                                    <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.CircCintura</p></div>
+                                                }
+                                                <div class="w-140px pl-1 ml-1 float-left bg-secondary text-light">Circ. Cintura</div>
+                                                <input type="text" asp-for="CircCintura" mask="formAval" class="float-left ml-1 w-140px text-center" id="txtCircintura" />
+                                                <div style="clear:both;"></div>
+                                            </div>
+
+                                            <div class="row mt-05">
+                                                @foreach (var aval in avaliacoes)
+                                                {
+                                                    <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.CircAbdominal</p></div>
+                                                }
+                                                <div class="w-140px pl-1 ml-1 float-left bg-secondary text-light">Circ. Abdominal</div>
+                                                <input type="text" asp-for="CircAbdominal" mask="formAval" class=" float-lef ml-1 w-140px text-center" id="txtCircAbdominal" />
+                                                <div style="clear:both;"></div>
+                                            </div>
+
+                                            <div class="row mt-05">
+                                                @foreach (var aval in avaliacoes)
+                                                {
+                                                    <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.CircQuadril</p></div>
+                                                }
+                                                <div class="w-140px pl-1 ml-1 float-left bg-secondary text-light">Circ. Quadril</div>
+                                                <input type="text" asp-for="CircQuadril" mask="formAval" class="float-lef ml-1 w-140px text-center" id="txtCircQuadril" />
+                                                <div style="clear:both;"></div>
+                                            </div>
+
+                                            <div class="row mt-05">
+                                                @foreach (var aval in avaliacoes)
+                                                {
+                                                    <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.CircPeito</p></div>
+                                                }
+                                                <div class="w-140px pl-1 ml-1 float-left bg-secondary text-light">Circ. Peito</div>
+                                                <input type="text" asp-for="CircPeito" mask="formAval" class="float-lef ml-1 w-140px text-center" id="txtCircPeito" />
+                                                <div style="clear:both;"></div>
+                                            </div>
+
+                                            <div class="row mt-05">
+                                                @foreach (var aval in avaliacoes)
+                                                {
+                                                    <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.CircBracoDireito</p></div>
+                                                }
+                                                <div class="w-140px pl-1 ml-1 float-left bg-secondary text-light">Circ. Braço D</div>
+                                                <input type="text" asp-for="CircBracoDireito" mask="formAval" class="float-lef ml-1 w-140px text-center" id="txtCircBracoDireito" />
+                                                <div style="clear:both;"></div>
+                                            </div>
+
+                                            <div class="row mt-05">
+                                                @foreach (var aval in avaliacoes)
+                                                {
+                                                    <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.CircBracoEsquerdo</p></div>
+                                                }
+                                                <div class="w-140px pl-1 ml-1 float-left bg-secondary text-light">Circ. Braço E</div>
+                                                <input type="text" asp-for="CircBracoEsquerdo" mask="formAval" class="float-lef ml-1 w-140px text-center" id="txtCircBracoEsquerdo" />
+                                                <div style="clear:both;"></div>
+                                            </div>
+
+                                            <div class="row mt-05">
+                                                @foreach (var aval in avaliacoes)
+                                                {
+                                                    <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.CircCoxadireita</p></div>
+                                                }
+                                                <div class="w-140px pl-1 ml-1 float-left bg-secondary text-light">Circ. Coxa D</div>
+                                                <input type="text" asp-for="CircCoxadireita" mask="formAval" class="float-lef ml-1 w-140px text-center" id="txtCircCoxadireita" />
+                                                <div style="clear:both;"></div>
+                                            </div>
+
+                                            <div class="row mt-05">
+                                                @foreach (var aval in avaliacoes)
+                                                {
+                                                    <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.CircCoxaEsquerda</p></div>
+                                                }
+                                                <div class="w-140px pl-1 ml-1 float-left bg-secondary text-light">Circ. Coxa E</div>
+                                                <input type="text" asp-for="CircCoxaEsquerda" mask="formAval" class="float-lef ml-1 w-140px text-center" id="txtCircCoxaEsquerda" />
+                                                <div style="clear:both;"></div>
+                                            </div>
+
+                                            <div class="row mt-05">
+                                                @foreach (var aval in avaliacoes)
+                                                {
+                                                    <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.CircPanturrilhaDireita</p></div>
+                                                }
+                                                <div class="w-140px pl-1 ml-1 float-left bg-secondary text-light">Circ. Pant. D</div>
+                                                <input type="text" asp-for="CircPanturrilhaDireita" mask="formAval" class="float-lef ml-1 w-140px text-center" id="txtCircPanturrilhaDireita" />
+                                                <div style="clear:both;"></div>
+                                            </div>
+
+                                            <div class="row mt-05">
+                                                @foreach (var aval in avaliacoes)
+                                                {
+                                                    <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.CircPanturrilhaEsquerda</p></div>
+                                                }
+                                                <div class="w-140px pl-1 ml-1 float-left bg-secondary text-light">Circ. Pant. E</div>
+                                                <input type="text" asp-for="CircPanturrilhaEsquerda" mask="formAval" class="float-lef ml-1 w-140px text-center" id="txtCircPanturrilhaEsquerda" />
+                                                <div style="clear:both;"></div>
+                                            </div>
+
+                                            <div class="row mt-05">
+                                                <div class="w-100 bg-secondary text-center text-light">
+                                                    <b>Dobra Cutânea</b>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mt-05">
+                                                @foreach (var aval in avaliacoes)
+                                                {
+                                                    <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.DCTriceps</p></div>
+                                                }
+                                                <div class="w-140px pl-1 ml-1 float-left bg-secondary text-light">DC. Triceps</div>
+                                                <input type="text" asp-for="DCTriceps" mask="formAval" class="float-lef ml-1 w-140px text-center" id="txtDCTriceps" />
+                                                <div style="clear:both;"></div>
+                                            </div>
+
+                                            <div class="row mt-05">
+                                                @foreach (var aval in avaliacoes)
+                                                {
+                                                    <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.DCEscapular</p></div>
+                                                }
+                                                <div class="w-140px pl-1 ml-1 float-left bg-secondary text-light">DC. Escapula</div>
+                                                <input type="text" asp-for="DCEscapular" mask="formAval" class="float-lef ml-1 w-140px text-center" id="txtDCEscapular" />
+                                                <div style="clear:both;"></div>
+                                            </div>
+
+                                            <div class="row mt-05">
+                                                @foreach (var aval in avaliacoes)
+                                                {
+                                                    <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.DCSupraIliaca</p></div>
+                                                }
+                                                <div class="w-140px pl-1 ml-1 float-left bg-secondary text-light">DC. Supra Iliaca</div>
+                                                <input type="text" asp-for="DCSupraIliaca" mask="formAval" class="float-lef ml-1 w-140px text-center" id="txtDCSupraIlica" />
+                                                <div style="clear:both;"></div>
+                                            </div>
+
+                                            <div class="row mt-05">
+                                                @foreach (var aval in avaliacoes)
+                                                {
+                                                    <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.DCAbdominal</p></div>
+                                                }
+                                                <div class="w-140px pl-1 ml-1 float-left bg-secondary text-light">DC. Abdominal</div>
+                                                <input type="text" asp-for="DCAbdominal" mask="formAval" class="float-lef ml-1 w-140px text-center" id="txtDCAbdominal" />
+                                                <div style="clear:both;"></div>
+                                            </div>
+
+                                            <div class="row mt-05">
+                                                @foreach (var aval in avaliacoes)
+                                                {
+                                                    <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.DCAxilar</p></div>
+                                                }
+                                                <div class="w-140px pl-1 ml-1 float-left bg-secondary text-light">DC. Axilar</div>
+                                                <input type="text" asp-for="DCAxilar" mask="formAval" class="float-lef ml-1 w-140px text-center" id="txtDCAxilar" />
+                                                <div style="clear:both;"></div>
+                                            </div>
+
+                                            <div class="row mt-05">
+                                                @foreach (var aval in avaliacoes)
+                                                {
+                                                    <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.DCPeitoral</p></div>
+                                                }
+                                                <div class="w-140px pl-1 ml-1 float-left bg-secondary text-light">DC. Peitoral</div>
+                                                <input type="text" asp-for="DCPeitoral" mask="formAval" class="float-lef ml-1 w-140px text-center" id="txtDCPeitoral" />
+                                                <div style="clear:both;"></div>
+                                            </div>
+
+                                            <div class="row mt-05">
+                                                @foreach (var aval in avaliacoes)
+                                                {
+                                                    <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.DCCoxa</p></div>
+                                                }
+                                                <div class="w-140px pl-1 ml-1 float-left bg-secondary text-light">DC. Coxa</div>
+                                                <input type="text" asp-for="DCCoxa" mask="formAval" class="float-lef ml-1 w-140px text-center" id="txtDCCoxa" />
+                                                <div style="clear:both;"></div>
+                                            </div>
+
+                                            <div class="row mt-05">
+                                                @foreach (var aval in avaliacoes)
+                                                {
+                                                    <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.PercentualGordura.GetValueOrDefault().ToString("N1") %</p></div>
+                                                }
+                                                <div class="w-140px pl-1 ml-1 float-left bg-secondary text-light">%Gordura</div>
+                                                <input type="text" readonly class="float-lef ml-1 w-140px" />
+                                                <div style="clear:both;"></div>
+                                            </div>
+
+                                            <div class="row mt-05">
+                                                @foreach (var aval in avaliacoes)
+                                                {
+                                                    <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.MassaMuscular.GetValueOrDefault().ToString("N1") Kg</p></div>
+                                                }
+                                                <div class="w-140px pl-1 ml-1 float-left bg-secondary text-light">M. Muscular</div>
+                                                <input type="text" readonly class="float-lef ml-1 w-140px" />
+                                                <div style="clear:both;"></div>
+                                            </div>
+
+                                            <div class="row mt-05">
+                                                @foreach (var aval in avaliacoes)
+                                                {
+                                                    <div class="float-left ml-1" style="width: 100px; border: solid 1px #808080"><p class="m-0 text-center">@aval.Gordura.GetValueOrDefault().ToString("N1") Kg</p></div>
+                                                }
+                                                <div class="w-140px pl-1 ml-1 float-left bg-secondary text-light">Gordura</div>
+                                                <input type="text" readonly class="float-lef ml-1 w-140px" />
+                                                <div style="clear:both;"></div>
+                                            </div>
+
+                                            <div class="row mt-05">
+
+                                                @foreach (var aval in avaliacoes)
+                                                {
+                                                    <div class="float-left ml-1" style="width: 100px;">
+
+                                                    </div>
+                                                }
+
+                                                <div class="float-left ml-1 mt-1" style="width: 140px;">
+                                                    <button type="button" class="btn btn-primary w-100" id="btnInserirAvaliacao">
+                                                        <i class="fa fa-chevron-left"></i> Anterior
+                                                    </button>
+                                                </div>
+
+                                                <div class="float-left ml-1 mt-1" style="width: 140px;">
+                                                    <button type="button" onclick="inserirAvaliacao()" class="btn btn-primary w-100" id="btnInserirAvaliacao">
+                                                        Proximo <i class="fa fa-chevron-right"></i>
+                                                    </button>
+                                                </div>
+
+                                                <div style="clear:both;"></div>
+                                            </div>
+                                        @*</form>*@
+
+                                    }
+                                    
+                                </div>
+                                <div style="clear:both"></div>
+                                @*<partial name="PartiaisConsulta/PartiaisAvaliacao/_ConteudoAvaliacao" for="@Model" />*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalAvaliacao" tabindex="-1" aria-labelledby="modalAvaliacao" aria-modal="true" role="dialog">
+    <div class="modal-dialog" id="formularioAvaliacao">
+    </div>
+</div>
+
+
+@*@section Scripts{
+
+    @{
+        Html.RenderPartial("_PacienteJS");
+    }
+
+}*@

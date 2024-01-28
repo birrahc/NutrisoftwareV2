@@ -1,0 +1,23 @@
+﻿@using NutriSoftwareV2.Negocio.Domain;
+@using NutriSoftwareV2.Negocio.Enums;
+@model IEnumerable<NutriSoftwareV2.Negocio.Domain.Pagamento>
+
+
+<div class="container-fluid" id="conteudoPagamento" style="margin-top:100px">
+    <partial name="PartiaisPagamentos/_ConteudoPagamento" for="@Model" />
+</div>
+
+@*Modais*@
+<div class="modal fade" id="modalPagamento" tabindex="-1" aria-labelledby="modalPagamento" aria-hidden="true">
+    <div class="modal-dialog modal-lg" id="formularioPagamento">
+        @*Carregamento do formulario via jquery*@
+    </div>
+</div>
+
+
+@section Scripts{
+
+    @{
+        Html.RenderPartial("_PagamentoJS");
+    }
+}

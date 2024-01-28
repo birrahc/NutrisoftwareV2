@@ -13,9 +13,9 @@ namespace NutriSoftwareV2.Negocio.Domain
         public int TipoMedidaId { get; set; }
         public float Quantidade { get; set; }
         public EN_TipoDietaAlimentos Tipo { get; set; }
-        public virtual TipoMedida TipoMedida { get; set; }
-        public virtual AlimentoBebida Alimento { get; set; }
-        public virtual PlanoAlimentar PlanoAlimentar{ get; set; }
+        public virtual TipoMedida ? TipoMedida { get; set; }
+        public virtual AlimentoBebida ? Alimento { get; set; }
+        public virtual PlanoAlimentar ? PlanoAlimentar{ get; set; }
 
     }
 }
