@@ -11,7 +11,7 @@
 
 }
 
-<h3 class="text-center" style="background-color: #acacac; border-radius: 0 0 50px 50px; padding: 5px 0; color: #6c6b6b;">Dieta</h3>
+
 @if (Model != null)
 {
     @foreach (var hora in Model)
@@ -29,7 +29,7 @@
                     <table class="table">
                         <tbody>
                             <tr>
-                                <td rowspan="@rowSpan">
+                                <td rowspan="@rowSpan" style="border:none">
                                     <p style="font-size:22px;"><b>@hora.HoraAlimentos</b></p>
                                 </td>
                             </tr>
@@ -113,32 +113,38 @@
             <div class="row pl-3 linhasform">
                 <form method="post" id="frmInserirIntervalos_@contador" class="p-0 m-0" style="width:100%">
 
-                    <h6 class="m-auto">Intervalos</h6>
-                    <div class="row p-0 m-0 linhasIntervalos">
-                        <div class="col-9">
+                    <h5 class="m-auto text-center mt-2">Intervalos</h5>
+                    <div class="row p-0 m-0 mt-2 linhasIntervalos">
+                        <div class="col-12">
                             <div class="row p-0">
                                 <div class="col-5 p-1">
+                                    <label>Alimento/Bebida</label>
                                     <input type="text" onblur="habilitarbotoes(3,@contador)" id="txtIntervalo_@contador" onfocus="buscarIntervalos(@contador)" class="form-control w-100 txtIntervalo" />
                                     <input type="hidden" name="AlimentoId" id="txtIntervaloId_@contador" class="form-control w-100" />
                                     <input type="hidden" name="Tipo" value="3" class="form-control w-100" />
                                     <input type="hidden" name="CodigoDieta" value="@hora.CodigoDieta" class="form-control w-100" />
                                     <input type="hidden" name="Hora" value="@hora.HoraAlimentos" id="horaIntervalo_@contador" class="form-control w-100 hora" />
                                 </div>
-                                <div class="col-2 p-1">
+                                <div class="col-1 p-1">
+                                    <label>Qtd.</label>
                                     <input type="text" onblur="habilitarbotoes(3,@contador)" name="QuantidadeAlimento" id="quantidadeIntervaloAlimento_@contador" class="form-control w-100" />
                                 </div>
                                 <div class="col-4 p-1">
+                                    <label>Medida</label>
                                     <input type="text" onblur="habilitarbotoes(3,@contador)" id="txtTpIntervalo_@contador" onfocus="buscarTipoMedidaIntevalos(@contador)" class="form-control w-100" />
                                     <input type="hidden" name="TipoMedidaAlimentoId" id="txtTpIntervaloId_@contador" class="form-control w-100" />
                                 </div>
                                 <div class="col-1 p-0 pt-1 pb-1">
+                                    <br/>
                                     <button type="button" class="btn btn-outline-secondary"><i class="fa fa-history"></i> Limpar</button>
+                                </div>
+                                <div class="col-1 p-0 pl-2 pt-1 pb-1 dvbtnAdicionar">
+                                    <br/>
+                                    <button type="button" class="btn btn-primary" id="btnInserirIntervalos_@contador" onclick="adicionarIntervalos(@contador)">Adicionar</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-2 p-0 pl-2 pt-1 pb-1 dvbtnAdicionar">
-                            <button type="button" class="btn btn-primary" id="btnInserirIntervalos_@contador" onclick="adicionarIntervalos(@contador)">Adicionar</button>
-                        </div>
+                        
                     </div>
                     
                 </form>
@@ -180,7 +186,7 @@
     }
 }
 
-<div class="row mt-1" id="pnlBotaoEditarDieta" style="display: none; margin: auto; margin-bottom: 62px;">
+@* <div class="row mt-1" id="pnlBotaoEditarDieta" style="display: none; margin: auto; margin-bottom: 62px;">
     <div class="col-6 pl-2 pr-0">
         <button type="button" class="btn btn-secondary" onclick="EditarPassoConsulta(3,'@codigoDieta','@editar')"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</button>
     </div>
@@ -212,7 +218,7 @@
             </div>
         </div>
     </form>
-</div>
+</div> *@
 
 
 

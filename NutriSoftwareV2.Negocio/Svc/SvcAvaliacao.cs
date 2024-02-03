@@ -84,6 +84,21 @@ namespace NutriSoftwareV2.Negocio.Svc
             }
         }
 
+        public static AvaliacaoFisica BuscarAvalicaoPorConsulta(int pNConsulta)
+        {
+            try
+            {
+                NutriDbContext db = new NutriDbContext();
+                var avaliacao = db.AvaliacoesFisicas.Include(p=>p.Paciente).FirstOrDefault(p=>p.NumAvaliacao == pNConsulta);
+                db.Dispose();
+                return avaliacao;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao buscar avaliação", ex);
+            }
+        }
+
         public static List<AvaliacaoFisica> ListarEntreAvaliacoesPaciente(ParametrosPesquisaEntreAvaliacoes pPesquisa)
         {
             try

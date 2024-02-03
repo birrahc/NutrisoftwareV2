@@ -1,1 +1,48 @@
 ﻿<script src="~/js/consulta.js"></script>
+
+<script>
+    function AbrirAba_Onclick(url,btnId,codigoConsulta,pacienteId) {
+        MenuConsulta(url, btnId, codigoConsulta, 'pnlConteudoConsulta', pacienteId)
+    }
+    function InserirAnotacao_OnClick() {
+        InserirAtualizarDados('@Url.Action("InserirEditarAnotacao", "Consulta")', 'frmObservacaoConsulta', 'pnlConteudoConsulta', 'Anotação pré inserida.', '2')
+    }
+    function AutoCompleteFieldAlimentos() {
+        autoComplete('@Url.Action("AutoComplete", "Dieta")', 'txtAlimento', 'txtAlimentoId');
+    }
+
+    function AutoCompeteTipoMedidaAlimento() {
+        autoComplete('@Url.Action("AutoCompleteTipoMedidas", "Dieta")', 'txtTpMedidaAlimento', 'txtTpMedidaAlimentoId');
+    }
+
+    function InserirAvaliacao_OnClick() {
+        if (validaCamposAvaliacao()) { 
+            InserirAtualizarDados('@Url.Action("InserirEditarAvaliacao", "Consulta")', 'frmCadastrarAvaliacaoConsulta', 'pnlConteudoConsulta', 'Avaliação pré inserida.', '2')
+        }
+    }
+
+    // function inserirAvaliacao() {
+    //     if (validaCamposAvaliacao()) {
+    //         $("#blnInserir").val(true);
+    //         var formularioAvalicao = $("#frmCadastrarAvaliacaoConsulta").serialize();
+    //         $.ajax({
+    //             url: '/Consulta/SegundoPassoAvaliacao',
+    //             type: 'POST',
+    //             data: formularioAvalicao,
+    //             async: false,
+    //             success: function (response) {
+    //                 $("#pnlTotal").empty();
+    //                 $("#pnlTotal").append(response);
+    //                 painesConsultaCompleCadastro('none', 'block');
+    //                 paineisPnlCadastroVisiveis('none', 'none', 'block');
+    //                 //$("#prtListaAlimentos").css('margin-top', '235px')
+    //                 inicializacao();
+    //                 $("#pnlBtnSalvarConsulta").css('display', 'none');
+    //             },
+    //             error: function (response) {
+    //                 toastr.error("Houve um erro ao abrir formulário." + response, "Error");
+    //             }
+    //         });
+    //     }
+   
+</script>

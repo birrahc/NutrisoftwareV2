@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "UExAlvVADBtc0bAVvOgxSAuoQS7+9tq1QeCM1+0iWgw=",
+  "Hash": "zNcHmdDlOieSY3e00O2xrBQXp2iicrqSQVXDLzGDHo8=",
   "Source": "NutriSoftwareV2.Web",
   "BasePath": "_content/NutriSoftwareV2.Web",
   "Mode": "Default",
@@ -28762,6 +28762,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\dieta.js"
+    },
+    {
+      "Identity": "D:\\programacao\\Projetos\\NET7\\NutriSoftwareV2\\NutriSoftwareV2.Web\\wwwroot\\js\\jquery-3.6.4.min.js",
+      "SourceId": "NutriSoftwareV2.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\programacao\\Projetos\\NET7\\NutriSoftwareV2\\NutriSoftwareV2.Web\\wwwroot\\",
+      "BasePath": "_content/NutriSoftwareV2.Web",
+      "RelativePath": "js/jquery-3.6.4.min.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\jquery-3.6.4.min.js"
     },
     {
       "Identity": "D:\\programacao\\Projetos\\NET7\\NutriSoftwareV2\\NutriSoftwareV2.Web\\wwwroot\\js\\jQuery-Mask\\.gitignore",

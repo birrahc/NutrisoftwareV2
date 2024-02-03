@@ -8,7 +8,7 @@ using NutriSoftwareV2.Negocio.Svc;
 using NutriSoftwareV2.Web.Dto;
 using NutriSoftwareV2.Web.Identity;
 using NutriSoftwareV2.Web.Svc;
-
+using Org.BouncyCastle.Asn1.Crmf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,10 +47,107 @@ namespace NutriSoftwareV2.Web.Controllers
         }
         public ActionResult CadastrarConsulta(int Id)
         {
-            ViewBag.Codigo = Guid.NewGuid().ToString();
+            ViewBag.CodigoMemory = Guid.NewGuid().ToString();
             ViewBag.Avaliacoes = null;
             return View("CadastarConsulta", new Consulta { PacienteId = Id, Paciente = SvcPaciente.BuscarPacienteCompleto(Id) });
         }
+
+        [HttpGet]
+        public ActionResult AbrirAbaAnotacoes(string Codigo, int PacienteId)
+        {
+            ViewBag.CodigoMemory = Codigo;
+            ViewBag.PacienteId = PacienteId;
+            var AnotacaoEmCache = SvcMemoryCache.BuscarEntidade<Consulta>(_memoryCache, Codigo);
+            if (AnotacaoEmCache != null)
+                return PartialView("PartiaisConsulta/_Anotacao", AnotacaoEmCache);
+            var consulta = new Consulta { PacienteId = PacienteId };
+            SvcMemoryCache.AmarzenarEntidadeUnica<Consulta>(consulta, _memoryCache, Codigo);
+
+            return PartialView("PartiaisConsulta/_Anotacao");
+        }
+
+        [HttpPost]
+        public ActionResult InserirEditarAnotacao(int PacienteId, string Anotacoes, string Codigo, bool Editar = false)
+        {
+            var consulta = SvcMemoryCache.BuscarEntidade<Consulta>(_memoryCache, Codigo);
+            if (consulta != null)
+            {
+                consulta.Anotacoes = Anotacoes;
+            }
+            else
+            {
+                var paciente = SvcPaciente.BuscarPaciente(PacienteId);
+                consulta = new Consulta { PacienteId = PacienteId, Paciente = paciente, Anotacoes = Anotacoes };
+            }
+            SvcMemoryCache.AmarzenarEntidadeUnica<Consulta>(consulta, _memoryCache, Codigo);
+
+            ViewBag.CodigoConsulta = Codigo;
+            ViewBag.CodigoMemory = Codigo;
+            ViewBag.Editar = Editar;
+            ViewBag.PacienteId = PacienteId;
+            return PartialView("PartiaisConsulta/_Anotacao", SvcMemoryCache.BuscarEntidade<Consulta>(_memoryCache, Codigo));
+        }
+
+        [HttpGet]
+        public ActionResult AbrirAbaAvaliacao(string Codigo, int PacienteId)
+        {
+            ViewBag.CodigoMemory = Codigo;
+            ViewBag.PacienteId = PacienteId;
+            var consultaEmCache = SvcMemoryCache.BuscarEntidade<Consulta>(_memoryCache, Codigo);
+            if (consultaEmCache != null && consultaEmCache.Avaliacao!=null)
+            {
+                ViewBag.AvaliacaoAnterior = SvcAvaliacao.BuscarAvalicaoPorConsulta(consultaEmCache.Avaliacao.NumAvaliacao - 1);
+                return PartialView("PartiaisConsulta/PartiaisAvaliacao/_FomularioAvaliacao", consultaEmCache.Avaliacao);
+            }
+            else
+            {
+                var ultimaAvaliacao = SvcAvaliacao.ListarAvaliacoesPorPaciente(PacienteId).OrderBy(c => c.NumAvaliacao).Last();
+                ViewBag.AvaliacaoAnterior = ultimaAvaliacao;
+                var consulta = new Consulta { PacienteId = PacienteId, DataConsulta = DateTime.Now };
+                AvaliacaoFisica avaliacao = new AvaliacaoFisica { DataAvaliacao = DateTime.Now, NumAvaliacao = ultimaAvaliacao.NumAvaliacao + 1 };
+                SvcMemoryCache.AmarzenarEntidadeUnica(avaliacao, _memoryCache, Codigo);
+                return PartialView("PartiaisConsulta/PartiaisAvaliacao/_FomularioAvaliacao", avaliacao);
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult InserirEditarAvaliacao(AvaliacaoFisica pAvaliacao, string Codigo)
+        {
+            ViewBag.CodigoMemory = Codigo;
+            var consultaEmCache = SvcMemoryCache.BuscarEntidade<Consulta>(_memoryCache, Codigo);
+            if (consultaEmCache != null)
+            {
+                consultaEmCache.Avaliacao = pAvaliacao;
+                SvcMemoryCache.AmarzenarEntidadeUnica<Consulta>(consultaEmCache, _memoryCache, Codigo);
+                //return PartialView("PartiaisConsulta/PartiaisAvaliacao/_FomularioAvaliacao", SvcMemoryCache.BuscarEntidade<Consulta>(_memoryCache, Codigo).Avaliacao);
+            }
+            else
+            {
+                consultaEmCache = new Consulta { Avaliacao = pAvaliacao };
+                SvcMemoryCache.AmarzenarEntidadeUnica<Consulta>(consultaEmCache, _memoryCache, Codigo);
+            }
+            consultaEmCache.Avaliacao.Paciente = SvcPaciente.BuscarPaciente(pAvaliacao.PacienteId);
+            ViewBag.AvaliacaoAnterior = SvcAvaliacao.BuscarAvalicaoPorConsulta(consultaEmCache.Avaliacao.NumAvaliacao - 1);
+            return PartialView("PartiaisConsulta/PartiaisAvaliacao/_FomularioAvaliacao", SvcMemoryCache.BuscarEntidade<Consulta>(_memoryCache, Codigo).Avaliacao);
+
+        }
+
+
+        [HttpGet]
+        public ActionResult AbrirAbaPlanoAlimentar(string Codigo, int PacienteId)
+        {
+            ViewBag.CodigoMemory = Codigo;
+            ViewBag.PacienteId = PacienteId;
+            var consultaEmCache = SvcMemoryCache.BuscarEntidade<Consulta>(_memoryCache, Codigo);
+            if (consultaEmCache != null && consultaEmCache.DietaPlano != null)
+                return PartialView("PartiaisConsulta/PartiaisDieta/_CadastrarDieta", consultaEmCache.DietaPlano);
+
+            var consulta = new Consulta { PacienteId = PacienteId, DataConsulta = DateTime.Now};
+            SvcMemoryCache.AmarzenarEntidadeUnica(consulta, _memoryCache, Codigo);
+            return PartialView("PartiaisConsulta/PartiaisDieta/_CadastrarDieta");
+        }
+
 
 
 
@@ -78,7 +175,7 @@ namespace NutriSoftwareV2.Web.Controllers
 
             ViewBag.AvaliacaoAnterior = avaliacoesPaciente.LastOrDefault();
             ViewBag.CodigoConsulta = Codigo;
-            ViewBag.Codigo = Codigo;
+            ViewBag.CodigoMemory = Codigo;
             ViewBag.Editar = Editar;
             return PartialView("PartiaisConsulta/_ConteudoConsulta", SvcMemoryCache.BuscarEntidade<Consulta>(_memoryCache, Codigo));
         }
@@ -90,11 +187,11 @@ namespace NutriSoftwareV2.Web.Controllers
             var avaliacoesPaciente = SvcAvaliacao.ListarAvaliacoesPorPaciente(pAvaliacao.PacienteId);
             ViewBag.AvaliacaoAnterior = avaliacoesPaciente.LastOrDefault();
             ViewBag.CodigoConsulta = Codigo;
-            ViewBag.Codigo = Codigo;
+            ViewBag.CodigoMemory = Codigo;
             ViewBag.Editar = Editar;
             ViewBag.PacienteId = pAvaliacao.PacienteId;
             ViewBag.CodigoConsulta = Codigo;
-            ViewBag.Codigo = Codigo;
+            ViewBag.CodigoMemory = Codigo;
             pAvaliacao.DataAvaliacao = DateTime.Now;
 
 
@@ -138,7 +235,7 @@ namespace NutriSoftwareV2.Web.Controllers
                     });
                 }
 
-                SvcMemoryCache.BuscarEntidade<Consulta>(_memoryCache, Codigo).Dieta = ultimaDietaDoPaciente != null ? ultimaDietaDoPaciente : new Dieta()
+                SvcMemoryCache.BuscarEntidade<Consulta>(_memoryCache, Codigo).DietaPlano = ultimaDietaDoPaciente != null ? ultimaDietaDoPaciente : new Dieta()
                 {
                     CodigoDieta = Codigo,
                     Paciente = paciente,
@@ -147,7 +244,7 @@ namespace NutriSoftwareV2.Web.Controllers
             }
             ViewBag.Editar = Editar;
             ViewBag.CodigoDieta = Codigo;
-            ViewBag.Codigo = Codigo;
+            ViewBag.CodigoMemory = Codigo;
 
             return PartialView("PartiaisConsulta/PartiaisAvaliacao/_FomularioAvaliacao", SvcMemoryCache.BuscarEntidade<Consulta>(_memoryCache, Codigo).Avaliacao);
         }
@@ -158,7 +255,7 @@ namespace NutriSoftwareV2.Web.Controllers
             var avaliacoesPaciente = SvcAvaliacao.ListarAvaliacoesPorPaciente(pAvaliacao.PacienteId);
             ViewBag.AvaliacaoAnterior = avaliacoesPaciente.LastOrDefault();
             ViewBag.CodigoConsulta = Codigo;
-            ViewBag.Codigo = Codigo;
+            ViewBag.CodigoMemory = Codigo;
             pAvaliacao.DataAvaliacao = DateTime.Now;
 
 
@@ -202,8 +299,8 @@ namespace NutriSoftwareV2.Web.Controllers
                     });
                 }
                 var consulta = SvcMemoryCache.BuscarEntidade<Consulta>(_memoryCache, Codigo);
-                if (consulta ==null||consulta?.Dieta ==null || consulta.Dieta.PlanosAlimentares ==null|| consulta?.Dieta?.PlanosAlimentares?.Count < 1)
-                    SvcMemoryCache.BuscarEntidade<Consulta>(_memoryCache, Codigo).Dieta = ultimaDietaDoPaciente != null ? ultimaDietaDoPaciente : new Dieta()
+                if (consulta == null || consulta?.DietaPlano == null || consulta.DietaPlano.PlanosAlimentares == null || consulta?.DietaPlano?.PlanosAlimentares?.Count < 1)
+                    SvcMemoryCache.BuscarEntidade<Consulta>(_memoryCache, Codigo).DietaPlano = ultimaDietaDoPaciente != null ? ultimaDietaDoPaciente : new Dieta()
                     {
                         CodigoDieta = Codigo,
                         Paciente = paciente,
@@ -212,7 +309,7 @@ namespace NutriSoftwareV2.Web.Controllers
             }
             ViewBag.Editar = Editar;
             ViewBag.CodigoDieta = Codigo;
-            ViewBag.Codigo = Codigo;
+            ViewBag.CodigoMemory = Codigo;
             return PartialView("PartiaisConsulta/_ConteudoConsulta", SvcMemoryCache.BuscarEntidade<Consulta>(_memoryCache, Codigo));
 
         }
@@ -224,7 +321,7 @@ namespace NutriSoftwareV2.Web.Controllers
 
             var avaliacoesPaciente = SvcAvaliacao.ListarAvaliacoesPorPaciente(PacienteId);
             ViewBag.AvaliacaoAnterior = avaliacoesPaciente.LastOrDefault();
-            ViewBag.Codigo = Codigo;
+            ViewBag.CodigoMemory = Codigo;
             ViewBag.CodigoConsulta = Codigo;
             ViewBag.CodigoDieta = Codigo;
             ViewBag.Editar = true;
@@ -246,7 +343,7 @@ namespace NutriSoftwareV2.Web.Controllers
                 ViewBag.AvaliacaoAnterior = avaliacoesPaciente.LastOrDefault();
 
             }
-            ViewBag.Codigo = Codigo;
+            ViewBag.CodigoMemory = Codigo;
             ViewBag.CodigoConsulta = Codigo;
             ViewBag.CodigoDieta = Codigo;
             ViewBag.Editar = Editar;
@@ -272,9 +369,9 @@ namespace NutriSoftwareV2.Web.Controllers
             List<ObservacaoPlano> obsPlano = new List<ObservacaoPlano>();
             List<QuantidadeAlimento> listaAlimentos = new List<QuantidadeAlimento>();
             var consulta = SvcMemoryCache.BuscarEntidade<Consulta>(_memoryCache, pMontar.CodigoDieta);
-            if (consulta?.Dieta?.PlanosAlimentares?.Count > 0)
+            if (consulta?.DietaPlano?.PlanosAlimentares?.Count > 0)
             {
-                consulta.Dieta.PlanosAlimentares.ToList()
+                consulta.DietaPlano.PlanosAlimentares.ToList()
                 .ForEach(pl =>
                 {
 
@@ -300,11 +397,23 @@ namespace NutriSoftwareV2.Web.Controllers
                     ObservacaoPlano = obsPlano?.FirstOrDefault(h => h?.HorarioReferencia == p.Key)
                 });
             });
-            ViewBag.Codigo = pMontar.CodigoDieta;
+            ViewBag.CodigoMemory = pMontar.CodigoDieta;
             ViewBag.CodigoDieta = pMontar.CodigoDieta;
             ViewBag.Editar = pMontar.Editar;
-            SvcMemoryCache.BuscarEntidade<Consulta>(_memoryCache, pMontar.CodigoDieta).Dieta.PlanosAlimentares = planosAlimentos.ToList();
-            return PartialView("PartiaisConsulta/PartiaisDieta/_ListaAlimentos", planosAlimentos);
+
+            var consultaDieta = SvcMemoryCache.BuscarEntidade<Consulta>(_memoryCache, pMontar.CodigoDieta);
+            if (consultaDieta.DietaPlano != null)
+                SvcMemoryCache.BuscarEntidade<Consulta>(_memoryCache, pMontar.CodigoDieta).DietaPlano.PlanosAlimentares = planosAlimentos.ToList();
+            else
+            {
+                consultaDieta = new Consulta();
+                consultaDieta.PacienteId = pMontar.PacienteId;
+                consultaDieta.DietaPlano = new Dieta { PacienteId = pMontar.PacienteId, Data = DateTime.Now };
+                consultaDieta.DietaPlano.PlanosAlimentares = planosAlimentos.ToList();
+                SvcMemoryCache.AmarzenarEntidadeUnica<Consulta>(consultaDieta, _memoryCache, pMontar.CodigoDieta);
+            }
+
+            return PartialView("PartiaisConsulta/PartiaisDieta/_ListaAlimentos", SvcMemoryCache.BuscarEntidade<Consulta>(_memoryCache, pMontar.CodigoDieta).DietaPlano.PlanosAlimentares.ToList());
         }
 
         [HttpPost]
@@ -317,9 +426,9 @@ namespace NutriSoftwareV2.Web.Controllers
                 List<ObservacaoPlano> obsPlano = new List<ObservacaoPlano>();
                 List<QuantidadeAlimento> listaAlimentos = new List<QuantidadeAlimento>();
                 var consulta = SvcMemoryCache.BuscarEntidade<Consulta>(_memoryCache, pObs.CodigoDieta);
-                if (consulta?.Dieta?.PlanosAlimentares?.Count > 0)
+                if (consulta?.DietaPlano?.PlanosAlimentares?.Count > 0)
                 {
-                    consulta.Dieta.PlanosAlimentares.ToList()
+                    consulta.DietaPlano.PlanosAlimentares.ToList()
                    .ForEach(pl =>
                    {
 
@@ -350,10 +459,10 @@ namespace NutriSoftwareV2.Web.Controllers
                         ObservacaoPlano = obsPlano.FirstOrDefault(h => h.HorarioReferencia == p.Key)
                     });
                 });
-                ViewBag.Codigo =pObs.CodigoDieta; 
+                ViewBag.CodigoMemory = pObs.CodigoDieta;
                 ViewBag.Editar = Editar;
 
-                SvcMemoryCache.BuscarEntidade<Consulta>(_memoryCache, pObs.CodigoDieta).Dieta.PlanosAlimentares = planosAlimentos.ToList();
+                SvcMemoryCache.BuscarEntidade<Consulta>(_memoryCache, pObs.CodigoDieta).DietaPlano.PlanosAlimentares = planosAlimentos.ToList();
                 return PartialView("PartiaisConsulta/PartiaisDieta/_ListaAlimentos", planosAlimentos);
 
             }
@@ -367,9 +476,9 @@ namespace NutriSoftwareV2.Web.Controllers
             List<QuantidadeAlimento> listaAlimentos = new List<QuantidadeAlimento>();
             var consulta = SvcMemoryCache.BuscarEntidade<Consulta>(_memoryCache, CodigoDieta);
 
-            if (consulta?.Dieta?.PlanosAlimentares?.Count > 0)
+            if (consulta?.DietaPlano?.PlanosAlimentares?.Count > 0)
             {
-                consulta.Dieta.PlanosAlimentares.ToList()
+                consulta.DietaPlano.PlanosAlimentares.ToList()
                 .ForEach(pl =>
                 {
 
@@ -395,9 +504,9 @@ namespace NutriSoftwareV2.Web.Controllers
                     ObservacaoPlano = obsPlano?.FirstOrDefault(h => h?.HorarioReferencia == p.Key)
                 });
             });
-            ViewBag.Codigo = CodigoDieta;
+            ViewBag.CodigoMemory = CodigoDieta;
             ViewBag.Editar = Editar;
-            SvcMemoryCache.BuscarEntidade<Consulta>(_memoryCache, CodigoDieta).Dieta.PlanosAlimentares = planosAlimentos.ToList();
+            SvcMemoryCache.BuscarEntidade<Consulta>(_memoryCache, CodigoDieta).DietaPlano.PlanosAlimentares = planosAlimentos.ToList();
 
             return PartialView("PartiaisConsulta/PartiaisDieta/_ListaAlimentos", planosAlimentos);
         }
@@ -411,9 +520,9 @@ namespace NutriSoftwareV2.Web.Controllers
             List<QuantidadeAlimento> listaAlimentos = new List<QuantidadeAlimento>();
             var consulta = SvcMemoryCache.BuscarEntidade<Consulta>(memoryCache, pQuantidadeAlimento.CodigoDieta);
 
-            if (consulta?.Dieta?.PlanosAlimentares?.Count > 0)
+            if (consulta?.DietaPlano?.PlanosAlimentares?.Count > 0)
             {
-                consulta?.Dieta?.PlanosAlimentares.ToList()
+                consulta?.DietaPlano?.PlanosAlimentares.ToList()
                     .ForEach(pl =>
                     {
 

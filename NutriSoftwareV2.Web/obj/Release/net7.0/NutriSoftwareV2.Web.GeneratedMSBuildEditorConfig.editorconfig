@@ -70,6 +70,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uc3VsdGFcUGFydGlhaXNDb25zdWx0YVxQYXJ0aWFpc0RpZXRhXF9MaXN0YUFsaW1lbnRvcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Consulta/PartiaisConsulta/_Anotacao.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uc3VsdGFcUGFydGlhaXNDb25zdWx0YVxfQW5vdGFjYW8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Consulta/PartiaisConsulta/_ConteudoConsulta.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uc3VsdGFcUGFydGlhaXNDb25zdWx0YVxfQ29udGV1ZG9Db25zdWx0YS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

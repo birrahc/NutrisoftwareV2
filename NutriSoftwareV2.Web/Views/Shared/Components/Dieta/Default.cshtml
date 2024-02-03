@@ -1,6 +1,6 @@
 ﻿@model NutriSoftwareV2.Web.Components.ComponentModel.ComponenteDietaModel
 
-<div class="row pl-5 pr-5 pt-2">
+<div class="row pl-5 pr-5 pt-2" style="margin-top:50px">
     @if (Model.Cabecalho)
     {
         <div class="col-12">
@@ -9,7 +9,7 @@
     }
     @if (Model != null && Model?.Dieta?.PlanosAlimentares !=null)
     {
-        <div class="container" style="border: solid 5px #d8f0d6; border-radius:5px;">
+        <div class="container card-shadow">
             <div class="row">
                 <div class="col-9 bg-light">
                     <p class=" m-0 p-3 text-secondary text-center" style="font-size:25px;">Plano Alimentar:<b> @Model?.Dieta?.Paciente?.Nome</b></p>
@@ -31,7 +31,7 @@
                         <table class="table">
                             <tbody>
                                 <tr>
-                                    <td rowspan="@rowSpan">
+                                    <td rowspan="@rowSpan" style="border:none">
                                         <p style="font-size:22px;"><b>@hora.HoraAlimentos</b></p>
                                     </td>
                                 </tr>

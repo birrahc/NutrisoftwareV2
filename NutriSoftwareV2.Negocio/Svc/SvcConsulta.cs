@@ -116,15 +116,15 @@ namespace NutriSoftwareV2.Negocio.Svc
                 return db.Consulta
                     .Include(p => p.Paciente)
                     .Include(a => a.Avaliacao)
-                    .Include(d => d.Dieta)
+                    .Include(d => d.DietaPlano)
                     .ThenInclude(i => i.PlanosAlimentares)
                     .ThenInclude(qa => qa.QuantidadeAlimentos)
                     .ThenInclude(al => al.Alimento)
-                    .Include(d => d.Dieta)
+                    .Include(d => d.DietaPlano)
                     .ThenInclude(pl => pl.PlanosAlimentares)
                     .ThenInclude(qa => qa.QuantidadeAlimentos)
                     .ThenInclude(tm => tm.TipoMedida)
-                    .Include(d => d.Dieta)
+                    .Include(d => d.DietaPlano)
                     .ThenInclude(pl => pl.PlanosAlimentares)
                     .ThenInclude(qa => qa.ObservacaoPlano)
                     .ToList();
@@ -140,15 +140,15 @@ namespace NutriSoftwareV2.Negocio.Svc
                 return db.Consulta
                     .Include(p => p.Paciente)
                     .Include(a => a.Avaliacao)
-                    .Include(d => d.Dieta)
+                    .Include(d => d.DietaPlano)
                     .ThenInclude(i => i.PlanosAlimentares)
                     .ThenInclude(qa => qa.QuantidadeAlimentos)
                     .ThenInclude(al => al.Alimento)
-                    .Include(d => d.Dieta)
+                    .Include(d => d.DietaPlano)
                     .ThenInclude(pl => pl.PlanosAlimentares)
                     .ThenInclude(qa => qa.QuantidadeAlimentos)
                     .ThenInclude(tm => tm.TipoMedida)
-                    .Include(d => d.Dieta)
+                    .Include(d => d.DietaPlano)
                     .ThenInclude(pl => pl.PlanosAlimentares)
                     .ThenInclude(qa => qa.ObservacaoPlano)
                     .FirstOrDefault(p => p.Id == ConsultaId);
@@ -172,26 +172,28 @@ namespace NutriSoftwareV2.Negocio.Svc
 
             try
             {
+
                 Consulta consulta = new Consulta();
 
-                AvaliacaoFisica avaliacao = pConsulta.Avaliacao;
-                avaliacao.Paciente = null;
-                context.AvaliacoesFisicas.Add(avaliacao);
-                context.SaveChanges();
-
-                consulta.AvaliacaoId = avaliacao.Id;
-                consulta.PacienteId = avaliacao.PacienteId;
+                if (pConsulta.Avaliacao != null)
+                {
+                    AvaliacaoFisica avaliacao = pConsulta.Avaliacao;
+                    avaliacao.Paciente = null;
+                    context.AvaliacoesFisicas.Add(avaliacao);
+                    context.SaveChanges();
+                    consulta.AvaliacaoId = avaliacao.Id;
+                }
+                consulta.PacienteId = pConsulta.PacienteId;
                 consulta.Anotacoes = pConsulta.Anotacoes;
                 consulta.DataConsulta = DateTime.Now;
-                /*pAvaliacaoFisica.Paciente = null;
-                context.AvaliacoesFisicas.Add(pAvaliacaoFisica);
-                context.SaveChanges();*/
-                if (pConsulta?.Dieta.PlanosAlimentares?.Count > 0)
+
+               
+                if (pConsulta?.DietaPlano.PlanosAlimentares?.Count > 0)
                 {
                     List<QuantidadeAlimento> listaAlimentos = new List<QuantidadeAlimento>();
                     List<ObservacaoPlano> obsPlano = new List<ObservacaoPlano>();
 
-                    pConsulta.Dieta.PlanosAlimentares.ToList()
+                    pConsulta.DietaPlano.PlanosAlimentares.ToList()
                     .ForEach(p =>
                     {
                         listaAlimentos.AddRange(p.QuantidadeAlimentos.Where(a => a.Hora == p.HoraAlimentos && a.CodigoDieta == CodigoDieta));
@@ -211,17 +213,8 @@ namespace NutriSoftwareV2.Negocio.Svc
                     context.QuandadeAlimento.AddRange(listaAlimentos);
                     context.SaveChanges();
 
-
-                    /*context.QuandadeAlimento.AddRange(pQuantidadeAlimentos);
-                    context.SaveChanges();*/
-
-
                     context.ObservacaoPlano.AddRange(obsPlano);
                     context.SaveChanges();
-
-                    /*
-                    context.ObservacaoPlano.AddRange(pObsPlano);
-                    context.SaveChanges();*/
 
                     List<PlanoAlimentar> planos = new List<PlanoAlimentar>();
                     var horarios = listaAlimentos.GroupBy(p => p.Hora).ToList();
@@ -235,25 +228,13 @@ namespace NutriSoftwareV2.Negocio.Svc
                     });
 
 
-                    /*List<PlanoAlimentar> planos = new List<PlanoAlimentar>();
-                    var horarios = pQuantidadeAlimentos.GroupBy(p => p.Hora).ToList();
-                    horarios.ForEach(p =>
-                    {
-
-                        var alimentosPorHora = pQuantidadeAlimentos.Where(a => a.Hora == p.Key).ToList();
-                        var observacao = pObsPlano.FirstOrDefault(obs => obs.HorarioReferencia == p.Key);
-                        var plano = new PlanoAlimentar { CodigoDieta = CodigoDieta, HoraAlimentos = p.Key, ObservacaoPlanoId = observacao?.Id };
-                        planos.Add(plano);
-                    });*/
-
-
                     context.PlanoAlimentar.AddRange(planos);
                     context.SaveChanges();
 
                     Dieta dieta = new Dieta
                     {
                         CodigoDieta = CodigoDieta,
-                        PacienteId = avaliacao.PacienteId,
+                        PacienteId = pConsulta.PacienteId,
                         Data = DateTime.Now
                     };
                     context.Dieta.Add(dieta);
@@ -262,14 +243,7 @@ namespace NutriSoftwareV2.Negocio.Svc
                     consulta.DietaId = dieta.CodigoDieta;
                 }
 
-                //Consulta consulta = new Consulta
-                //{
-                //    AvaliacaoId = avaliacao.Id,
-                //    PacienteId = avaliacao.PacienteId,
-                //    DietaId = dieta.CodigoDieta,
-                //    Anotacoes = pConsulta.Anotacoes,
-                //    DataConsulta = DateTime.Now
-                //};
+              
 
                 pConsulta.Paciente = null;
                 context.Consulta.Add(consulta);

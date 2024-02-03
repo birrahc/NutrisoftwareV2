@@ -2,6 +2,9 @@
 
 <script>
 
+    $(document).ready(function () { 
+        carregarMascaras();
+    });
     function AbrirModalParaCadastro() {
 
         AbrirModal('@Url.Action("Create", "Paciente")', 'formularioPaciente', 'modalPaciente')

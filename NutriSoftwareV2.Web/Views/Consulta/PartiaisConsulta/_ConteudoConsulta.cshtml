@@ -3,34 +3,22 @@
 
 @{
     var result = Model;
-    var codigoDieta = ViewBag.Codigo;
+    var codigoDieta = ViewBag.CodigoMemory;
     bool? editar = ViewBag.Editar;
 }
 
-<h2 class="text-center" style="margin-top:75px;">Paciente: <b>@Model?.Paciente.Nome</b></h2>
-<div id="pnlCadastro" style="margin-top:40px;">
-    <div class="row" id="pnlBtnSalvarConsulta" style="display:none;">
-        <div class="container" style=" padding: 0px 0 10px 0;">
-            <div class="col-12 pr-0">
-                <div style="float:right">
-                    <form method="post" asp-action="FinalizarConsulta" asp-controller="Consulta" class="p-0 m-0" id="frmFinalizarConsulta">
-                        <input type="hidden" name="Codigo" value="@codigoDieta" />
-                        <input type="hidden" name="PacienteId" value="@Model.PacienteId"/>
-                        <button 
-                            type="button" 
-                            onclick="confirm('frmFinalizarConsulta','Deseja realmente finalizar esta consulta ?')" 
-                            class="btn btn-success" id="btnFinalizarConsulta_OnClick">
-                            <i class="fa fa-floppy-o"></i>
-                            Salvar dieta
-                        </button>
-                    </form>
-                </div>
-                <div style="clear:both"></div>
+
+
+    <div class="row mt-1">
+        <div class="container" style="border: solid 2px #c4c0c0; padding: 0 0 10px 0; ">
+            <div class="col-12">
+                <button class="btn btn-outline-dark d-lg-inline-block">Anotações</button>
+                <button class="btn btn-outline-dark d-lg-inline-block">Avaliação</button>
+                <button class="btn btn-outline-dark d-lg-inline-block">Dieta</button>
             </div>
         </div>
     </div>
-
-    <div class="row" id="pnlCadastroAnotacoes">
+    <div class="row mt3" id="pnlCadastroAnotacoes">
         <div class="container" style="border: solid 2px #c4c0c0; padding: 0 0 10px 0; ">
             <div style="clear:both;"></div>
             <div class="col-12">
@@ -38,18 +26,18 @@
                 <form method="post" id="frmObservacaoConslta" class="p-0 m-0">
                     <input type="hidden" name="PacienteId" value="@Model.PacienteId" />
                     <input type="hidden" name="Codigo" value="@codigoDieta" />
-                    <input type="hidden" name="Editar" value="@editar" class="txtEditar"/>
+                    <input type="hidden" name="Editar" value="@editar" class="txtEditar" />
                     <textarea asp-for="Anotacoes" class="form-control" rows="10" id="txtAnotacoesIniciaisConsulta"></textarea>
                     <div id="plnBotaoAnotacoes" class="mt-1">
                         <button type="button" onclick="inserirAnotacoes()" class="btn btn-primary" id="btnInserirAnotacoes">
-                            Proximo <i class="fa fa-chevron-right"></i>
+                            <i class="fa fa-chevron-right"></i> Inserir
                         </button>
                     </div>
                     <div id="pnlBotaoEditarObservacaoConsulta" style="display:none;" class="mt-1">
                         <button type="button" onclick="EditarPassoConsulta(1,'@codigoDieta','@editar')" class="btn btn-secondary" id="btnInserirAnotacoes">
                             <i class="fa fa-pencil"></i> Editar
                         </button>
-                      
+
                     </div>
                     <div id="pnlBotaoSalvarEdicaoObservacaoConsulta" style="display:none;" class="mt-1">
                         <button type="button" onclick="SalvarAlteracoes('#frmObservacaoConslta', 'PrimeiroPassoObservacoes')" class="btn btn-secondary" id="btnInserirAnotacoes">
@@ -69,7 +57,7 @@
     </div>
 
     <div class="row" id="pnlCadastroDieta">
-        <partial name="PartiaisConsulta/PartiaisDieta/_CadastrarDieta" for="@Model.Dieta" />
+        <partial name="PartiaisConsulta/PartiaisDieta/_CadastrarDieta" for="@Model.DietaPlano" />
     </div>
 
 </div>

@@ -6213,6 +6213,10 @@
       "PackagePath": "staticwebassets\\js\\jQuery-Mask\\test\\zepto\\zepto.min.js"
     },
     {
+      "Id": "D:\\programacao\\Projetos\\NET7\\NutriSoftwareV2\\NutriSoftwareV2.Web\\wwwroot\\js\\jquery-3.6.4.min.js",
+      "PackagePath": "staticwebassets\\js\\jquery-3.6.4.min.js"
+    },
+    {
       "Id": "D:\\programacao\\Projetos\\NET7\\NutriSoftwareV2\\NutriSoftwareV2.Web\\wwwroot\\js\\paciente.js",
       "PackagePath": "staticwebassets\\js\\paciente.js"
     },

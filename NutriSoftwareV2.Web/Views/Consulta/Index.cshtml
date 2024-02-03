@@ -14,7 +14,7 @@
                         Anotacoes = p.Anotacoes,
                         AvaliacaoId = p.AvaliacaoId,
                         DietaId = p.DietaId,
-                        Dieta = p.Dieta,
+                        DietaPlano = p.DietaPlano,
                         Paciente = p.Paciente,
                         PacienteId = p.PacienteId,
                         Avaliacao = p.Avaliacao
@@ -28,19 +28,19 @@
 {
 
 
-    <div class="container-fluid">
+    <div class="container-fluid" style="margin-top:70px;">
 
-        <div class="row bg-light p-2 fixed-top">
+        <div class="row bg-light p-2 fixed-top" style="margin-top: 57px;">
             <h3 class="text-center">Paciente: @Model.Nome</h3>
         </div>
         <div class="row">
             <div class="col-lg-2 col-md-2 col-sm-12">
                 <div class="container-fluid m-0 p-0" style="position: fixed; width: 15%;">
-                    <div class="row m-0 p-2" style="border:solid 1px">
+                    <div class="row m-0 p-2 card-shadow" style="margin-top:50px !important">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th style="border:none;">Data</th>
+                                    <th style="border:none;">Data da consulta</th>
                                     <th style="border:none;"></th>
                                 </tr>
                             </thead>
@@ -49,17 +49,10 @@
                                 {
                                     <tr>
                                         <td>
-                                            @if (item.DataConsulta.HasValue)
-                                            {
-                                                @item.DataConsulta.Value.ToShortDateString()
-                                            }
-                                            else
-                                            {
-                                                @item.DataConsulta
-                                            }
+                                            @item.DataConsulta?.ToShortDateString()
                                         </td>
                                         <td>
-                                            <a href="@Url.Action("Index","Consulta",new{ Id= Model.Id, ConsultaId = item.Id })" class="btn btn-light">
+                                            <a href="@Url.Action("Index","Consulta",new{ Id= Model.Id, ConsultaId = item.Id })" class="btn" style="border-radius: 25px;">
                                                 <i class="fa fa-eye" title="Ver detalhes"></i>
                                             </a>
                                         </td>
@@ -72,7 +65,7 @@
                             <a href="@Url.Action("CadastrarConsulta","Consulta", new{Id=Model.Id})" class="btn btn-success  float-right"><i class="fa fa-plus"></i> Nova Consulta </a>
                         </div>
                     </div>
-                   
+
                 </div>
                 <div style="clear:both"></div>
             </div>
@@ -81,7 +74,7 @@
                 {
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="container" style="border: solid 2px #c4c0c0; padding: 0 0 10px 0; ">
+                            <div class="container card-shadow" style="padding: 0 0 10px 0;  margin-top:50px;">
                                 <div class="row" style="padding: 0 35px;">
                                     <div class="col-12">
                                         <h3 class="text-secondary">Anotações</h3>
@@ -98,8 +91,10 @@
 
 
 
-                        @if (consulta.Dieta != null)
-                            @await Component.InvokeAsync("Dieta", new ComponenteDietaModel { Cabecalho = false, Dieta = consulta.Dieta == null ? new Dieta() : consulta.Dieta })
+
+                        @if (consulta.DietaPlano != null)
+                            @await Component.InvokeAsync("Dieta", new ComponenteDietaModel { Cabecalho = false, Dieta = consulta.DietaPlano == null ? new Dieta() : consulta.DietaPlano })
+
 
 
 

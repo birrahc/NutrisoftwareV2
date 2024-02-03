@@ -3,6 +3,54 @@
     paineisPnlCadastroVisiveis('block', 'none', 'none');
 });
 
+function InserirAtualizarDados(url,frmName,pnlResultadoId,message,tipoMessage=1)
+{
+    let formulario = $('form[name="' + frmName + '"]').serialize();
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: formulario,
+        async: true,
+        success: function (response) {
+            $("#" + pnlResultadoId).empty();
+            $("#" + pnlResultadoId).append(response);
+
+            if (tipoMessage == 2) {
+                toastr.info(message, "Informação")
+            }
+            else {
+                toastr.success(message, "Sucesso")
+            }
+            //painesConsultaCompleCadastro('none', 'block');
+            //paineisPnlCadastroVisiveis('none', 'block', 'none');
+            //$('input[mask="formAval"]').mask("00,0", { reverse: false });
+        },
+        error: function (response) {
+            toastr.error("Houve um erro ao abrir formulário." + response, "Error");
+        }
+    });
+}
+
+function MenuConsulta(url,btnId, codigoConsulta,pnlResultadoId,pacienteId, passo = null) {
+
+    $.get(url, {
+        Codigo: codigoConsulta,
+        PacienteId: pacienteId
+    }, function (data) {
+       
+    }).done(function (data) {
+        $("#" + pnlResultadoId).html(data)
+        $(".btn-menus-consulta").removeClass('btn-menu-consulta-selecionado');
+        $("#" + btnId).addClass('btn-menu-consulta-selecionado')
+        $('input[mask="hora"]').mask('00:00');
+        
+        }).fail(function (error) {
+            // Tratar erros aqui
+            console.error('Erro na requisição:', error);
+        });
+   
+}
+
 //Passo 1 Anotaçoes
 function inserirAnotacoes() {
 

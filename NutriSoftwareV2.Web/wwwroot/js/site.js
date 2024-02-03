@@ -20,6 +20,38 @@
 
 })
 
+function autoComplete(url,fieldSearch,inputHideId) {
+
+    $("#" + fieldSearch).autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: { busca: request.term },
+                dataType: "json",
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return item;
+                    }))
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        },
+        select: function (e, i) {
+            $("#" + inputHideId).val(i.item.val);
+        },
+        minLength: 1
+    });
+
+  
+}
+
+
 function AbrirModal(modalId) {
     $("#" + modalId).modal('show');
 }

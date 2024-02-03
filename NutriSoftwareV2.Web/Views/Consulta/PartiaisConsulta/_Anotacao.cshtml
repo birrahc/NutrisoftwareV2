@@ -1,0 +1,36 @@
+﻿@model NutriSoftwareV2.Negocio.Domain.Consulta
+@{
+    var codigoConsulta = ViewBag.CodigoMemory;
+    var pacienteId = Model?.PacienteId ==null || Model.PacienteId < 1 ? ViewBag.PacienteId : Model.PacienteId;
+    bool? editar = ViewBag.Editar;
+}
+
+
+<div class="col-12">
+    <h3 class="text-center p-2" style="background-color: #acacac; color: #6c6b6b;">Anotações</h3>
+    <form name="frmObservacaoConsulta" method="post" class="p-0 m-0">
+        <input type="hidden" name="PacienteId" value="@pacienteId" />
+        <input type="hidden" name="Codigo" value="@codigoConsulta" />
+        <input type="hidden" name="Editar" value="@editar" class="txtEditar" />
+        <textarea asp-for="Anotacoes" class="form-control" rows="10" id="txtAnotacoesIniciaisConsulta"></textarea>
+        <div id="plnBotaoAnotacoes" class="mt-1">
+            <button type="button" onclick="InserirAnotacao_OnClick()" class="btn btn-primary" id="btnInserirAnotacoes">
+                <i class="fa fa-arrow-right"></i> Inserir Anotação
+            </button>
+        </div>
+        @*  <div id="pnlBotaoEditarObservacaoConsulta" style="display:none;" class="mt-1">
+        <button type="button" onclick="EditarPassoConsulta(1,'@codigoConsulta','@editar')" class="btn btn-secondary" id="btnInserirAnotacoes">
+        <i class="fa fa-pencil"></i> Editar
+        </button>
+
+        </div>
+        <div id="pnlBotaoSalvarEdicaoObservacaoConsulta" style="display:none;" class="mt-1">
+        <button type="button" onclick="SalvarAlteracoes('#frmObservacaoConslta', 'PrimeiroPassoObservacoes')" class="btn btn-secondary" id="btnInserirAnotacoes">
+        <i class="fa fa-pencil"></i> Salvar alteração
+        </button>
+        <button type="button" onclick="cancelarAlteracaoConsulta()" class="btn btn-secondary" id="btnInserirAnotacoes">
+        <i class="fa fa-refresh"></i> Cancelar
+        </button>
+        </div>  *@
+    </form>
+</div>

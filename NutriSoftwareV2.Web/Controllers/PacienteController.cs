@@ -7,6 +7,7 @@ using NutriSoftwareV2.Negocio.Data.NutriDbContext;
 using NutriSoftwareV2.Negocio.Domain;
 using NutriSoftwareV2.Negocio.Svc;
 using NutriSoftwareV2.Web.Identity;
+using NutriSoftwareV2.Web.Svc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,6 +68,7 @@ namespace NutriSoftwareV2.Web.Controllers
             {
                 if (paciente != null)
                 {
+                    paciente.CPF = Utils.RemoverMascara(paciente.CPF);
                     SvcPaciente.CadastrarPaciente(paciente);
                     ViewBag.Paciente = paciente;
                     var pacientes = SvcPaciente.ListarPacientes();
@@ -99,6 +101,7 @@ namespace NutriSoftwareV2.Web.Controllers
             {
                 if (paciente != null)
                 {
+                    paciente.CPF = Utils.RemoverMascara(paciente?.CPF);
                     SvcPaciente.AtualizarPaciente(paciente);
 
                     var pacientes = SvcPaciente.ListarPacientes();

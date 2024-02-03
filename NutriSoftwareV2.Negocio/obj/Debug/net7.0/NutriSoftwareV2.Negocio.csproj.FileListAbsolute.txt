@@ -1,13 +1,13 @@
+D:\programacao\Projetos\NET7\NutriSoftwareV2\NutriSoftwareV2.Negocio\bin\Debug\net7.0\NutriSoftwareV2.Negocio.deps.json
+D:\programacao\Projetos\NET7\NutriSoftwareV2\NutriSoftwareV2.Negocio\bin\Debug\net7.0\NutriSoftwareV2.Negocio.runtimeconfig.json
+D:\programacao\Projetos\NET7\NutriSoftwareV2\NutriSoftwareV2.Negocio\bin\Debug\net7.0\NutriSoftwareV2.Negocio.dll
+D:\programacao\Projetos\NET7\NutriSoftwareV2\NutriSoftwareV2.Negocio\bin\Debug\net7.0\NutriSoftwareV2.Negocio.pdb
 D:\programacao\Projetos\NET7\NutriSoftwareV2\NutriSoftwareV2.Negocio\obj\Debug\net7.0\NutriSoftwareV2.Negocio.csproj.AssemblyReference.cache
 D:\programacao\Projetos\NET7\NutriSoftwareV2\NutriSoftwareV2.Negocio\obj\Debug\net7.0\NutriSoftwareV2.Negocio.GeneratedMSBuildEditorConfig.editorconfig
 D:\programacao\Projetos\NET7\NutriSoftwareV2\NutriSoftwareV2.Negocio\obj\Debug\net7.0\NutriSoftwareV2.Negocio.AssemblyInfoInputs.cache
 D:\programacao\Projetos\NET7\NutriSoftwareV2\NutriSoftwareV2.Negocio\obj\Debug\net7.0\NutriSoftwareV2.Negocio.AssemblyInfo.cs
 D:\programacao\Projetos\NET7\NutriSoftwareV2\NutriSoftwareV2.Negocio\obj\Debug\net7.0\NutriSoftwareV2.Negocio.csproj.CoreCompileInputs.cache
 D:\programacao\Projetos\NET7\NutriSoftwareV2\NutriSoftwareV2.Negocio\obj\Debug\net7.0\NutriSoftwareV2.Negocio.sourcelink.json
-D:\programacao\Projetos\NET7\NutriSoftwareV2\NutriSoftwareV2.Negocio\bin\Debug\net7.0\NutriSoftwareV2.Negocio.deps.json
-D:\programacao\Projetos\NET7\NutriSoftwareV2\NutriSoftwareV2.Negocio\bin\Debug\net7.0\NutriSoftwareV2.Negocio.runtimeconfig.json
-D:\programacao\Projetos\NET7\NutriSoftwareV2\NutriSoftwareV2.Negocio\bin\Debug\net7.0\NutriSoftwareV2.Negocio.dll
-D:\programacao\Projetos\NET7\NutriSoftwareV2\NutriSoftwareV2.Negocio\bin\Debug\net7.0\NutriSoftwareV2.Negocio.pdb
 D:\programacao\Projetos\NET7\NutriSoftwareV2\NutriSoftwareV2.Negocio\obj\Debug\net7.0\NutriSoftwareV2.Negocio.dll
 D:\programacao\Projetos\NET7\NutriSoftwareV2\NutriSoftwareV2.Negocio\obj\Debug\net7.0\refint\NutriSoftwareV2.Negocio.dll
 D:\programacao\Projetos\NET7\NutriSoftwareV2\NutriSoftwareV2.Negocio\obj\Debug\net7.0\NutriSoftwareV2.Negocio.pdb

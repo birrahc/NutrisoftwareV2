@@ -5,25 +5,25 @@
     var data = Model?.DataAvaliacao == null ? DateTime.Now : Model?.DataAvaliacao;
 }
 <div class="row pl-5 pr-5 pt-2">
-    <div class="container" style="border: solid 5px #d8f0d6; border-radius:5px; padding: 0px 0 10px 0px; margin-top: 50px; ">
-        <h3 class="text-center" style="background-color: #acacac; border-radius: 0 0 50px 50px; padding: 5px 0; color: #6c6b6b;">Avaliação</h3>
+    <div class="container card-shadow" style="padding: 0px 0 10px 0px; margin-top: 50px; ">
+        <h3 style="padding: 5px 0 0 45px; color: #6c6b6b;">Avaliação</h3>
 
         <div style="width:35%; margin:auto;">
             <div class="row mt-1 p-0">
                 <div class="p-1 pl-1 float-left bg-secondary text-light" style="width:50%;">Avaliacao</div>
-                <div class="float-left text-center bg-light p-1" style="width:50%;">@Model.NumAvaliacao</div>
+                <div class="float-left text-center  p-1" style="width:50%; background-color:#e5e5e5;">@Model.NumAvaliacao</div>
 
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1 p-0">
                 <div class="p-1 pl-1 float-left bg-secondary text-light" style="width:50%;">Data</div>
-                <div class="float-left text-center bg-light p-1" style="width:50%;">@Model?.DataAvaliacao.ToShortDateString()</div>
+                <div class="float-left text-center  p-1" style="width:50%; background-color:#e5e5e5;">@Model?.DataAvaliacao.ToShortDateString()</div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
 
                 <div class="p-1 pl-1 float-left bg-secondary text-light" style="width:50%;">Peso</div>
-                <div class="float-left text-center bg-light p-1" style="width:50%;">@Model?.Peso?.ToString("N2")</div>
+                <div class="float-left text-center  p-1" style="width:50%; background-color:#e5e5e5;">@Model?.Peso?.ToString("N2")</div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
@@ -34,61 +34,61 @@
             <div class="row mt-1">
 
                 <div class="p-1 pl-1 float-left bg-secondary text-light" style="width:50%;">Circ. Cintura</div>
-                <div class="float-left text-center bg-light p-1" style="width:50%;">@Model.CircCintura?.ToString("N2")</div>
+                <div class="float-left text-center  p-1" style="width:50%; background-color:#e5e5e5;">@Model.CircCintura?.ToString("N2")</div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
 
                 <div class="p-1 pl-1 float-left bg-secondary text-light" style="width:50%;">Circ. Abdominal</div>
-                <div class="float-left text-center bg-light p-1" style="width:50%;">@Model.CircAbdominal?.ToString("N2")</div>
+                <div class="float-left text-center  p-1" style="width:50%; background-color:#e5e5e5;">@Model.CircAbdominal?.ToString("N2")</div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
 
                 <div class="p-1 pl-1 float-left bg-secondary text-light" style="width:50%;">Circ. Quadril</div>
-                <div class="float-left text-center bg-light p-1" style="width:50%;">@Model.CircQuadril?.ToString("N2")</div>
+                <div class="float-left text-center  p-1" style="width:50%; background-color:#e5e5e5;">@Model.CircQuadril?.ToString("N2")</div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
 
                 <div class="p-1 pl-1 float-left bg-secondary text-light" style="width:50%;">Circ. Peito</div>
-                <div class="float-left text-center bg-light p-1" style="width:50%;">@Model.CircPeito?.ToString("N2")</div>
+                <div class="float-left text-center  p-1" style="width:50%; background-color:#e5e5e5;">@Model.CircPeito?.ToString("N2")</div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
 
                 <div class="p-1 pl-1 float-left bg-secondary text-light" style="width:50%;">Circ. Braço D</div>
-                <div class="float-left text-center bg-light p-1" style="width:50%;">@Model.CircBracoDireito?.ToString("N2")</div>
+                <div class="float-left text-center  p-1" style="width:50%; background-color:#e5e5e5;">@Model.CircBracoDireito?.ToString("N2")</div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
 
                 <div class="p-1 pl-1 float-left bg-secondary text-light" style="width:50%;">Circ. Braço E</div>
-                <div class="float-left text-center bg-light p-1" style="width:50%;">@Model.CircBracoEsquerdo?.ToString("N2")</div>
+                <div class="float-left text-center  p-1" style="width:50%; background-color:#e5e5e5;">@Model.CircBracoEsquerdo?.ToString("N2")</div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
 
                 <div class="p-1 pl-1 float-left bg-secondary text-light" style="width:50%;">Circ. Coxa D</div>
-                <div class="float-left text-center bg-light p-1" style="width:50%;">@Model.CircCoxadireita?.ToString("N2")</div>
+                <div class="float-left text-center  p-1" style="width:50%; background-color:#e5e5e5;">@Model.CircCoxadireita?.ToString("N2")</div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
 
                 <div class="p-1 pl-1 float-left bg-secondary text-light" style="width:50%;">Circ. Coxa E</div>
-                <div class="float-left text-center bg-light p-1" style="width:50%;">@Model.CircCoxaEsquerda?.ToString("N2")</div>
+                <div class="float-left text-center  p-1" style="width:50%; background-color:#e5e5e5;">@Model.CircCoxaEsquerda?.ToString("N2")</div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
 
                 <div class="p-1 pl-1 float-left bg-secondary text-light" style="width:50%;">Circ. Pant. D</div>
-                <div class="float-left text-center bg-light p-1" style="width:50%;">@Model.CircPanturrilhaDireita?.ToString("N2")</div>
+                <div class="float-left text-center  p-1" style="width:50%; background-color:#e5e5e5;">@Model.CircPanturrilhaDireita?.ToString("N2")</div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
 
                 <div class="p-1 pl-1 float-left bg-secondary text-light" style="width:50%;">Circ. Pant. E</div>
-                <div class="float-left text-center bg-light p-1" style="width:50%;">@Model.CircPanturrilhaEsquerda?.ToString("N2")</div>
+                <div class="float-left text-center  p-1" style="width:50%; background-color:#e5e5e5;">@Model.CircPanturrilhaEsquerda?.ToString("N2")</div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
@@ -99,64 +99,64 @@
             <div class="row mt-1">
 
                 <div class="p-1 pl-1 float-left bg-secondary text-light" style="width:50%;">DC. Triceps</div>
-                <div class="float-left text-center bg-light p-1" style="width:50%;">@Model.DCTriceps?.ToString("N2")</div>
+                <div class="float-left text-center  p-1" style="width:50%; background-color:#e5e5e5;">@Model.DCTriceps?.ToString("N2")</div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
 
                 <div class="p-1 pl-1 float-left bg-secondary text-light" style="width:50%;">DC. Escapular</div>
-                <div class="float-left text-center bg-light p-1" style="width:50%;">@Model.DCEscapular?.ToString("N2")</div>
+                <div class="float-left text-center  p-1" style="width:50%; background-color:#e5e5e5;">@Model.DCEscapular?.ToString("N2")</div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
 
                 <div class="p-1 pl-1 float-left bg-secondary text-light" style="width:50%;">DC. Supra Iliaca</div>
-                <div class="float-left text-center bg-light p-1" style="width:50%;">@Model.DCSupraIliaca?.ToString("N2")</div>
+                <div class="float-left text-center  p-1" style="width:50%; background-color:#e5e5e5;">@Model.DCSupraIliaca?.ToString("N2")</div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
 
                 <div class=" p-1 pl-1 float-left bg-secondary text-light" style="width:50%;">DC. Abdominal</div>
-                <div class="float-left text-center bg-light p-1" style="width:50%;">@Model.DCAbdominal?.ToString("N2")</div>
+                <div class="float-left text-center  p-1" style="width:50%; background-color:#e5e5e5;">@Model.DCAbdominal?.ToString("N2")</div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
 
                 <div class="p-1 pl-1 float-left bg-secondary text-light" style="width:50%;">DC. Axilar</div>
-                <div class="float-left text-center bg-light p-1" style="width:50%;">@Model.DCAxilar?.ToString("N2")</div>
+                <div class="float-left text-center  p-1" style="width:50%; background-color:#e5e5e5;">@Model.DCAxilar?.ToString("N2")</div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
 
                 <div class="p-1 pl-1 float-left bg-secondary text-light h32px" style="width:50%;">DC. Peitoral</div>
-                <div class="float-left text-center bg-light p-1" style="width:50%;">@Model.DCPeitoral?.ToString("N2")</div>
+                <div class="float-left text-center  p-1" style="width:50%; background-color:#e5e5e5;">@Model.DCPeitoral?.ToString("N2")</div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
 
                 <div class="p-1 pl-1 float-left bg-secondary text-light h32px" style="width:50%;">DC. Coxa</div>
-                <div class="float-left text-center bg-light p-1" style="width:50%;">@Model.DCCoxa?.ToString("N2")</div>
+                <div class="float-left text-center  p-1" style="width:50%; background-color:#e5e5e5;">@Model.DCCoxa?.ToString("N2")</div>
                 <div style="clear:both;"></div>
             </div>
 
             <div class="row mt-1">
 
                 <div class="p-1 pl-1 float-left bg-secondary text-light h32px" style="width:50%;">% Gordura</div>
-                <div class="float-left text-center bg-light p-1" style="width:50%;">@Model?.PercentualGordura?.ToString("N2")</div>
+                <div class="float-left text-center  p-1" style="width:50%; background-color:#e5e5e5;">@Model?.PercentualGordura?.ToString("N2")</div>
                 <div style="clear:both;"></div>
             </div>
 
             <div class="row mt-1">
 
                 <div class="p-1 pl-1 float-left bg-secondary text-light h32px" style="width:50%;">M. Muscular</div>
-                <div class="float-left text-center bg-light p-1" style="width:50%;">@Model?.MassaMuscular?.ToString("N2")</div>
+                <div class="float-left text-center  p-1" style="width:50%; background-color:#e5e5e5;">@Model?.MassaMuscular?.ToString("N2")</div>
                 <div style="clear:both;"></div>
             </div>
 
             <div class="row mt-1">
 
                 <div class="p-1 pl-1 float-left bg-secondary text-light h32px" style="width:50%;">Gordura</div>
-                <div class="float-left text-center bg-light p-1" style="width:50%;">@Model?.Gordura?.ToString("N2")</div>
+                <div class="float-left text-center  p-1" style="width:50%; background-color:#e5e5e5;">@Model?.Gordura?.ToString("N2")</div>
                 <div style="clear:both;"></div>
             </div>
 

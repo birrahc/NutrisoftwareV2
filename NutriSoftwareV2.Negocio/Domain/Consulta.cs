@@ -14,7 +14,7 @@ namespace NutriSoftwareV2.Negocio.Domain
         //public Nutricionista Nutricionista { get; set;}
         public Paciente? Paciente { get; set; }
         public AvaliacaoFisica? Avaliacao { get; set; }
-        public Dieta? Dieta { get; set; }
+        public Dieta? DietaPlano { get; set; }
         public int? PagamentoId { get; set; }
         public Pagamento? Pagamento { get; set; }
         [NotMapped]

@@ -3,14 +3,175 @@
 @{
     NutriSoftwareV2.Negocio.Domain.AvaliacaoFisica avaliacaAnterior = ViewBag.AvaliacaoAnterior == null ? new NutriSoftwareV2.Negocio.Domain.AvaliacaoFisica() : ViewBag.AvaliacaoAnterior;
     var data = Model?.DataAvaliacao == null ? DateTime.Now : Model?.DataAvaliacao;
-    string codigoDieta = ViewBag.CodigoConsulta;
+    var codigo =ViewBag.CodigoMemory;
+    var pacienteId = Model?.PacienteId < 1 ? ViewBag.PacienteId : Model.PacienteId;
     bool? editar = ViewBag.Editar;
     string display = Model != null && Model.IsValid() ? "block" : "none";
 }
+<div class="col-12">
+    <h3 class="text-center p-2" style="background-color: #acacac; color: #6c6b6b;">Avaliação Física</h3>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-7 m-auto">
+                <div class="container-fluid p-0 m-0">
+                    <form method="post" name="frmCadastrarAvaliacaoConsulta" class="p-0">
+                        <input type="hidden" name="Inserir" id="blnInserir" />
+                        <input type="hidden" asp-for="Id" id="avaliacaoId" />
+                        <input type="hidden" name="PacienteId" value="@pacienteId" />
+                        <input type="hidden" name="Codigo" value="@codigo" />
+                        <input type="hidden" name="Editar" value="@editar" class="txtEditar" />
+                        <div class="row mt-1 p-0">
+                            <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior.NumAvaliacao" tabindex="-1" readonly class="form-control text-center"/> </div>
+                            <div class="col-6 d-inline-block bg-secondary text-light">Avaliacao</div>
+                            <div class="col-3 d-inline-block pe-0"><input type="text" name="NumAvaliacao" class="form-control   text-center" value="@Model?.NumAvaliacao" id="txtNumAvaliacao" /></div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-3 d-inline-block ps-0"><input type="text"  value="@avaliacaAnterior?.DataAvaliacao.ToShortDateString()" tabindex="-1" readonly class="form-control text-center"/></div>
+                            <div class="col-6 d-inline-block bg-secondary text-light">Data</div>
+                            <div class="col-3 d-inline-block pe-0"><input type="date" asp-for="DataAvaliacao" class="form-control   text-center" id="txtDataAvaliacao" /></div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior?.Peso?.ToString("N1")" tabindex="-1" readonly class="form-control text-center"/></div>
+                            <div class="col-6 d-inline-block bg-secondary text-light">Peso</div>
+                            <div class="col-3 d-inline-block pe-0"><input type="text" name="Peso"  value="@Model?.Peso" mask="formAval" class="form-control   text-center" id="txtPeso" /></div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-12 bg-secondary">
+                                <p class="text-center m-1 text-light"><b>Circunferências</b></p>
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior?.CircCintura?.ToString("N1")" tabindex="-1" readonly class="form-control text-center"/></div>
+                            <div class="col-6 d-inline-block bg-secondary text-light">Circ. Cintura</div>
+                            <div class="col-3 d-inline-block pe-0"><input type="text" name="CircCintura"  value="@Model?.CircCintura" mask="formAval" class="form-control   text-center" id="txtCircCintura" /></div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior?.CircAbdominal?.ToString("N1")" tabindex="-1" readonly class="form-control text-center"/> </div>
+                            <div class="col-6 d-inline-block bg-secondary text-light">Circ. Abdominal</div>
+                            <div class="col-3 d-inline-block pe-0"><input type="text" name="CircAbdominal"  value="@Model?.CircAbdominal" mask="formAval" class="form-control   text-center" id="txtCircAbdominal" /></div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior?.CircQuadril?.ToString("N1")" tabindex="-1" readonly class="form-control text-center"/></div>
+                            <div class="col-6 d-inline-block bg-secondary text-light">Circ. Quadril</div>
+                            <div class="col-3 d-inline-block pe-0"><input type="text" name="CircQuadril"  value="@Model?.CircQuadril" mask="formAval" class="form-control   text-center" id="txtCircQuadril" /></div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior?.CircPeito?.ToString("N1")" tabindex="-1" readonly class="form-control text-center"/></div>
+                            <div class="col-6 d-inline-block bg-secondary text-light">Circ. Peito</div>
+                            <div class="col-3 d-inline-block pe-0"><input type="text" name="CircPeito"  value="@Model?.CircPeito" mask="formAval" class="form-control   text-center" id="txtCircPeito" /></div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior?.CircBracoDireito?.ToString("N1")" tabindex="-1" readonly class="form-control text-center"/></div>
+                            <div class="col-6 d-inline-block bg-secondary text-light">Circ. Braço D</div>
+                            <div class="col-3 d-inline-block pe-0"><input type="text" name="CircBracoDireito"  value="@Model?.CircBracoDireito" mask="formAval" class="form-control   text-center" id="txtCircBracoDireito" /></div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior?.CircBracoEsquerdo?.ToString("N1")" tabindex="-1" readonly class="form-control text-center"/></div>
+                            <div class="col-6 d-inline-block bg-secondary text-light">Circ. Braço E</div>
+                            <div class="col-3 d-inline-block pe-0"><input type="text" name="CircBracoEsquerdo"  value="@Model?.CircBracoEsquerdo" mask="formAval" class="form-control   text-center" id="txtCircBracoEsquerdo" /></div>
+                            
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior?.CircCoxadireita?.ToString("N1")" tabindex="-1" readonly class="form-control text-center"/></div>
+                            <div class="col-6 d-inline-block bg-secondary text-light">Circ. Coxa D</div>
+                            <div class="col-3 d-inline-block pe-0"><input type="text" name="CircCoxadireita"  value="@Model?.CircCoxadireita" mask="formAval" class="form-control   text-center" id="txtCircCoxadireita" /></div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior?.CircCoxaEsquerda?.ToString("N1")" tabindex="-1" readonly class="form-control text-center"/></div>
+                            <div class="col-6 d-inline-block bg-secondary text-light">Circ. Coxa E</div>
+                            <div class="col-3 d-inline-block pe-0"><input type="text" name="CircCoxaEsquerda"  value="@Model?.CircCoxaEsquerda" mask="formAval" class="form-control   text-center" id="txtCircCoxaEsquerda" /></div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior?.CircPanturrilhaDireita?.ToString("N1")" tabindex="-1" readonly class="form-control text-center"/></div>
+                            <div class="col-6 d-inline-block bg-secondary text-light">Circ. Pant. D</div>
+                            <div class="col-3 d-inline-block pe-0"><input type="text" name="CircPanturrilhaDireita"  value="@Model?.CircPanturrilhaDireita" mask="formAval" class="form-control   text-center" id="txtPanturrilhaD" /></div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior?.CircPanturrilhaEsquerda?.ToString("N1")" tabindex="-1" readonly class="form-control text-center"/></div>
+                            <div class="col-6 d-inline-block bg-secondary text-light">Circ. Pant. E</div>
+                            <div class="col-3 d-inline-block pe-0"><input type="text" name="CircPanturrilhaEsquerda"  value="@Model?.CircPanturrilhaEsquerda" mask="formAval" class="form-control   text-center" id="txtPanturrilhaE" /></div>
+                            <div style="clear:both;"></div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-12 bg-secondary">
+                                <p class="text-center m-1 text-light"><b>Dobra cutânia</b></p>
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior?.DCTriceps?.ToString("N1")" tabindex="-1" readonly class="form-control text-center"/></div>
+                            <div class="col-6 d-inline-block bg-secondary text-light">DC. Triceps</div>
+                            <div class="col-3 d-inline-block pe-0"><input type="text" name="DCTriceps" value="@Model?.DCTriceps"  mask="formAval" class="form-control   text-center" id="txtDCTriceps" /></div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior?.DCEscapular?.ToString("N1")" tabindex="-1" readonly class="form-control text-center"/></div>
+                            <div class="col-6 d-inline-block bg-secondary text-light">DC. Escapular</div>
+                            <div class="col-3 d-inline-block pe-0"><input type="text" name="DCEscapular" value="@Model?.DCEscapular"  mask="formAval" class="form-control   text-center" id="txtDCEscapular" /></div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior?.DCSupraIliaca?.ToString("N1")" tabindex="-1" readonly class="form-control text-center"/></div>
+                            <div class="col-6 d-inline-block bg-secondary text-light">DC. Supra Iliaca</div>
+                            <div class="col-3 d-inline-block pe-0"><input type="text" name="DCSupraIliaca" value="@Model?.DCSupraIliaca"  mask="formAval" class="form-control   text-center" id="txtDCSupraIliaca" /></div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior?.DCAbdominal?.ToString("N1")" tabindex="-1" readonly class="form-control text-center"/></div>
+                            <div class="col-6 d-inline-block bg-secondary text-light">DC. Abdominal</div>
+                            <div class="col-3 d-inline-block pe-0"><input type="text" name="DCAbdominal" value="@Model?.DCAbdominal"  mask="formAval" class="form-control   text-center" id="txtDCAbdominal" /></div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior?.DCAxilar?.ToString("N1")" tabindex="-1" readonly class="form-control text-center"/></div>
+                            <div class="col-6 d-inline-block bg-secondary text-light">DC. Axilar</div>
+                            <div class="col-3 d-inline-block pe-0"><input type="text" name="DCAxilar" value="@Model?.DCAxilar"  mask="formAval" class="form-control   text-center" id="txtDCAxilar" /></div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior?.DCPeitoral?.ToString("N1")" tabindex="-1" readonly class="form-control text-center"/></div>
+                            <div class="col-6 d-inline-block bg-secondary text-light ">DC. Peitoral</div>
+                            <div class="col-3 d-inline-block pe-0"><input type="text" name="DCPeitoral" value="@Model?.DCPeitoral"  mask="formAval" class="form-control   text-center" id="txtDCPeitoral" /></div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior?.DCCoxa?.ToString("N1")" tabindex="-1" readonly class="form-control text-center"/></div>
+                            <div class="col-6 d-inline-block bg-secondary text-light ">DC. Coxa</div>
+                            <div class="col-3 d-inline-block pe-0"><input type="text" name="DCCoxa" value="@Model?.DCCoxa"  mask="formAval" class="form-control   text-center" id="txtDCCoxa" /></div>
+                        </div>
 
-<div class="container" style="border: solid 2px #c4c0c0; padding: 0px 0 10px 0px; margin-top: 50px; ">
+                        <div class="row mt-1">
+                            <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior?.PercentualGordura?.ToString("N1")" tabindex="-1" readonly class="form-control text-center"/></div>
+                            <div class="col-6 d-inline-block bg-secondary text-light">% Gordura</div>
+                            <div class="col-3 d-inline-block pe-0"><input type="text" value="@Model?.PercentualGordura?.ToString("N1")" tabindex="-1" readonly class="form-control text-center"/></div>
+                        </div>
+
+                        <div class="row mt-1">
+                            <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior?.MassaMuscular?.ToString("N1")" tabindex="-1" readonly class="form-control text-center"/></div>
+                            <div class="col-6 d-inline-block bg-secondary text-light">M. Muscular</div>
+                            <div class="col-3 d-inline-block pe-0"><input type="text" value="@Model?.MassaMuscular?.ToString("N1")" tabindex="-1" readonly class="form-control text-center"/></div>
+                        </div>
+
+                        <div class="row mt-1">
+                            <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior?.Gordura?.ToString("N1")" tabindex="-1" readonly class="form-control text-center"/></div>
+                            <div class="col-6 d-inline-block bg-secondary text-light">Gordura</div>
+                            <div class="col-3 d-inline-block pe-0"><input type="text" value="@Model?.Gordura?.ToString("N1")" tabindex="-1" readonly class="form-control text-center"/></div>
+                        </div>
+                        
+                        <div class="row mt-1" id="pnlBotoesAvaliacao">
+                            <div class="col-12 ps-0">
+                                <button type="button" onclick="InserirAvaliacao_OnClick()" class="btn btn-primary w-100"><i class="fa fa-arrow-right" aria-hidden="true"></i> Inserir Avaliação</button>
+
+                                @* <button type="button" onclick="VoltarEtapasConsulta(2,'@codigo')" class="btn btn-primary" id="btnAnteriorAvaliacao"> <i class="fa fa-arrow-right" aria-hidden="true"></i> Inserir Avaliação</button> *@
+                            </div>
+                            @* <div class="col-6 pr-0">
+                                <button type="button" onclick="CalcularAvaliacao()" class="btn btn-secondary w-100" id="btnCalcular" style="display:none">Calcular <i class="fa fa-calculator" aria-hidden="true"></i></button>
+                                <button type="button" onclick="inserirAvaliacao()" class="btn btn-primary w-100" id="btnInserirAvaliacao" style="display:@display;">Proximo <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                            </div> *@
+                        </div> 
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* <div class="container" style="border: solid 2px #c4c0c0; padding: 0px 0 10px 0px; margin-top: 50px; ">
     <h3 class="text-center" style="background-color: #acacac; border-radius: 0 0 50px 50px; padding: 5px 0; color: #6c6b6b;">Avaliação</h3>
-    <form method="post" id="frmCadastrarAvaliacaoConsulta" class="p-0">
+    
         <div style="width:35%; margin:auto;">
             <input type="hidden" name="Inserir" id="blnInserir" />
             <input type="hidden" asp-for="Id" id="avaliacaoId" />
@@ -18,21 +179,21 @@
             <input type="hidden" name="Codigo" value="@codigoDieta" />
             <input type="hidden" name="Editar" value="@editar" class="txtEditar" />
             <div class="row mt-1 p-0">
-                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.NumAvaliacao</div>
-                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Avaliacao</div>
-                <div class="float-left" style="width:100px;"><input type="text" name="NumAvaliacao" class="form-control h32px w-140px text-center" value="@Model?.NumAvaliacao" id="txtNumAvaliacao" /></div>
+                <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior.NumAvaliacao</div>
+                <div class="col-6 d-inline-block bg-secondary text-light">Avaliacao</div>
+                <div class="col-3 d-inline-block pe-0"><input type="text" name="NumAvaliacao" class="form-control   text-center" value="@Model?.NumAvaliacao" id="txtNumAvaliacao" /></div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1 p-0">
-                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior?.DataAvaliacao.ToShortDateString()</div>
-                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Data</div>
-                <div class="float-left" style="width:100px;"><input type="date" asp-for="DataAvaliacao" class="form-control h32px w-140px text-center" id="txtDataAvaliacao" /></div>
+                <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior?.DataAvaliacao.ToShortDateString()</div>
+                <div class="col-6 d-inline-block bg-secondary text-light">Data</div>
+                <div class="col-3 d-inline-block"><input type="date" asp-for="DataAvaliacao" class="form-control   text-center" id="txtDataAvaliacao" /></div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
-                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior?.Peso?.ToString("N2")</div>
-                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Peso</div>
-                <div class="float-left" style="width:100px;"><input type="text" name="Peso" onblur="CalcularAvaliacao()" value="@Model?.Peso" mask="formAval" class="form-control h32px w-140px text-center" id="txtPeso" /></div>
+                <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior?.Peso?.ToString("N2")</div>
+                <div class="col-6 d-inline-block bg-secondary text-light">Peso</div>
+                <div class="col-3 d-inline-block pe-0"><input type="text" name="Peso"  value="@Model?.Peso" mask="formAval" class="form-control   text-center" id="txtPeso" /></div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
@@ -41,63 +202,63 @@
                 </div>
             </div>
             <div class="row mt-1">
-                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.CircCintura</div>
-                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Circ. Cintura</div>
-                <div class="float-left" style="width:100px;"><input type="text" name="CircCintura" onblur="CalcularAvaliacao()" value="@Model?.CircCintura" mask="formAval" class="form-control h32px w-140px text-center" id="txtCircCintura" /></div>
+                <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior.CircCintura</div>
+                <div class="col-6 d-inline-block bg-secondary text-light">Circ. Cintura</div>
+                <div class="col-3 d-inline-block pe-0"><input type="text" name="CircCintura"  value="@Model?.CircCintura" mask="formAval" class="form-control   text-center" id="txtCircCintura" /></div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
-                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.CircAbdominal</div>
-                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Circ. Abdominal</div>
-                <div class="float-left" style="width:100px;"><input type="text" name="CircAbdominal" onblur="CalcularAvaliacao()" value="@Model?.CircAbdominal" mask="formAval" class="form-control h32px w-140px text-center" id="txtCircAbdominal" /></div>
+                <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior.CircAbdominal</div>
+                <div class="col-6 d-inline-block bg-secondary text-light">Circ. Abdominal</div>
+                <div class="col-3 d-inline-block pe-0"><input type="text" name="CircAbdominal"  value="@Model?.CircAbdominal" mask="formAval" class="form-control   text-center" id="txtCircAbdominal" /></div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
-                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.CircQuadril</div>
-                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Circ. Quadril</div>
-                <div class="float-left" style="width:100px;"><input type="text" name="CircQuadril" onblur="CalcularAvaliacao()" value="@Model?.CircQuadril" mask="formAval" class="form-control h32px w-140px text-center" id="txtCircQuadril" /></div>
+                <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior.CircQuadril</div>
+                <div class="col-6 d-inline-block bg-secondary text-light">Circ. Quadril</div>
+                <div class="col-3 d-inline-block pe-0"><input type="text" name="CircQuadril"  value="@Model?.CircQuadril" mask="formAval" class="form-control   text-center" id="txtCircQuadril" /></div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
-                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.CircPeito</div>
-                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Circ. Peito</div>
-                <div class="float-left" style="width:100px;"><input type="text" name="CircPeito" onblur="CalcularAvaliacao()" value="@Model?.CircPeito" mask="formAval" class="form-control h32px w-140px text-center" id="txtCircPeito" /></div>
+                <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior.CircPeito</div>
+                <div class="col-6 d-inline-block bg-secondary text-light">Circ. Peito</div>
+                <div class="col-3 d-inline-block pe-0"><input type="text" name="CircPeito"  value="@Model?.CircPeito" mask="formAval" class="form-control   text-center" id="txtCircPeito" /></div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
-                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.CircBracoDireito</div>
-                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Circ. Braço D</div>
-                <div class="float-left" style="width:100px;"><input type="text" name="CircBracoDireito" onblur="CalcularAvaliacao()" value="@Model?.CircBracoDireito" mask="formAval" class="form-control h32px w-140px text-center" id="txtCircBracoDireito" /></div>
+                <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior.CircBracoDireito</div>
+                <div class="col-6 d-inline-block bg-secondary text-light">Circ. Braço D</div>
+                <div class="col-3 d-inline-block pe-0"><input type="text" name="CircBracoDireito"  value="@Model?.CircBracoDireito" mask="formAval" class="form-control   text-center" id="txtCircBracoDireito" /></div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
-                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.CircBracoEsquerdo</div>
-                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Circ. Braço E</div>
-                <div class="float-left" style="width:100px;"><input type="text" name="CircBracoEsquerdo" onblur="CalcularAvaliacao()" value="@Model?.CircBracoEsquerdo" mask="formAval" class="form-control h32px w-140px text-center" id="txtCircBracoEsquerdo" /></div>
+                <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior.CircBracoEsquerdo</div>
+                <div class="col-6 d-inline-block bg-secondary text-light">Circ. Braço E</div>
+                <div class="col-3 d-inline-block pe-0"><input type="text" name="CircBracoEsquerdo"  value="@Model?.CircBracoEsquerdo" mask="formAval" class="form-control   text-center" id="txtCircBracoEsquerdo" /></div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
-                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.CircCoxadireita</div>
-                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Circ. Coxa D</div>
-                <div class="float-left" style="width:100px;"><input type="text" name="CircCoxadireita" onblur="CalcularAvaliacao()" value="@Model?.CircCoxadireita" mask="formAval" class="form-control h32px w-140px text-center" id="txtCircCoxadireita" /></div>
+                <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior.CircCoxadireita</div>
+                <div class="col-6 d-inline-block bg-secondary text-light">Circ. Coxa D</div>
+                <div class="col-3 d-inline-block pe-0"><input type="text" name="CircCoxadireita"  value="@Model?.CircCoxadireita" mask="formAval" class="form-control   text-center" id="txtCircCoxadireita" /></div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
-                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.CircCoxaEsquerda</div>
-                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Circ. Coxa E</div>
-                <div class="float-left" style="width:100px;"><input type="text" name="CircCoxaEsquerda" onblur="CalcularAvaliacao()" value="@Model?.CircCoxaEsquerda" mask="formAval" class="form-control h32px w-140px text-center" id="txtCircCoxaEsquerda" /></div>
+                <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior.CircCoxaEsquerda</div>
+                <div class="col-6 d-inline-block bg-secondary text-light">Circ. Coxa E</div>
+                <div class="col-3 d-inline-block pe-0"><input type="text" name="CircCoxaEsquerda"  value="@Model?.CircCoxaEsquerda" mask="formAval" class="form-control   text-center" id="txtCircCoxaEsquerda" /></div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
-                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.CircPanturrilhaDireita</div>
-                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Circ. Pant. D</div>
-                <div class="float-left" style="width:100px;"><input type="text" name="CircPanturrilhaDireita" onblur="CalcularAvaliacao()" value="@Model?.CircPanturrilhaDireita" mask="formAval" class="form-control h32px w-140px text-center" id="txtPanturrilhaD" /></div>
+                <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior.CircPanturrilhaDireita</div>
+                <div class="col-6 d-inline-block bg-secondary text-light">Circ. Pant. D</div>
+                <div class="col-3 d-inline-block pe-0"><input type="text" name="CircPanturrilhaDireita"  value="@Model?.CircPanturrilhaDireita" mask="formAval" class="form-control   text-center" id="txtPanturrilhaD" /></div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
-                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.CircPanturrilhaEsquerda</div>
-                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">Circ. Pant. E</div>
-                <div class="float-left" style="width:100px;"><input type="text" name="CircPanturrilhaEsquerda" onblur="CalcularAvaliacao()" value="@Model?.CircPanturrilhaEsquerda" mask="formAval" class="form-control h32px w-140px text-center" id="txtPanturrilhaE" /></div>
+                <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior.CircPanturrilhaEsquerda</div>
+                <div class="col-6 d-inline-block bg-secondary text-light">Circ. Pant. E</div>
+                <div class="col-3 d-inline-block pe-0"><input type="text" name="CircPanturrilhaEsquerda"  value="@Model?.CircPanturrilhaEsquerda" mask="formAval" class="form-control   text-center" id="txtPanturrilhaE" /></div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
@@ -106,66 +267,66 @@
                 </div>
             </div>
             <div class="row mt-1">
-                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.DCTriceps</div>
-                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">DC. Triceps</div>
-                <div class="float-left" style="width:100px;"><input type="text" name="DCTriceps" value="@Model?.DCTriceps" onblur="CalcularAvaliacao()" mask="formAval" class="form-control h32px w-140px text-center" id="txtDCTriceps" /></div>
+                <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior.DCTriceps</div>
+                <div class="col-6 d-inline-block bg-secondary text-light">DC. Triceps</div>
+                <div class="col-3 d-inline-block pe-0"><input type="text" name="DCTriceps" value="@Model?.DCTriceps"  mask="formAval" class="form-control   text-center" id="txtDCTriceps" /></div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
-                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.DCEscapular</div>
-                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">DC. Escapular</div>
-                <div class="float-left" style="width:100px;"><input type="text" name="DCEscapular" value="@Model?.DCEscapular" onblur="CalcularAvaliacao()" mask="formAval" class="form-control h32px w-140px text-center" id="txtDCEscapular" /></div>
+                <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior.DCEscapular</div>
+                <div class="col-6 d-inline-block bg-secondary text-light">DC. Escapular</div>
+                <div class="col-3 d-inline-block pe-0"><input type="text" name="DCEscapular" value="@Model?.DCEscapular"  mask="formAval" class="form-control   text-center" id="txtDCEscapular" /></div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
-                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.DCSupraIliaca</div>
-                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">DC. Supra Iliaca</div>
-                <div class="float-left" style="width:100px;"><input type="text" name="DCSupraIliaca" value="@Model?.DCSupraIliaca" onblur="CalcularAvaliacao()" mask="formAval" class="form-control h32px w-140px text-center" id="txtDCSupraIliaca" /></div>
+                <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior.DCSupraIliaca</div>
+                <div class="col-6 d-inline-block bg-secondary text-light">DC. Supra Iliaca</div>
+                <div class="col-3 d-inline-block pe-0"><input type="text" name="DCSupraIliaca" value="@Model?.DCSupraIliaca"  mask="formAval" class="form-control   text-center" id="txtDCSupraIliaca" /></div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
-                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.DCAbdominal</div>
-                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">DC. Abdominal</div>
-                <div class="float-left" style="width:100px;"><input type="text" name="DCAbdominal" value="@Model?.DCAbdominal" onblur="CalcularAvaliacao()" mask="formAval" class="form-control h32px w-140px text-center" id="txtDCAbdominal" /></div>
+                <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior.DCAbdominal</div>
+                <div class="col-6 d-inline-block bg-secondary text-light">DC. Abdominal</div>
+                <div class="col-3 d-inline-block pe-0"><input type="text" name="DCAbdominal" value="@Model?.DCAbdominal"  mask="formAval" class="form-control   text-center" id="txtDCAbdominal" /></div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
-                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.DCAxilar</div>
-                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light">DC. Axilar</div>
-                <div class="float-left" style="width:100px;"><input type="text" name="DCAxilar" value="@Model?.DCAxilar" onblur="CalcularAvaliacao()" mask="formAval" class="form-control h32px w-140px text-center" id="txtDCAxilar" /></div>
+                <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior.DCAxilar</div>
+                <div class="col-6 d-inline-block bg-secondary text-light">DC. Axilar</div>
+                <div class="col-3 d-inline-block pe-0"><input type="text" name="DCAxilar" value="@Model?.DCAxilar"  mask="formAval" class="form-control   text-center" id="txtDCAxilar" /></div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
-                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.DCPeitoral</div>
-                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light h32px">DC. Peitoral</div>
-                <div class="float-left" style="width:100px;"><input type="text" name="DCPeitoral" value="@Model?.DCPeitoral" onblur="CalcularAvaliacao()" mask="formAval" class="form-control h32px w-140px text-center" id="txtDCPeitoral" /></div>
+                <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior.DCPeitoral</div>
+                <div class="col-6 d-inline-block bg-secondary text-light ">DC. Peitoral</div>
+                <div class="col-3 d-inline-block pe-0"><input type="text" name="DCPeitoral" value="@Model?.DCPeitoral"  mask="formAval" class="form-control   text-center" id="txtDCPeitoral" /></div>
                 <div style="clear:both;"></div>
             </div>
             <div class="row mt-1">
-                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior.DCCoxa</div>
-                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light h32px">DC. Coxa</div>
-                <div class="float-left" style="width:100px;"><input type="text" name="DCCoxa" value="@Model?.DCCoxa" onblur="CalcularAvaliacao()" mask="formAval" class="form-control h32px w-140px text-center" id="txtDCCoxa" /></div>
-                <div style="clear:both;"></div>
-            </div>
-
-            <div class="row mt-1">
-                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior?.PercentualGordura?.ToString("N2")</div>
-                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light h32px">% Gordura</div>
-                <div class="float-left text-center bg-light p-1" style="width:140px;"><b>% @Model?.PercentualGordura?.ToString("N2")</b></div>
+                <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior.DCCoxa</div>
+                <div class="col-6 d-inline-block bg-secondary text-light ">DC. Coxa</div>
+                <div class="col-3 d-inline-block pe-0"><input type="text" name="DCCoxa" value="@Model?.DCCoxa"  mask="formAval" class="form-control   text-center" id="txtDCCoxa" /></div>
                 <div style="clear:both;"></div>
             </div>
 
             <div class="row mt-1">
-                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior?.MassaMuscular?.ToString("N2")</div>
-                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light h32px">M. Muscular</div>
-                <div class="float-left text-center bg-light p-1" style="width:140px;"><b>@Model?.MassaMuscular?.ToString("N2")</b></div>
+                <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior?.PercentualGordura?.ToString("N2")</div>
+                <div class="col-6 d-inline-block bg-secondary text-light ">% Gordura</div>
+                <div class="col-3 d-inline-block ps-0"><input type="text" value="<b>% @Model?.PercentualGordura?.ToString("N2")</b></div>
                 <div style="clear:both;"></div>
             </div>
 
             <div class="row mt-1">
-                <div class="float-left text-center bg-light p-1" style="width:140px;">@avaliacaAnterior?.Gordura?.ToString("N2")</div>
-                <div class="w-140px p-1 pl-1 float-left bg-secondary text-light h32px">Gordura</div>
-                <div class="float-left text-center bg-light p-1" style="width:140px;"><b>@Model?.Gordura?.ToString("N2")</b></div>
+                <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior?.MassaMuscular?.ToString("N2")</div>
+                <div class="col-6 d-inline-block bg-secondary text-light ">M. Muscular</div>
+                <div class="col-3 d-inline-block ps-0"><input type="text" value="<b>@Model?.MassaMuscular?.ToString("N2")</b></div>
+                <div style="clear:both;"></div>
+            </div>
+
+            <div class="row mt-1">
+                <div class="col-3 d-inline-block ps-0"><input type="text" value="@avaliacaAnterior?.Gordura?.ToString("N2")</div>
+                <div class="col-6 d-inline-block bg-secondary text-light ">Gordura</div>
+                <div class="col-3 d-inline-block ps-0"><input type="text" value="<b>@Model?.Gordura?.ToString("N2")</b></div>
                 <div style="clear:both;"></div>
             </div>
 
@@ -198,3 +359,4 @@
 
     </form>
 </div>
+ *@

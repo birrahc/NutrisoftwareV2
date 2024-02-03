@@ -16,6 +16,8 @@ namespace NutriSoftwareV2.Web.Dto
         public EN_TipoDietaAlimentos Tipo { get; set; }
         public float QuantidadeAlimento { get; set; }
         public int TipoMedidaAlimentoId { get; set; }
+        public int PacienteId { get; set; }
+        public DateTime Data { get; set; }
         public bool Editar { get; set; }
 
         public QuantidadeAlimento ConvertParamToQuantidadeAlimento() 
