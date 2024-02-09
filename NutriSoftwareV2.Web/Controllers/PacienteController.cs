@@ -5,11 +5,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NutriSoftwareV2.Negocio.Data.NutriDbContext;
 using NutriSoftwareV2.Negocio.Domain;
+using NutriSoftwareV2.Negocio.Enums;
 using NutriSoftwareV2.Negocio.Svc;
 using NutriSoftwareV2.Web.Identity;
 using NutriSoftwareV2.Web.Svc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.Xml;
 using System.Threading.Tasks;
@@ -173,6 +175,88 @@ namespace NutriSoftwareV2.Web.Controllers
             SvcAnotacoes.DeletarAnotacao(anotacao);
             var anotacoes = SvcAnotacoes.ListarAnotacoesPaciente(pacienteId);
             return PartialView("PartiaisPaciente/_ObservacaoPaciente", anotacoes.OrderByDescending(p => p.Id));
+        }
+
+
+        public ActionResult ListarArquivosPaciente(int Id)
+        {
+            return PartialView("PartiaisPaciente/_ListaDeArquivosPaciente", SvcArquivo.ListarArquivosDoPaciente(Id));
+        }
+
+        [HttpGet]
+        public ActionResult CadastrarEditarArquivo(int Id, int? ObjetoId = null)
+        {
+            Arquivo arquivo = new Arquivo();
+            if (ObjetoId.HasValue)
+            {
+                arquivo = SvcArquivo.BuscarAquivo(ObjetoId.Value);
+            }
+            else
+            {
+                arquivo.PacienteId = Id;
+            }
+            return PartialView("PartiaisPaciente/_FormularioCadastrarArquivo", arquivo);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CadastrarEditarArquivo(IFormFile NewFile, int PacienteId, string NomeDocumento, EN_TipoDocumentoArquivo TipoDocumento)
+        {
+            if (NewFile == null || NewFile.Length == 0)
+                return Content("Arquivo não selecionado");
+            using (NutriDbContext db = new NutriDbContext())
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await NewFile.CopyToAsync(memoryStream);
+                    var arquivoModel = new Arquivo
+                    {
+                        NomeDocumento = NomeDocumento,
+                        FileName = NewFile.FileName,
+                        ContentType = NewFile.ContentType,
+                        TamanhoArquivo = NewFile.Length,
+                        TipoDocumento = TipoDocumento,
+                        PacienteId = PacienteId,
+                        DadosArquivo = Convert.ToBase64String(memoryStream.ToArray())
+                    };
+
+                    db.Arquivo.Add(arquivoModel);
+                    await db.SaveChangesAsync();
+                    return PartialView("PartiaisPaciente/_ListaDeArquivosPaciente", SvcArquivo.ListarArquivosDoPaciente(PacienteId));
+                }
+            }
+
+        }
+
+        public IActionResult RemoverArquivo(int Id,int PacienteId)
+        {
+            SvcArquivo.DeletarArquivo(Id);
+            return PartialView("PartiaisPaciente/_ListaDeArquivosPaciente", SvcArquivo.ListarArquivosDoPaciente(PacienteId);
+        }
+        public async Task<IActionResult> Download(int Id)
+        {
+
+            var arquivo = SvcArquivo.BuscarAquivo(Id);
+
+            if (arquivo == null && arquivo?.DadosArquivo?.Length < 1)
+            {
+                return NotFound(); // Retorna 404 se o arquivo não for encontrado
+            }
+
+            try
+            {
+                var result = new FileStreamResult(new MemoryStream(arquivo.ArquivoByte), arquivo.ContentType)
+                {
+                    FileDownloadName = arquivo.FileName
+                };
+
+                // Configuração do cabeçalho Content-Disposition para forçar o download do arquivo
+                Response.Headers["Content-Disposition"] = $"attachment; filename=\"{arquivo.FileName}\"";
+
+                return result;
+            }
+            catch (Exception ex) {
+                throw new Exception("Erro ao tentar fazer download do Arquivo");
+            }
         }
 
         public static SelectList ListarProfissoes(NutriDbContext db, int? Id = null)

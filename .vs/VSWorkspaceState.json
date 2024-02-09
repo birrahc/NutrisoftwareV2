@@ -1,14 +1,16 @@
 {
   "ExpandedNodes": [
     "",
+    "\\NutriSoftwareV2.Negocio",
+    "\\NutriSoftwareV2.Negocio\\Data",
+    "\\NutriSoftwareV2.Negocio\\Data\\Configuration",
     "\\NutriSoftwareV2.Web",
-    "\\NutriSoftwareV2.Web\\Controllers",
     "\\NutriSoftwareV2.Web\\Views",
     "\\NutriSoftwareV2.Web\\Views\\Consulta",
     "\\NutriSoftwareV2.Web\\Views\\Consulta\\PartiaisConsulta",
     "\\NutriSoftwareV2.Web\\Views\\Consulta\\PartiaisConsulta\\PartiaisAvaliacao",
     "\\NutriSoftwareV2.Web\\Views\\Shared"
   ],
-  "SelectedNode": "\\NutriSoftwareV2.Web\\Views\\Consulta\\CadastarConsulta.cshtml",
+  "SelectedNode": "\\NutriSoftwareV2Sln.sln",
   "PreviewInSolutionExplorer": false
 }

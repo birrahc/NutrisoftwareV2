@@ -1,7 +1,7 @@
 ﻿
 
 
-function AbrirModal(url, pnlResultadoId,modalId, id=null) {
+function AbrirModal(url, pnlResultadoId,modalId,carregarMacaras=true, id=null) {
     $.ajax({
         url: url,
         type: 'GET',
@@ -11,7 +11,9 @@ function AbrirModal(url, pnlResultadoId,modalId, id=null) {
             $("#" + pnlResultadoId).empty();
             $("#" + pnlResultadoId).append(response);
             $("#" + modalId).modal('show')
-            carregarMascaras();
+            if (carregarMacaras) {
+                carregarMascaras();
+            }
 
         },
         error: function (response) {

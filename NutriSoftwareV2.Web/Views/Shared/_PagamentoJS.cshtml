@@ -7,7 +7,7 @@
         if (validarPesquisaPagamento(dataIncio, dataFim)) {
             var dados = $("#frmFiltroPgt").serialize();
             $.ajax({
-                url: '@Url.Action("ResultadoPagamento","Pagamento")',
+                url: '@Url.Action("ResultadoPagamento", "Pagamento")',
                 type: 'POST',
                 data: dados,
                 async: true,
@@ -26,7 +26,7 @@
     function AbrirModalParaCadastroPagamento() {
 
         $.ajax({
-            url: '@Url.Action("Create","Pagamento")',
+            url: '@Url.Action("Create", "Pagamento")',
             type: 'GET',
             async: true,
             success: function (response) {
@@ -46,7 +46,7 @@
         window.value = value;
 
         $.ajax({
-            url: '@Url.Action("Edit","Pagamento")',
+            url: '@Url.Action("Edit", "Pagamento")',
             type: 'GET',
             data: { Id: window.value },
             async: true,
@@ -69,7 +69,7 @@
         //var action = $('input[ident-paciente ="pacienteId"]').val() > 0 ? "Edit" : "Create";
         let actionResult = $('input[ident-pagamento ="pagamentoId"]').val() > 0 ? "Edit" : "Create";
         let mensagemOperacao = actionResult == "Edit" ? "Dados do pagamento editados com sucesso" : "Pagamento cadastrado com sucesso";
-        var url = actionResult == "Edit" ? '@Url.Action("Edit","Pagamento")' : '@Url.Action("Create","Pagamento")';
+        var url = actionResult == "Edit" ? '@Url.Action("Edit", "Pagamento")' : '@Url.Action("Create", "Pagamento")';
         $.ajax({
             url: url,
             type: 'POST',
@@ -105,7 +105,7 @@
                 if (result.value) {
 
                     $.ajax({
-                        url: '@Url.Action("Delete","Pagamento")',
+                        url: '@Url.Action("Delete", "Pagamento")',
                         type: 'POST',
                         data: { Id: value },
                         async: true,
@@ -125,6 +125,33 @@
 
     }
 
-</script>
+    function ExcluirPagamento_OnClick(pagamentoId) {
+
+        Swal.fire({
+            title: 'Deseja realmente remover este pagamento ?',
+            text: "Você não conseguirá mais reverter essa operação.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sim'
+
+        }).then((result) => {
+            if (result.value) {
+                $.post('@Url.Action("Delete", "Pagamento")', {
+                    Id: pagamentoId,
+
+
+                }, function (response) {
+                    $("#resultaPagamento").html(response)
+                    toastr.success("Pagamento removido com sucesso")
+                })
+                    .fail(function (error) {
+                        // Handle errors here
+                        console.error('Error:', error);
+                    });
+            }
+        });
     }
+
 </script>

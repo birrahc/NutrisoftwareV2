@@ -7,12 +7,12 @@
     });
     function AbrirModalParaCadastro() {
 
-        AbrirModal('@Url.Action("Create", "Paciente")', 'formularioPaciente', 'modalPaciente')
+        AbrirModal('@Url.Action("Create", "Paciente")', 'formularioPaciente', 'modalPaciente',true)
     }
 
     function AbrirFormulariEdicao(id) {
 
-        AbrirModal('@Url.Action("Edit", "Paciente")', 'formularioPaciente', 'modalPaciente', id)
+        AbrirModal('@Url.Action("Edit", "Paciente")', 'formularioPaciente', 'modalPaciente',true, id)
     }
 
     function cadastrarPaciente() {
@@ -50,6 +50,24 @@
                 paciente.style.display = "block"
             }
         }
+    }
+
+    function AbrirListaDeAquivosModal_OnClick(Id) {
+
+        AbrirModal('@Url.Action("ListarArquivosPaciente", "Paciente")', 'pnlModalArquivo', 'modalArquivo', false, Id)
+    }
+
+    function AbrirForularioArquivoModal_OnClick(pacienteId, objetoId=null) {
+        AbrirFormularioCadastroEdicao('@Url.Action("CadastrarEditarArquivo", "Paciente")', pacienteId, 'pnlModalArquivo', objetoId)
+    }
+    
+    function CadastrarEditarArquivo_OnClick() { 
+        //UploadJs()
+        UploadJs('@Url.Action("CadastrarEditarArquivo", "Paciente")', 'CadastrarEditarArquivo', 'pnlModalArquivo')
+        //CadastrarEditarDados('@Url.Action("CadastrarEditarArquivo", "Paciente")', 'CadastrarEditarArquivo', 'pnlModalArquivo', 'txtArquivoId', 'Aqruivo cadastrado com sucesso.', 'Arquivo editado com sucesso.')
+    }
+    function DownloadArquivo_OnClick(id) {
+        GetRequest('@Url.Action("Download", "Paciente")', id, 'Download efetuado com sucesso.');
     }
 
     function LimparFiltro_OnClick() {

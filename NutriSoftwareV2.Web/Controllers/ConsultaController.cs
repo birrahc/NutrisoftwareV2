@@ -105,7 +105,7 @@ namespace NutriSoftwareV2.Web.Controllers
                 ViewBag.AvaliacaoAnterior = ultimaAvaliacao;
                 var consulta = new Consulta { PacienteId = PacienteId, DataConsulta = DateTime.Now };
                 AvaliacaoFisica avaliacao = new AvaliacaoFisica { DataAvaliacao = DateTime.Now, NumAvaliacao = ultimaAvaliacao.NumAvaliacao + 1 };
-                SvcMemoryCache.AmarzenarEntidadeUnica(avaliacao, _memoryCache, Codigo);
+                SvcMemoryCache.AmarzenarEntidadeUnica<Consulta>(consulta, _memoryCache, Codigo);
                 return PartialView("PartiaisConsulta/PartiaisAvaliacao/_FomularioAvaliacao", avaliacao);
             }
 

@@ -44,32 +44,36 @@
                     <div class="m-auto p-3 bg-white" style="width: 99%; border: solid 1px #d8d8d8; border-radius: 5px; height: 440px;" id="dadosPessoais">
                         <partial name="PartiaisPaciente/_DetalhesPaciente" for="@pacienteDetalhado" />
                     </div>
-                    <p class="mt-3">
+                    @* <p class="mt-3">
                         <br />
-                    </p>
+                    </p> *@
 
-                    <a href="@Url.Action("Index","Consulta",new {Id=pacienteDetalhado.Id})" class="btn btn-light ml-2 mt-3" style="border-radius:25px;">
-                        <i class="fa fa-stethoscope" aria-hidden="true" title="Consultas"></i>
+                    <a href="@Url.Action("Index","Consulta",new {Id=pacienteDetalhado.Id})" class="btn btn-gray ms-4 mt-3" style="border-radius:25px;">
+                        <i class="fa fa-stethoscope" aria-hidden="true" title="Consultas"></i> Consultas
                     </a>
 
-                    <a href="@Url.Action("AvaliacoesDoPaciente","Avaliacao",new {Id=pacienteDetalhado.Id})" class="btn btn-light ml-2 mt-3" style="border-radius:25px;">
-                        <i class="fa fa-table" title="Avaliações"></i>
+                    <a href="@Url.Action("AvaliacoesDoPaciente","Avaliacao",new {Id=pacienteDetalhado.Id})" class="btn btn-gray ms-2 mt-3" style="border-radius:25px;">
+                        <i class="fa fa-table" title="Avaliações"></i> Avaliações
                     </a>
 
-                    <a href="@Url.Action("DietasPaciente","Dieta",new {Id=pacienteDetalhado.Id })" class="btn btn-light ml-2 mt-3" style="border-radius:25px;">
-                        <i class="fa fa-wpforms" aria-hidden="true" title="Dietas"></i>
+                    <a href="@Url.Action("DietasPaciente","Dieta",new {Id=pacienteDetalhado.Id })" class="btn btn-gray ms-2 mt-3" style="border-radius:25px;">
+                        <i class="fa fa-wpforms" aria-hidden="true" title="Dietas"></i> Dietas
                     </a>
 
-                    <a href="@Url.Action("PagamentosPaciente","Pagamento",new {Id=pacienteDetalhado.Id })" class="btn btn-light ml-2 mt-3" style="border-radius:25px;">
-                        <i class="fa fa-money" title="Pagamentos"></i>
-                    </a>
-
-                    <button type="button" value="@pacienteDetalhado.Id" onclick="AbrirFormulariEdicao(this.value)" class="btn btn-light ml-2 mt-3" style="border-radius:25px;">
-                        <i class="fa fa-pencil-square" title="Editar"></i>
+                    <button type="button" value="@pacienteDetalhado.Id" onclick="AbrirListaDeAquivosModal_OnClick(this.value)" class="btn btn-gray ms-2 mt-3" style="border-radius:25px; cursor:pointer;">
+                        <i class="fa fa-file-archive-o" aria-hidden="true"></i> Arquivos
                     </button>
 
-                    <button type="button" value="@pacienteDetalhado.Id" onclick="ExcluirPaciente(this.value)" class="btn btn-light ml-2 mt-3" style="border-radius:25px;">
-                        <i class="fa fa-trash" title="Excluir"></i>
+                    <a href="@Url.Action("PagamentosPaciente","Pagamento",new {Id=pacienteDetalhado.Id })" class="btn btn-gray ms-2 mt-3" style="border-radius:25px;">
+                        <i class="fa fa-money" title="Pagamentos"></i> Pagamentos
+                    </a>
+
+                    <button type="button" value="@pacienteDetalhado.Id" onclick="AbrirFormulariEdicao(this.value)" class="btn text-primary fw-bold me-4 mt-3 float-end">
+                        <i class="fa fa-pencil-square" title="Editar"></i> Editar
+                    </button>
+
+                    <button type="button" value="@pacienteDetalhado.Id" onclick="ExcluirPaciente(this.value)" class="btn text-danger fw-bold me-2 mt-3 float-end">
+                        <i class="fa fa-trash" title="Excluir"></i> Remover
                     </button>
                 </div>
             </div>

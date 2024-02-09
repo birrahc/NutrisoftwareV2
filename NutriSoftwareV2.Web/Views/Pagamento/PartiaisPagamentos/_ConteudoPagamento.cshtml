@@ -44,18 +44,22 @@
                 <div class="row">
                     <div class="col-1 ml-0">
                         <br />
-                        <button type="button" onclick="listarPagamentos()" class="btn btn-success w-100">Buscar</button>
+                        <button type="button" onclick="listarPagamentos()" class="btn btn-success w-100">
+                            <i class="fa fa-search"></i> Buscar
+                        </button>
                     </div>
                     <div class="col-1 ml-0">
                         <br />
-                        <button type="button" onclick="limparPesquisaPagamento()" class="btn btn-info w-100">Limpar</button>
+                        <button type="button" onclick="limparPesquisaPagamento()" class="btn btn-success w-100">
+                            <i class="fa fa-undo" aria-hidden="true"></i> Limpar
+                        </button>
                     </div>
                 </div>
 
             </fieldset>
         </form>
 
-        <button type="button" class="btn btn-outline-secondary float-right mt-1" onclick="AbrirModalParaCadastroPagamento()">
+        <button type="button" class="btn btn-outline-secondary float-end mt-1" onclick="AbrirModalParaCadastroPagamento()">
             <i class="fa fa-plus"></i> Registrar pagamento
         </button>
         <div style="clear:both;"></div>

@@ -20,6 +20,7 @@ namespace NutriSoftwareV2.Negocio.Data.NutriDbContext
         public DbSet<Pagamento> Pagamento{get ; set;}
         public DbSet<LocaisAtendimento> LocalAtendimento{get ; set;}
         public DbSet<Profissao> Profissao { get; set; }
+        public DbSet<Arquivo> Arquivo { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
         {

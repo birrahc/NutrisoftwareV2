@@ -146,12 +146,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFjaWVudGVcUGFydGlhaXNQYWNpZW50ZVxfRGV0YWxoZXNQYWNpZW50ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Paciente/PartiaisPaciente/_FormularioCadastrarArquivo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFjaWVudGVcUGFydGlhaXNQYWNpZW50ZVxfRm9ybXVsYXJpb0NhZGFzdHJhckFycXVpdm8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Paciente/PartiaisPaciente/_FormularioObservacaoPaciente.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFjaWVudGVcUGFydGlhaXNQYWNpZW50ZVxfRm9ybXVsYXJpb09ic2VydmFjYW9QYWNpZW50ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Paciente/PartiaisPaciente/_FormularioPaciente.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFjaWVudGVcUGFydGlhaXNQYWNpZW50ZVxfRm9ybXVsYXJpb1BhY2llbnRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Paciente/PartiaisPaciente/_ListaDeArquivosPaciente.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFjaWVudGVcUGFydGlhaXNQYWNpZW50ZVxfTGlzdGFEZUFycXVpdm9zUGFjaWVudGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Paciente/PartiaisPaciente/_ListaDePacientes.cshtml]
@@ -192,6 +200,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Shared/_AlimentoJS.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9BbGltZW50b0pTLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Shared/_ArquivoJs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9BcnF1aXZvSnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/programacao/Projetos/NET7/NutriSoftwareV2/NutriSoftwareV2.Web/Views/Shared/_ConsultasJs.cshtml]

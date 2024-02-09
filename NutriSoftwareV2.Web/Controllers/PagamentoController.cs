@@ -66,20 +66,20 @@ namespace NutriSoftwareV2.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(int Id)
+        public async Task<IActionResult> Delete(int Id)
         {
             if (Id > 0)
             {
-                SvcPagamento.DeletarPagamento(Id);
-                return RedirectToAction("Index");
+                await SvcPagamento.DeletarPagamento(Id);
+                return PartialView("PartiaisPagamentos/_ConteudoPagamento");
             }
             return View();
         }
 
         [HttpPost]
-        public ActionResult Edit([FromForm] Pagamento pagamento)
+        public async Task<ActionResult> EditAsync([FromForm] Pagamento pagamento)
         {
-            SvcPagamento.EidtarPagamento(pagamento);
+            await SvcPagamento.EidtarPagamentoAsync(pagamento);
             List<Pagamento> lista = new List<Pagamento>();
             var pgt = SvcPagamento.BuscarPagamento(pagamento.Id);
             lista.Add(pgt);

@@ -31,7 +31,7 @@ namespace NutriSoftwareV2.Negocio.Svc
         }
 
 
-        public static void EidtarPagamento(Pagamento pPagamento)
+        public static async Task EidtarPagamentoAsync(Pagamento pPagamento)
         {
             try
             {
@@ -39,7 +39,7 @@ namespace NutriSoftwareV2.Negocio.Svc
                 {
                     var consulta = db.Consulta.Where(c => c.PagamentoId == pPagamento.Id && !pPagamento.ConsultasId.Any(k => c.Id == k));
 
-                    consulta.ForEachAsync(c => c.PagamentoId = null);
+                    await consulta.ForEachAsync(c => c.PagamentoId = null);
                     if (consulta != null)
                         db.Consulta.UpdateRange(consulta);
 
@@ -56,19 +56,35 @@ namespace NutriSoftwareV2.Negocio.Svc
             }
         }
 
-        public static void DeletarPagamento(int pPagamentoId)
+        public static async 
+        Task
+DeletarPagamento(int pPagamentoId)
         {
             try
             {
+
                 using (NutriDbContext db = new NutriDbContext())
                 {
-                    var pagamento = db.Pagamento.SingleOrDefault(c => c.Id == pPagamentoId);
+                    var consulta = await db.Consulta.FirstOrDefaultAsync(c => c.PagamentoId == pPagamentoId);
+                    if (consulta != null)
+                    {
+                        consulta.PagamentoId = null;
+                        db.Consulta.Update(consulta);
+                        await db.SaveChangesAsync();
+                       
+                    }
+                }
+                using (NutriDbContext db = new NutriDbContext())
+                {
+                    var pagamento = await db.Pagamento.SingleOrDefaultAsync(c => c.Id == pPagamentoId);
                     db.Pagamento.Remove(pagamento);
-                    db.SaveChanges();
-                    db.Dispose();
+                    await db.SaveChangesAsync();
                 }
             }
-            catch (Exception ex) { }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao tentar remover dados");
+            }
         }
 
         public static List<Pagamento> ListarPagamentosCompleto()
@@ -163,8 +179,8 @@ namespace NutriSoftwareV2.Negocio.Svc
                     if (pSituacao > 0)
                         pagamentos = pagamentos.Where(s => s.Situacao == pSituacao).ToList();
 
-                    if(pPacienteId > 0)
-                        pagamentos = pagamentos.Where(p=>p.Consulta.Any(c=>c.PacienteId.Equals(pPacienteId))).ToList();
+                    if (pPacienteId > 0)
+                        pagamentos = pagamentos.Where(p => p.Consulta.Any(c => c.PacienteId.Equals(pPacienteId))).ToList();
 
                     db.Dispose();
                     return pagamentos;
@@ -203,7 +219,7 @@ namespace NutriSoftwareV2.Negocio.Svc
                 {
                     return db.Pagamento
                         .Include(con => con.Consulta)
-                        .ThenInclude(p=>p.Paciente)?
+                        .ThenInclude(p => p.Paciente)?
                         .Where(p => p.Consulta.Any(c => c.PacienteId == pPacienteId)).ToList();
                 }
             }

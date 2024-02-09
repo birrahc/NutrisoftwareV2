@@ -1,0 +1,45 @@
+﻿@using NutriSoftwareV2.Negocio.Enums
+@model NutriSoftwareV2.Negocio.Domain.Arquivo
+
+<form name="CadastrarEditarArquivo" class="m-0 p-0" id="frmCadastrarEditarArquivo">
+    <input type="hidden" name="PacienteId" value="@Model?.PacienteId" />
+    <input type="hidden" name="ContentType" value="@Model?.ContentType" />
+    <input type="hidden" name="Id" value="@Model?.Id" id="txtArquivoId" />
+    
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Arquivos do paciente</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-12">
+                <label>Nome do documento</label>
+                <input type="text" name="NomeDocumento" class="form-control"/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <label>Tipo de documento</label>
+               <select name="TipoDocumento" asp-items="@Html.GetEnumSelectList<EN_TipoDocumentoArquivo>()" class="form-select">
+                   <option></option>
+               </select>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <label>Arquivo</label>
+                <input type="file" name="NewFile" class="form-control" />
+
+            </div>
+        </div>
+
+       
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button onclick="CadastrarEditarArquivo_OnClick()" type="button" class="btn btn-primary">Salvar</button>
+    </div>
+</form>

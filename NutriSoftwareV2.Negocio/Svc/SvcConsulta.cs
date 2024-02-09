@@ -188,7 +188,7 @@ namespace NutriSoftwareV2.Negocio.Svc
                 consulta.DataConsulta = DateTime.Now;
 
                
-                if (pConsulta?.DietaPlano.PlanosAlimentares?.Count > 0)
+                if (pConsulta?.DietaPlano?.PlanosAlimentares?.Count > 0)
                 {
                     List<QuantidadeAlimento> listaAlimentos = new List<QuantidadeAlimento>();
                     List<ObservacaoPlano> obsPlano = new List<ObservacaoPlano>();
@@ -245,7 +245,7 @@ namespace NutriSoftwareV2.Negocio.Svc
 
               
 
-                pConsulta.Paciente = null;
+                //pConsulta.Paciente = null;
                 context.Consulta.Add(consulta);
                 context.SaveChanges();
 
